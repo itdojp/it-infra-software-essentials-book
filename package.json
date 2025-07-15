@@ -1,0 +1,39 @@
+{
+  "name": "it-infra-software-essentials-book",
+  "version": "1.0.0",
+  "description": "ITインフラエンジニアのためのソフトウェア基礎知識",
+  "scripts": {
+    "dev": "cd docs && bundle exec jekyll serve --livereload --baseurl ''",
+    "build": "cd docs && bundle exec jekyll build",
+    "install:deps": "cd docs && bundle install",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build",
+    "lint:markdown": "markdownlint docs/**/*.md --ignore docs/_site",
+    "format:check": "prettier --check 'docs/**/*.{md,yml,yaml,json}'",
+    "format": "prettier --write 'docs/**/*.{md,yml,yaml,json}'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itdojp/it-infra-software-essentials-book.git"
+  },
+  "keywords": [
+    "infrastructure",
+    "automation",
+    "yaml",
+    "json",
+    "api",
+    "scripting",
+    "devops"
+  ],
+  "author": "ITDO Inc.",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/itdojp/it-infra-software-essentials-book/issues"
+  },
+  "homepage": "https://itdojp.github.io/it-infra-software-essentials-book/",
+  "devDependencies": {
+    "markdownlint-cli": "^0.37.0",
+    "prettier": "^3.1.0"
+  }
+}
