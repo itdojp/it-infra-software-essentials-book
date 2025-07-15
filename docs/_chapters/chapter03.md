@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: chapter
 title: 第3章：スクリプト言語による自動化の初歩
+chapter: 3
 ---
 
 # **第3章：スクリプト言語による自動化の初歩**

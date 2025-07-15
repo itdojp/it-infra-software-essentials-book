@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: chapter
 title: 第5章：インフラ運用を支えるその他のソフトウェア知識
+chapter: 5
 ---
 
 # **第5章：インフラ運用を支えるその他のソフトウェア知識**

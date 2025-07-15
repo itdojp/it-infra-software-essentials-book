@@ -1,36 +1,5 @@
 ---
-layout: default
+layout: book
 ---
 
-<article class="chapter">
-    <header class="chapter-header">
-        <h1>{{ page.title }}</h1>
-    </header>
-
-    <div class="chapter-content">
-        {{ content }}
-    </div>
-
-    <nav class="chapter-navigation">
-        {% assign chapters = site.data.navigation.chapters %}
-        {% assign current_index = page.chapter | minus: 1 %}
-        {% assign prev_index = current_index | minus: 1 %}
-        {% assign next_index = current_index | plus: 1 %}
-        
-        <div class="nav-links">
-            {% if prev_index >= 0 %}
-                {% assign prev_chapter = chapters[prev_index] %}
-                <a href="{{ prev_chapter.url | relative_url }}" class="prev-link">← 前へ: {{ prev_chapter.title }}</a>
-            {% else %}
-                <a href="{{ '/' | relative_url }}" class="prev-link">← ホームへ</a>
-            {% endif %}
-            
-            {% if next_index < chapters.size %}
-                {% assign next_chapter = chapters[next_index] %}
-                <a href="{{ next_chapter.url | relative_url }}" class="next-link">次へ: {{ next_chapter.title }} →</a>
-            {% else %}
-                <span class="next-link disabled">最終章です</span>
-            {% endif %}
-        </div>
-    </nav>
-</article>
+{{ content }}

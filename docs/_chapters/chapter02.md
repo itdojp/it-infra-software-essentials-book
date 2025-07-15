@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: chapter
 title: 第2章：データ記述言語の基本と実践
+chapter: 2
 ---
 
 # **第2章：データ記述言語の基本と実践**

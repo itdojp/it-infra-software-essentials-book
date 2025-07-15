@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: chapter
 title: 第1章：インフラエンジニアとソフトウェアの接点
+chapter: 1
 ---
 
 # **第1章：インフラエンジニアとソフトウェアの接点**

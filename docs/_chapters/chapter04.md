@@ -1,6 +1,7 @@
 ---
-layout: default
+layout: chapter
 title: 第4章：APIによるインフラ連携
+chapter: 4
 ---
 
 # **第4章：APIによるインフラ連携**
