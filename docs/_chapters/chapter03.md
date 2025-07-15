@@ -456,27 +456,71 @@ Pythonは、ファイルシステムとのやり取りや、OSコマンドの実
     file_path = "app_log.txt"
 
     # ファイルへの書き込み (w: 書き込みモード、ファイルが存在すれば上書き)
-    with open(file_path, "w", encoding="utf-8") as f:
-        f.write("サーバー起動ログ\n")
-        f.write("サービスAが正常に起動しました。\n")
-        f.write("設定ファイルがロードされました。\n")
-    print(f"'{file_path}' に内容を書き込みました。")
+    try:
+        # ファイルパスの検証（セキュリティ対策）
+        if not file_path or '..' in file_path or file_path.startswith('/'):
+            raise ValueError("不正なファイルパスが指定されました")
+        
+        # ディレクトリの存在確認と作成
+        os.makedirs(os.path.dirname(file_path) if os.path.dirname(file_path) else '.', exist_ok=True)
+        
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write("サーバー起動ログ\n")
+            f.write("サービスAが正常に起動しました。\n")
+            f.write("設定ファイルがロードされました。\n")
+        print(f"'{file_path}' に内容を書き込みました。")
+    except (OSError, IOError) as e:
+        print(f"ファイル書き込みエラー: {e}")
+    except ValueError as e:
+        print(f"パス検証エラー: {e}")
 
     # ファイルからの読み込み (r: 読み込みモード)
-    with open(file_path, "r", encoding="utf-8") as f:
-        content = f.read() # ファイル全体を文字列として読み込む
-        print(f"\n'{file_path}' の内容 (read):\n{content}")
+    try:
+        # ファイルの存在確認
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"ファイルが見つかりません: {file_path}")
+        
+        # ファイルサイズの確認（大きすぎるファイルの読み込みを防ぐ）
+        file_size = os.path.getsize(file_path)
+        max_size = 10 * 1024 * 1024  # 10MB
+        if file_size > max_size:
+            raise ValueError(f"ファイルサイズが大きすぎます: {file_size} bytes")
+        
+        with open(file_path, "r", encoding="utf-8") as f:
+            content = f.read() # ファイル全体を文字列として読み込む
+            print(f"\n'{file_path}' の内容 (read):\n{content}")
+    except (OSError, IOError) as e:
+        print(f"ファイル読み込みエラー: {e}")
+    except ValueError as e:
+        print(f"ファイル検証エラー: {e}")
       
     # ファイルからの読み込み (行ごとに読み込む)
     print(f"\n'{file_path}' の内容 (readlines):")
-    with open(file_path, "r", encoding="utf-8") as f:
-        for line in f:
-            print(f"  行: {line.strip()}") # .strip() で行末の改行文字を削除
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            for line_num, line in enumerate(f, 1):
+                print(f"  行{line_num}: {line.strip()}") # .strip() で行末の改行文字を削除
+                # 無限ループを防ぐため、最大行数を制限
+                if line_num > 1000:
+                    print("  ... (1000行を超えるため省略)")
+                    break
+    except (OSError, IOError) as e:
+        print(f"ファイル読み込みエラー: {e}")
 
     # ファイルへの追記 (a: 追記モード)
-    with open(file_path, "a", encoding="utf-8") as f:
-        f.write("新しいログエントリが追加されました。\n")
-    print(f"\n'{file_path}' に内容を追記しました。")
+    try:
+        # ファイルサイズの確認（ログファイルが大きくなりすぎないよう）
+        if os.path.exists(file_path):
+            file_size = os.path.getsize(file_path)
+            max_size = 50 * 1024 * 1024  # 50MB
+            if file_size > max_size:
+                print(f"警告: ログファイルが大きすぎます ({file_size} bytes)")
+        
+        with open(file_path, "a", encoding="utf-8") as f:
+            f.write("新しいログエントリが追加されました。\n")
+        print(f"\n'{file_path}' に内容を追記しました。")
+    except (OSError, IOError) as e:
+        print(f"ファイル追記エラー: {e}")
       
     # クリーンアップ (演習後などにファイルを削除する場合)
     # if os.path.exists(file_path):
@@ -513,11 +557,31 @@ Pythonは、ファイルシステムとのやり取りや、OSコマンドの実
     # shell=True を使うと、シェルインジェクションのリスクがあるため、
     # ユーザーからの入力を直接コマンドに渡す場合は特に注意が必要です。
     # 基本的には shell=False でリスト形式でコマンドと引数を渡すのが安全です。
-    # print("\n'ping -c 4 google.com' コマンドの実行結果 (shell=True):")
-    # try:
-    #     subprocess.run("ping -c 4 google.com", shell=True, check=True)
-    # except subprocess.CalledProcessError as e:
-    #     print(f"コマンド実行エラー: {e}")
+    
+    # 安全な方法でpingコマンドを実行する例
+    print("\n'ping -c 4 google.com' コマンドの実行結果 (安全な方法):")
+    try:
+        # タイムアウトを設定してハングを防ぐ
+        result = subprocess.run(
+            ["ping", "-c", "4", "google.com"], 
+            capture_output=True, 
+            text=True, 
+            check=True,
+            timeout=30  # 30秒のタイムアウト
+        )
+        print(f"実行成功: {result.returncode}")
+        print(f"出力: {result.stdout}")
+    except subprocess.TimeoutExpired:
+        print("エラー: コマンドがタイムアウトしました")
+    except subprocess.CalledProcessError as e:
+        print(f"コマンド実行エラー: {e}")
+        print(f"標準エラー出力: {e.stderr}")
+    except FileNotFoundError:
+        print("エラー: コマンドが見つかりません")
+    
+    # 危険な例（本番環境では使用しない）
+    # user_input = "google.com; rm -rf /"  # 悪意のある入力例
+    # subprocess.run(f"ping -c 4 {user_input}", shell=True)  # 危険！
     ```
 * **OSパス操作（`os.path`）**:  
     `os`モジュールは、オペレーティングシステムに依存する機能（ファイルパスの操作など）を提供します。  
@@ -525,22 +589,46 @@ Pythonは、ファイルシステムとのやり取りや、OSコマンドの実
     import os
 
     # パスの結合 (OSに合わせて適切な区切り文字を使用)
-    file_path = os.path.join("/var", "log", "nginx", "access.log")
-    print(f"結合されたパス: {file_path}")
+    try:
+        base_path = "/var/log/nginx"
+        filename = "access.log"
+        
+        # パスの検証
+        if '..' in base_path or '..' in filename:
+            raise ValueError("不正なパス要素が含まれています")
+        
+        file_path = os.path.join(base_path, filename)
+        print(f"結合されたパス: {file_path}")
 
-    # パスの存在確認
-    if os.path.exists(file_path):
-        print(f"'{file_path}' は存在します。")
-    else:
-        print(f"'{file_path}' は存在しません。")
+        # パスの存在確認
+        if os.path.exists(file_path):
+            print(f"'{file_path}' は存在します。")
+            # ファイルサイズの取得
+            try:
+                size = os.path.getsize(file_path)
+                print(f"ファイルサイズ: {size} bytes")
+            except OSError as e:
+                print(f"ファイルサイズ取得エラー: {e}")
+        else:
+            print(f"'{file_path}' は存在しません。")
 
-    # ディレクトリかどうかの判定
-    if os.path.isdir("/tmp"):
-        print("'/tmp' はディレクトリです。")
-      
-    # ファイルかどうかの判定
-    if os.path.isfile("/etc/hosts"):
-        print("'/etc/hosts' はファイルです。")
+        # ディレクトリかどうかの判定
+        test_dir = "/tmp"
+        if os.path.exists(test_dir) and os.path.isdir(test_dir):
+            print(f"'{test_dir}' はディレクトリです。")
+        else:
+            print(f"'{test_dir}' はディレクトリではありません。")
+          
+        # ファイルかどうかの判定
+        test_file = "/etc/hosts"
+        if os.path.exists(test_file) and os.path.isfile(test_file):
+            print(f"'{test_file}' はファイルです。")
+        else:
+            print(f"'{test_file}' はファイルではありません。")
+    except ValueError as e:
+        print(f"パス検証エラー: {e}")
+    except OSError as e:
+        print(f"パス操作エラー: {e}")
     ```
 
 ### 利用シーン

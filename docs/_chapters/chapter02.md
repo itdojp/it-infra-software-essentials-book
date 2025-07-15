@@ -69,9 +69,22 @@ import os
 
 # JSON文字列からPythonオブジェクトへ変換 (loads)
 json_string = '{"name": "Alice", "age": 30, "city": "New York"}'
-data = json.loads(json_string)
-print(f"Pythonオブジェクト: {data}")
-print(f"名前: {data['name']}, 年齢: {data['age']}")
+try:
+    data = json.loads(json_string)
+    # 型チェック: データが辞書型であることを確認
+    if not isinstance(data, dict):
+        raise ValueError("JSONデータは辞書型である必要があります")
+    # 必要なキーの存在チェック
+    required_keys = ["name", "age"]
+    for key in required_keys:
+        if key not in data:
+            raise KeyError(f"必須キー '{key}' が見つかりません")
+    print(f"Pythonオブジェクト: {data}")
+    print(f"名前: {data['name']}, 年齢: {data['age']}")
+except json.JSONDecodeError as e:
+    print(f"JSONパースエラー: {e}")
+except (KeyError, ValueError) as e:
+    print(f"データ検証エラー: {e}")
 
 # PythonオブジェクトからJSON文字列へ変換 (dumps)
 python_dict = {
@@ -86,9 +99,18 @@ print(f"\nJSON文字列:\n{json_output}")
 # ファイルからの読み込み (load)
 # まずはファイルを作成
 file_path_config = "config.json"
-with open(file_path_config, "w", encoding="utf-8") as f:
-    json.dump({"database": "mydb", "port": 5432, "environment": "production"}, f, indent=2, ensure_ascii=False)
-print(f"\n'{file_path_config}' を作成しました。")
+try:
+    # ファイルパスの検証
+    if not file_path_config or '..' in file_path_config:
+        raise ValueError("不正なファイルパスが指定されました")
+    
+    with open(file_path_config, "w", encoding="utf-8") as f:
+        json.dump({"database": "mydb", "port": 5432, "environment": "production"}, f, indent=2, ensure_ascii=False)
+    print(f"\n'{file_path_config}' を作成しました。")
+except (OSError, IOError) as e:
+    print(f"ファイル作成エラー: {e}")
+except ValueError as e:
+    print(f"パス検証エラー: {e}")
 
 try:
     with open(file_path_config, "r", encoding="utf-8") as f:
@@ -102,9 +124,22 @@ except json.JSONDecodeError:
 # ファイルへの書き込み (dump)
 file_path_users = "users.json"
 new_data = {"user_list": [{"id": 1, "name": "Bob"}, {"id": 2, "name": "Charlie", "status": "active"}]}
-with open(file_path_users, "w", encoding="utf-8") as f:
-    json.dump(new_data, f, indent=2, ensure_ascii=False)
-print(f"'{file_path_users}' にデータを書き込みました。")
+try:
+    # ファイルパスの検証
+    if not file_path_users or '..' in file_path_users:
+        raise ValueError("不正なファイルパスが指定されました")
+    
+    # データの検証
+    if not isinstance(new_data, dict):
+        raise ValueError("書き込むデータは辞書型である必要があります")
+    
+    with open(file_path_users, "w", encoding="utf-8") as f:
+        json.dump(new_data, f, indent=2, ensure_ascii=False)
+    print(f"'{file_path_users}' にデータを書き込みました。")
+except (OSError, IOError) as e:
+    print(f"ファイル書き込みエラー: {e}")
+except ValueError as e:
+    print(f"データ検証エラー: {e}")
 
 # クリーンアップ (実行環境によっては不要)
 # if os.path.exists(file_path_config):
@@ -125,8 +160,24 @@ print(f"'{file_path_users}' にデータを書き込みました。")
 ```python
 import json
 
-data = json.loads('{"server": {"name": "app01", "status": "running", "tags": ["backend", "production"]}, "metrics": [10, 20, 30]}')
-print(f"サーバー名: {data['server']['name']}") # ネストされた要素へのアクセス
+json_string = '{"server": {"name": "app01", "status": "running", "tags": ["backend", "production"]}, "metrics": [10, 20, 30]}'
+try:
+    data = json.loads(json_string)
+    # 型とキーの検証
+    if not isinstance(data, dict):
+        raise ValueError("JSONデータは辞書型である必要があります")
+    if 'server' not in data or not isinstance(data['server'], dict):
+        raise KeyError("'server' キーが見つからないか、辞書型ではありません")
+    if 'name' not in data['server']:
+        raise KeyError("'server.name' キーが見つかりません")
+    
+    print(f"サーバー名: {data['server']['name']}") # ネストされた要素へのアクセス
+except json.JSONDecodeError as e:
+    print(f"JSONパースエラー: {e}")
+except (KeyError, ValueError) as e:
+    print(f"データ検証エラー: {e}")
+    # エラーが発生した場合はスクリプトを続行しない
+    exit(1)
 
 # 値の変更
 data['server']['status'] = 'stopped'
@@ -252,10 +303,26 @@ database:
     username: admin
     password: mysecretpassword
 """
-config = yaml.safe_load(yaml_string)
-print(f"Pythonオブジェクト: {config}")
-print(f"DBタイプ: {config['database']['type']}")
-print(f"DBホスト: {config['database']['host']}")
+try:
+    config = yaml.safe_load(yaml_string)
+    # 型とキーの検証
+    if not isinstance(config, dict):
+        raise ValueError("YAMLデータは辞書型である必要があります")
+    if 'database' not in config or not isinstance(config['database'], dict):
+        raise KeyError("'database' キーが見つからないか、辞書型ではありません")
+    
+    required_keys = ['type', 'host', 'port']
+    for key in required_keys:
+        if key not in config['database']:
+            raise KeyError(f"必須キー 'database.{key}' が見つかりません")
+    
+    print(f"Pythonオブジェクト: {config}")
+    print(f"DBタイプ: {config['database']['type']}")
+    print(f"DBホスト: {config['database']['host']}")
+except yaml.YAMLError as e:
+    print(f"YAMLパースエラー: {e}")
+except (KeyError, ValueError) as e:
+    print(f"データ検証エラー: {e}")
 
 # PythonオブジェクトからYAML文字列へ変換 (dump)
 infra_settings = {
@@ -276,9 +343,22 @@ print(f"\nYAML文字列:\n{yaml_output}")
 
 # ファイルからの読み込みと書き込み
 file_path_settings = "settings.yaml"
-with open(file_path_settings, "w", encoding="utf-8") as f:
-    yaml.dump(infra_settings, f, sort_keys=False, indent=2, allow_unicode=True)
-print(f"\n'{file_path_settings}' を作成しました。")
+try:
+    # ファイルパスの検証
+    if not file_path_settings or '..' in file_path_settings:
+        raise ValueError("不正なファイルパスが指定されました")
+    
+    # データの検証
+    if not isinstance(infra_settings, dict):
+        raise ValueError("書き込むデータは辞書型である必要があります")
+    
+    with open(file_path_settings, "w", encoding="utf-8") as f:
+        yaml.dump(infra_settings, f, sort_keys=False, indent=2, allow_unicode=True)
+    print(f"\n'{file_path_settings}' を作成しました。")
+except (OSError, IOError) as e:
+    print(f"ファイル書き込みエラー: {e}")
+except ValueError as e:
+    print(f"データ検証エラー: {e}")
 
 try:
     with open(file_path_settings, "r", encoding="utf-8") as f:
