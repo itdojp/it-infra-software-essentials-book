@@ -1,9 +1,14 @@
 # Jekyll Configuration
 title: ITインフラエンジニアのためのソフトウェア基礎知識
 description: YAML, JSON, スクリプト, APIで学ぶ自動化の基本
-author: ITDO Inc.
+author: 
+  name: ITDO Inc.
+  email: knowledge@itdo.jp
 url: "https://itdojp.github.io"
 baseurl: "/it-infra-software-essentials-book"
+
+# Repository
+repository: https://github.com/itdojp/it-infra-software-essentials-book
 
 # Build settings
 markdown: kramdown
