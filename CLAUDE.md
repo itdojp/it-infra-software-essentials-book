@@ -11,7 +11,6 @@ This is a Japanese-language technical book project: "ITインフラエンジニ�
 **IMPORTANT**: This book has been migrated to **book-formatter**.
 
 - ✅ **Current**: Uses book-formatter system
-- ❌ **Deprecated**: book-publishing-template2 (no longer supported)
 
 ## Key Commands and Workflows
 
@@ -36,3 +35,4 @@ npm run clean               # Clean build artifacts
 **Author**: ITDO Inc.（株式会社アイティードゥ）  
 **Email**: knowledge@itdo.jp  
 **GitHub**: [@itdojp](https://github.com/itdojp)
+EOF < /dev/null
