@@ -1,0 +1,32 @@
+# Book metadata for ITDO book-formatter v3.0
+title: ITインフラエンジニアのためのソフトウェア基礎知識
+description: YAML, JSON, スクリプト, APIで学ぶ自動化の基本
+author: ITDO Inc.
+version: "1.0.0"
+language: ja
+license: MIT
+
+# Publication info
+publication:
+  format: web
+  theme: technical
+  target_audience: infrastructure_engineers
+  contact:
+    email: knowledge@itdo.jp
+    website: https://itdo.jp
+
+# Keywords for SEO
+keywords:
+  - インフラエンジニア
+  - 自動化
+  - JSON
+  - YAML
+  - Python
+  - API
+  - DevOps
+
+# Book structure
+structure:
+  total_chapters: 5
+  has_appendices: true
+  estimated_reading_time: "4-6 hours"
