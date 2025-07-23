@@ -12,6 +12,69 @@ chapter: 1
 
 ## **1.1 なぜインフラエンジニアにソフトウェア知識が必要か**
 
+```mermaid
+graph TD
+    subgraph "従来のインフラ運用"
+        Traditional["従来のアプローチ"]
+        Hardware["ハードウェア物理接続"]
+        Manual["手動設定・構築"]
+        Document["手順書ベース"]
+        Error["ヒューマンエラー"]
+        Time["長時間の作業"]
+        
+        Traditional --> Hardware
+        Traditional --> Manual
+        Traditional --> Document
+        Manual --> Error
+        Manual --> Time
+        
+        TraditionalProblems["課題:<br/>・設定の一貫性欠如<br/>・スケーラビリティの限界<br/>・変更管理の困難"]
+    end
+    
+    subgraph "現代のインフラ運用"
+        Modern["モダンなアプローチ"]
+        
+        subgraph "主要技術トレンド"
+            Cloud["クラウド技術"]
+            Virtualization["仮想化技術"]
+            DevOps["DevOps実践"]
+            IaC["Infrastructure as Code"]
+            API["API駆動インフラ"]
+        end
+        
+        subgraph "必要なスキル"
+            Programming["プログラミング基礎"]
+            Automation["自動化スクリプト"]
+            DataFormat["データ記述言語<br/>(JSON/YAML)"]
+            VersionControl["バージョン管理<br/>(Git)"]
+            APISkill["API理解・操作"]
+        end
+        
+        Modern --> Cloud
+        Modern --> Virtualization
+        Modern --> DevOps
+        Modern --> IaC
+        Modern --> API
+        
+        Cloud --> Programming
+        IaC --> DataFormat
+        DevOps --> Automation
+        API --> APISkill
+        Automation --> VersionControl
+        
+        ModernBenefits["効果:<br/>・高い再現性<br/>・迅速な変更対応<br/>・ヒューマンエラー削減<br/>・大規模運用対応"]
+    end
+    
+    Arrow["技術革新により変化"]
+    Traditional -.-> Arrow
+    Arrow -.-> Modern
+    
+    style Traditional fill:#ffebee
+    style Modern fill:#e8f5e8
+    style TraditionalProblems fill:#ffcdd2
+    style ModernBenefits fill:#c8e6c9
+```
+
 かつてのインフラ運用は、ハードウェアの物理的な接続、OSのインストール、ミドルウェアの手動設定が中心でした。しかし、仮想化技術の進化、クラウドサービスの登場、そしてDevOpsのプラクティスが普及するにつれて、インフラは「コード」として扱われるようになり、その管理はソフトウェアエンジニアリングの手法を取り入れるようになりました。
 
 ### **自動化の必要性**
@@ -48,6 +111,71 @@ chapter: 1
 
 ### **DevOpsの推進**
 
+```mermaid
+graph TD
+    subgraph "従来のサイロ化"
+        Developer["開発チーム"]
+        Operations["運用チーム"]
+        Wall["部門間の壁"]
+        SlowDeploy["遅いデプロイ"]
+        Blame["責任の押し付け"]
+        
+        Developer -.-> Wall
+        Wall -.-> Operations
+        Wall --> SlowDeploy
+        Wall --> Blame
+    end
+    
+    subgraph "DevOpsによる協調"
+        DevOps["DevOps文化"]
+        
+        subgraph "共有責任"
+            SharedGoals["共通目標"]
+            CrossFunctional["クロスファンクショナルチーム"]
+            CodeAsLanguage["コードという共通言語"]
+        end
+        
+        subgraph "実践要素"
+            CI_CD["CI/CD パイプライン"]
+            IaC_Practice["Infrastructure as Code"]
+            Monitoring["監視・ログ分析"]
+            AutomationPractice["自動化の推進"]
+        end
+        
+        subgraph "効果"
+            FastDelivery["高速なデリバリー"]
+            HighQuality["品質向上"]
+            ReducedError["エラー削減"]
+            BetterComm["コミュニケーション改善"]
+        end
+        
+        DevOps --> SharedGoals
+        DevOps --> CrossFunctional
+        DevOps --> CodeAsLanguage
+        
+        SharedGoals --> CI_CD
+        CrossFunctional --> IaC_Practice
+        CodeAsLanguage --> Monitoring
+        CodeAsLanguage --> AutomationPractice
+        
+        CI_CD --> FastDelivery
+        IaC_Practice --> HighQuality
+        Monitoring --> ReducedError
+        AutomationPractice --> BetterComm
+    end
+    
+    Transformation["DevOps変革"]
+    Developer -.-> Transformation
+    Operations -.-> Transformation
+    Transformation --> DevOps
+    
+    style Developer fill:#fff3e0
+    style Operations fill:#fff3e0
+    style Wall fill:#ffebee
+    style DevOps fill:#e8f5e8
+    style FastDelivery fill:#c8e6c9
+```
+
 * **開発と運用の連携強化**:  
   * DevOpsの文化は、開発チームと運用チームの間の壁を取り払い、ソフトウェアのライフサイクル全体（開発、テスト、デプロイ、運用）を迅速かつ効率的に進めることを目指します。  
   * インフラエンジニアがコードを理解し、開発者がインフラをコードとして扱えるようになることで、両者のコミュニケーションが円滑になり、開発からデプロイまでのプロセス全体が加速します。これにより、「開発者はコードを書き、運用者はそれを動かす」というサイロ化された関係から、「開発者と運用者が協力してコードを動かす」という協調的な関係へと変化します。  
@@ -56,6 +184,68 @@ chapter: 1
   * インフラの構成がコードで記述されることで、口頭やドキュメントでの仕様伝達ミスが減り、認識の齟齬を防ぐことができます。これにより、手戻りが減り、品質の高いシステムをより早く提供できるようになります。
 
 ### **SRE (Site Reliability Engineering) の実践**
+
+```mermaid
+graph TD
+    subgraph "SREの核心概念"
+        SRE["Site Reliability Engineering"]
+        
+        subgraph "基本原則"
+            Reliability["信頼性重視"]
+            SoftwareEng["ソフトウェアエンジニアリング原則"]
+            DataDriven["データ駆動の改善"]
+            ErrorBudget["エラーバジェット"]
+        end
+        
+        subgraph "実践活動"
+            ToilReduction["Toil（手作業）の削減"]
+            Automation["自動化の推進"]
+            Monitoring["包括的な監視"]
+            IncidentMgmt["インシデント管理"]
+            CapacityPlanning["キャパシティプランニング"]
+        end
+        
+        subgraph "必要スキル"
+            Programming["プログラミング"]
+            Scripting["スクリプト作成"]
+            DataAnalysis["データ解析"]
+            SystemDesign["システム設計"]
+        end
+        
+        SRE --> Reliability
+        SRE --> SoftwareEng
+        SRE --> DataDriven
+        SRE --> ErrorBudget
+        
+        Reliability --> ToilReduction
+        SoftwareEng --> Automation
+        DataDriven --> Monitoring
+        ErrorBudget --> IncidentMgmt
+        DataDriven --> CapacityPlanning
+        
+        ToilReduction --> Programming
+        Automation --> Scripting
+        Monitoring --> DataAnalysis
+        IncidentMgmt --> SystemDesign
+        
+        subgraph "成果"
+            HighAvailability["高可用性"]
+            FastRecovery["迅速な復旧"]
+            PredictablePerformance["予測可能な性能"]
+            EfficientOps["効率的な運用"]
+        end
+        
+        Programming --> HighAvailability
+        Scripting --> FastRecovery
+        DataAnalysis --> PredictablePerformance
+        SystemDesign --> EfficientOps
+    end
+    
+    style SRE fill:#e3f2fd
+    style Reliability fill:#fff3e0
+    style ToilReduction fill:#e8f5e8
+    style HighAvailability fill:#c8e6c9
+```
 
 * **信頼性向上のための自動化と計測**:  
   * SREは、Googleが提唱した運用モデルであり、ソフトウェアエンジニアリングの原則を運用に適用し、システムの信頼性（Reliability）を体系的に高めることを目指します。  
@@ -80,6 +270,113 @@ chapter: 1
   * ログ解析や文字列処理に役立つ正規表現の基礎を理解し、実務で活用できるようになる。
 
 ### **各章の概要と、実践的な演習の重要性**
+
+```mermaid
+graph TD
+    subgraph "本書の学習ロードマップ"
+        Start["学習開始"]
+        
+        subgraph "基礎理解 (第1章)"
+            Chapter1["第1章: インフラエンジニアと<br/>ソフトウェアの接点"]
+            Understanding["現代インフラの理解"]
+            Motivation["学習動機の明確化"]
+        end
+        
+        subgraph "データ処理基礎 (第2章)"
+            Chapter2["第2章: データ記述言語の<br/>基本と実践"]
+            JSON["JSON形式"]
+            YAML["YAML形式"]
+            Parsing["Pythonでの解析"]
+            K8sManifest["Kubernetesマニフェスト"]
+            AnsiblePlaybook["Ansible Playbook"]
+        end
+        
+        subgraph "自動化スキル (第3章)"
+            Chapter3["第3章: スクリプト言語による<br/>自動化の初歩"]
+            ShellScript["シェルスクリプト"]
+            Python["Python基礎"]
+            FileOps["ファイル操作"]
+            CommandExec["外部コマンド実行"]
+            ControlFlow["条件分岐・ループ"]
+        end
+        
+        subgraph "API連携 (第4章)"
+            Chapter4["第4章: APIによる<br/>インフラ連携"]
+            REST["RESTful API"]
+            HTTP["HTTPメソッド・ステータス"]
+            Requests["Pythonのrequests"]
+            CloudAPI["クラウドAPI操作"]
+            Auth["認証・認可"]
+        end
+        
+        subgraph "応用スキル (第5章)"
+            Chapter5["第5章: インフラ運用を支える<br/>その他のソフトウェア知識"]
+            Git["Git バージョン管理"]
+            Regex["正規表現"]
+            DataStructure["データ構造"]
+            LogAnalysis["ログ解析"]
+        end
+        
+        subgraph "実践と応用"
+            Practice["実務での応用"]
+            Advanced["さらなる学習"]
+        end
+        
+        Start --> Chapter1
+        Chapter1 --> Understanding
+        Understanding --> Motivation
+        
+        Motivation --> Chapter2
+        Chapter2 --> JSON
+        JSON --> YAML
+        YAML --> Parsing
+        Parsing --> K8sManifest
+        Parsing --> AnsiblePlaybook
+        
+        K8sManifest --> Chapter3
+        AnsiblePlaybook --> Chapter3
+        Chapter3 --> ShellScript
+        ShellScript --> Python
+        Python --> FileOps
+        FileOps --> CommandExec
+        CommandExec --> ControlFlow
+        
+        ControlFlow --> Chapter4
+        Chapter4 --> REST
+        REST --> HTTP
+        HTTP --> Requests
+        Requests --> CloudAPI
+        CloudAPI --> Auth
+        
+        Auth --> Chapter5
+        Chapter5 --> Git
+        Git --> Regex
+        Regex --> DataStructure
+        DataStructure --> LogAnalysis
+        
+        LogAnalysis --> Practice
+        Practice --> Advanced
+        
+        subgraph "学習効果"
+            Efficiency["作業効率向上"]
+            Quality["品質改善"]
+            Collaboration["チーム連携強化"]
+            Career["キャリア発展"]
+        end
+        
+        Practice --> Efficiency
+        Practice --> Quality
+        Practice --> Collaboration
+        Practice --> Career
+    end
+    
+    style Chapter1 fill:#e3f2fd
+    style Chapter2 fill:#fff3e0
+    style Chapter3 fill:#e8f5e8
+    style Chapter4 fill:#f3e5f5
+    style Chapter5 fill:#ffe0b2
+    style Practice fill:#c8e6c9
+```
 
 本書は以下の5つの章で構成され、段階的に知識を深めていきます。各章では、概念の説明だけでなく、実際に手を動かすための具体的なサンプルコードや演習問題を豊富に用意します。理論と実践を組み合わせることで、知識の定着と応用力の向上を目指します。
 

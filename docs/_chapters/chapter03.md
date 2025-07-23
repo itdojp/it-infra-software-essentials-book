@@ -10,6 +10,89 @@ chapter: 3
 
 この章では、インフラエンジニアが最も頻繁に利用するであろう**シェルスクリプト**と、汎用性が高く強力な**Python**に焦点を当て、それぞれの基本的な使い方と自動化への応用方法を学びます。これらの言語を習得することで、日々の運用業務を効率化し、より戦略的なタスクに時間を割けるようになるでしょう。
 
+```mermaid
+graph TD
+    subgraph "スクリプト言語による自動化アーキテクチャ"
+        subgraph "シェルスクリプト vs Python比較"
+            Shell["シェルスクリプト<br/>(Bash/Zsh)"]
+            Python["Python"]
+            
+            ShellFeatures["特徴:<br/>・システムコマンド実行<br/>・ファイル操作<br/>・軽量で高速起動<br/>・OS標準搭載"]
+            PythonFeatures["特徴:<br/>・豊富なライブラリ<br/>・複雑なロジック<br/>・クロスプラットフォーム<br/>・可読性の高いコード"]
+            
+            ShellUse["適用場面:<br/>・簡単なファイル操作<br/>・システム設定変更<br/>・バックアップスクリプト<br/>・ログローテーション"]
+            PythonUse["適用場面:<br/>・API呼び出し<br/>・データ処理・変換<br/>・複雑な条件分岐<br/>・エラーハンドリング"]
+        end
+        
+        subgraph "自動化の段階的発展"
+            Manual["手作業<br/>コマンドライン実行"]
+            SimpleScript["簡単なスクリプト<br/>コマンドの組み合わせ"]
+            AdvancedScript["高度なスクリプト<br/>変数・条件分岐・ループ"]
+            Framework["自動化フレームワーク<br/>Ansible/Terraform"]
+            
+            Manual --> SimpleScript
+            SimpleScript --> AdvancedScript
+            AdvancedScript --> Framework
+            
+            ManualEx["例: 手動でサーバー設定<br/>毎回同じコマンドを実行"]
+            SimpleEx["例: setup.sh<br/>基本的なコマンド羅列"]
+            AdvancedEx["例: deploy.py<br/>条件分岐、エラー処理"]
+            FrameworkEx["例: playbook.yml<br/>宣言的設定管理"]
+        end
+        
+        subgraph "実用的な自動化シナリオ"
+            System["システム管理"]
+            Monitoring["監視・アラート"]
+            Backup["バックアップ"]
+            Deploy["デプロイ"]
+            Config["設定管理"]
+            
+            SystemTasks["・サービス起動/停止<br/>・ログローテーション<br/>・ディスク容量チェック<br/>・ユーザー管理"]
+            MonitoringTasks["・ヘルスチェック<br/>・メトリクス収集<br/>・アラート通知<br/>・レポート生成"]
+            BackupTasks["・データベース<br/>・ファイルシステム<br/>・設定ファイル<br/>・圧縮・暗号化"]
+            DeployTasks["・アプリケーション<br/>・設定ファイル<br/>・データベース移行<br/>・ロールバック"]
+            ConfigTasks["・環境変数設定<br/>・ネットワーク設定<br/>・セキュリティ設定<br/>・サービス設定"]
+        end
+        
+        subgraph "開発・実行環境"
+            DevEnv["開発環境"]
+            TestEnv["テスト環境"]
+            ProdEnv["本番環境"]
+            
+            DevTools["・エディタ/IDE<br/>・デバッガー<br/>・バージョン管理<br/>・ローカルテスト"]
+            TestTools["・ステージング<br/>・結合テスト<br/>・性能テスト<br/>・安全性検証"]
+            ProdTools["・自動デプロイ<br/>・監視・ログ<br/>・障害対応<br/>・スケーリング"]
+        end
+        
+        Shell --> ShellFeatures
+        Python --> PythonFeatures
+        ShellFeatures --> ShellUse
+        PythonFeatures --> PythonUse
+        
+        Manual --> ManualEx
+        SimpleScript --> SimpleEx
+        AdvancedScript --> AdvancedEx
+        Framework --> FrameworkEx
+        
+        System --> SystemTasks
+        Monitoring --> MonitoringTasks
+        Backup --> BackupTasks
+        Deploy --> DeployTasks
+        Config --> ConfigTasks
+        
+        DevEnv --> DevTools
+        TestEnv --> TestTools
+        ProdEnv --> ProdTools
+    end
+    
+    style Shell fill:#e3f2fd
+    style Python fill:#fff3e0
+    style Manual fill:#ffebee
+    style Framework fill:#e8f5e8
+    style System fill:#f3e5f5
+    style DevEnv fill:#ffe0b2
+```
+
 ## **3.1 シェルスクリプトの基本**
 
 シェルスクリプトは、LinuxやUnix系OSのコマンドラインシェル（Bash, Zshなど）上で実行されるプログラムです。OSの標準コマンドを組み合わせて、ファイル操作、プロセス管理、システム設定の変更など、システムレベルの自動化を簡単に行うことができます。シンプルながらも強力なため、インフラの初期設定や簡易的な運用スクリプトとして広く利用されています。
