@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      /* Color Palette */
+      :root {
+        --bg-primary: #FFFFFF;
+        --bg-secondary: #F8F9FA;
+        --text-primary: #1A1A1A;
+        --text-secondary: #6B7280;
+        --primary: #3B82F6;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --neutral: #6B7280;
+        --border: #E5E7EB;
+        --chapter1-bg: #e3f2fd;
+        --chapter2-bg: #fff3e0;
+        --chapter3-bg: #e8f5e8;
+        --chapter4-bg: #f3e5f5;
+        --chapter5-bg: #ffe0b2;
+        --practice-bg: #c8e6c9;
+      }
+      
+      /* Dark Theme */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-primary: #1A1A1A;
+          --bg-secondary: #2D2D2D;
+          --text-primary: #FFFFFF;
+          --text-secondary: #9CA3AF;
+          --primary: #60A5FA;
+          --success: #34D399;
+          --warning: #FBBF24;
+          --error: #F87171;
+          --neutral: #9CA3AF;
+          --border: #374151;
+          --chapter1-bg: #1A237E;
+          --chapter2-bg: #E65100;
+          --chapter3-bg: #1B5E20;
+          --chapter4-bg: #4A148C;
+          --chapter5-bg: #FF6F00;
+          --practice-bg: #2E7D32;
+        }
+      }
+      
+      /* Typography */
+      .title-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .label-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .annotation-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 400;
+        text-anchor: middle;
+        fill: var(--text-secondary);
+      }
+      
+      .section-title {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      /* Node Styles */
+      .start-node {
+        fill: var(--primary);
+        stroke: var(--primary);
+        stroke-width: 2;
+      }
+      
+      .chapter1-node {
+        fill: var(--chapter1-bg);
+        stroke: var(--primary);
+        stroke-width: 1.5;
+      }
+      
+      .chapter2-node {
+        fill: var(--chapter2-bg);
+        stroke: var(--warning);
+        stroke-width: 1.5;
+      }
+      
+      .chapter3-node {
+        fill: var(--chapter3-bg);
+        stroke: var(--success);
+        stroke-width: 1.5;
+      }
+      
+      .chapter4-node {
+        fill: var(--chapter4-bg);
+        stroke: var(--error);
+        stroke-width: 1.5;
+      }
+      
+      .chapter5-node {
+        fill: var(--chapter5-bg);
+        stroke: var(--warning);
+        stroke-width: 1.5;
+      }
+      
+      .practice-node {
+        fill: var(--practice-bg);
+        stroke: var(--success);
+        stroke-width: 2;
+      }
+      
+      .effect-node {
+        fill: var(--success);
+        fill-opacity: 0.8;
+        stroke: var(--success);
+        stroke-width: 2;
+      }
+      
+      /* Connection Lines */
+      .connection-line {
+        stroke: var(--neutral);
+        stroke-width: 1.5;
+        opacity: 0.7;
+        marker-end: url(#arrow);
+      }
+      
+      .chapter-line {
+        stroke: var(--primary);
+        stroke-width: 2;
+        opacity: 0.8;
+        marker-end: url(#arrow-primary);
+      }
+    </style>
+    
+    <!-- Arrow Markers -->
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="var(--neutral)"/>
+    </marker>
+    <marker id="arrow-primary" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="var(--primary)"/>
+    </marker>
+  </defs>
+  
+  <title>本書の学習ロードマップ</title>
+  <desc>インフラエンジニア向けソフトウェア知識の体系的学習パス</desc>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="var(--bg-primary)"/>
+  
+  <!-- Main Title -->
+  <text x="400" y="24" class="title-text">本書の学習ロードマップ</text>
+  
+  <!-- Start Node -->
+  <circle cx="400" cy="60" r="20" class="start-node"/>
+  <text x="400" y="66" class="label-text" fill="white">開始</text>
+  
+  <!-- Chapter 1 Section -->
+  <rect x="320" y="100" width="160" height="20" rx="3" fill="var(--chapter1-bg)" stroke="var(--primary)" stroke-width="1"/>
+  <text x="400" y="114" class="section-title">基礎理解（第1章）</text>
+  
+  <rect x="280" y="130" width="240" height="28" rx="4" class="chapter1-node"/>
+  <text x="400" y="144" class="annotation-text">第1章：インフラエンジニアと</text>
+  <text x="400" y="154" class="annotation-text">ソフトウェアの接点</text>
+  
+  <rect x="320" y="168" width="80" height="24" rx="3" class="chapter1-node"/>
+  <text x="360" y="184" class="annotation-text">現代インフラ理解</text>
+  
+  <rect x="420" y="168" width="80" height="24" rx="3" class="chapter1-node"/>
+  <text x="460" y="184" class="annotation-text">学習動機明確化</text>
+  
+  <!-- Chapter 2 Section -->
+  <rect x="50" y="220" width="200" height="20" rx="3" fill="var(--chapter2-bg)" stroke="var(--warning)" stroke-width="1"/>
+  <text x="150" y="234" class="section-title">データ処理基礎（第2章）</text>
+  
+  <rect x="30" y="250" width="240" height="28" rx="4" class="chapter2-node"/>
+  <text x="150" y="264" class="annotation-text">第2章：データ記述言語の</text>
+  <text x="150" y="274" class="annotation-text">基本と実践</text>
+  
+  <rect x="30" y="288" width="60" height="24" rx="3" class="chapter2-node"/>
+  <text x="60" y="304" class="annotation-text">JSON形式</text>
+  
+  <rect x="110" y="288" width="60" height="24" rx="3" class="chapter2-node"/>
+  <text x="140" y="304" class="annotation-text">YAML形式</text>
+  
+  <rect x="190" y="288" width="80" height="24" rx="3" class="chapter2-node"/>
+  <text x="230" y="304" class="annotation-text">Python解析</text>
+  
+  <rect x="30" y="322" width="100" height="24" rx="3" class="chapter2-node"/>
+  <text x="80" y="338" class="annotation-text">Kubernetesマニフェスト</text>
+  
+  <rect x="150" y="322" width="100" height="24" rx="3" class="chapter2-node"/>
+  <text x="200" y="338" class="annotation-text">Ansible Playbook</text>
+  
+  <!-- Chapter 3 Section -->
+  <rect x="350" y="220" width="200" height="20" rx="3" fill="var(--chapter3-bg)" stroke="var(--success)" stroke-width="1"/>
+  <text x="450" y="234" class="section-title">自動化スキル（第3章）</text>
+  
+  <rect x="330" y="250" width="240" height="28" rx="4" class="chapter3-node"/>
+  <text x="450" y="264" class="annotation-text">第3章：スクリプト言語による</text>
+  <text x="450" y="274" class="annotation-text">自動化の初歩</text>
+  
+  <rect x="330" y="288" width="80" height="24" rx="3" class="chapter3-node"/>
+  <text x="370" y="304" class="annotation-text">シェルスクリプト</text>
+  
+  <rect x="430" y="288" width="60" height="24" rx="3" class="chapter3-node"/>
+  <text x="460" y="304" class="annotation-text">Python基礎</text>
+  
+  <rect x="510" y="288" width="60" height="24" rx="3" class="chapter3-node"/>
+  <text x="540" y="304" class="annotation-text">ファイル操作</text>
+  
+  <rect x="380" y="322" width="80" height="24" rx="3" class="chapter3-node"/>
+  <text x="420" y="334" class="annotation-text">外部コマンド</text>
+  <text x="420" y="344" class="annotation-text">実行</text>
+  
+  <rect x="480" y="322" width="80" height="24" rx="3" class="chapter3-node"/>
+  <text x="520" y="334" class="annotation-text">条件分岐・</text>
+  <text x="520" y="344" class="annotation-text">ループ</text>
+  
+  <!-- Chapter 4 Section -->
+  <rect x="50" y="380" width="200" height="20" rx="3" fill="var(--chapter4-bg)" stroke="var(--error)" stroke-width="1"/>
+  <text x="150" y="394" class="section-title">API連携（第4章）</text>
+  
+  <rect x="30" y="410" width="240" height="28" rx="4" class="chapter4-node"/>
+  <text x="150" y="424" class="annotation-text">第4章：APIによる</text>
+  <text x="150" y="434" class="annotation-text">インフラ連携</text>
+  
+  <rect x="30" y="448" width="80" height="24" rx="3" class="chapter4-node"/>
+  <text x="70" y="464" class="annotation-text">RESTful API</text>
+  
+  <rect x="130" y="448" width="80" height="24" rx="3" class="chapter4-node"/>
+  <text x="170" y="458" class="annotation-text">HTTPメソッド・</text>
+  <text x="170" y="468" class="annotation-text">ステータス</text>
+  
+  <rect x="230" y="448" width="80" height="24" rx="3" class="chapter4-node"/>
+  <text x="270" y="458" class="annotation-text">Python</text>
+  <text x="270" y="468" class="annotation-text">requests</text>
+  
+  <rect x="80" y="482" width="80" height="24" rx="3" class="chapter4-node"/>
+  <text x="120" y="498" class="annotation-text">クラウドAPI操作</text>
+  
+  <rect x="180" y="482" width="60" height="24" rx="3" class="chapter4-node"/>
+  <text x="210" y="498" class="annotation-text">認証・認可</text>
+  
+  <!-- Chapter 5 Section -->
+  <rect x="350" y="380" width="200" height="20" rx="3" fill="var(--chapter5-bg)" stroke="var(--warning)" stroke-width="1"/>
+  <text x="450" y="394" class="section-title">応用スキル（第5章）</text>
+  
+  <rect x="330" y="410" width="240" height="28" rx="4" class="chapter5-node"/>
+  <text x="450" y="424" class="annotation-text">第5章：インフラ運用を支える</text>
+  <text x="450" y="434" class="annotation-text">その他のソフトウェア知識</text>
+  
+  <rect x="330" y="448" width="80" height="24" rx="3" class="chapter5-node"/>
+  <text x="370" y="458" class="annotation-text">Git バージョン</text>
+  <text x="370" y="468" class="annotation-text">管理</text>
+  
+  <rect x="430" y="448" width="60" height="24" rx="3" class="chapter5-node"/>
+  <text x="460" y="464" class="annotation-text">正規表現</text>
+  
+  <rect x="510" y="448" width="60" height="24" rx="3" class="chapter5-node"/>
+  <text x="540" y="464" class="annotation-text">データ構造</text>
+  
+  <rect x="430" y="482" width="80" height="24" rx="3" class="chapter5-node"/>
+  <text x="470" y="498" class="annotation-text">ログ解析</text>
+  
+  <!-- Practice Section -->
+  <rect x="300" y="540" width="200" height="20" rx="3" fill="var(--practice-bg)" stroke="var(--success)" stroke-width="1"/>
+  <text x="400" y="554" class="section-title">実践と応用</text>
+  
+  <rect x="320" y="570" width="80" height="24" rx="3" class="practice-node"/>
+  <text x="360" y="586" class="annotation-text">実務での応用</text>
+  
+  <rect x="420" y="570" width="80" height="24" rx="3" class="practice-node"/>
+  <text x="460" y="586" class="annotation-text">さらなる学習</text>
+  
+  <!-- Learning Effects Section -->
+  <rect x="260" y="620" width="280" height="20" rx="3" fill="var(--success)" fill-opacity="0.2" stroke="var(--success)" stroke-width="1"/>
+  <text x="400" y="634" class="section-title">学習効果</text>
+  
+  <rect x="260" y="650" width="80" height="24" rx="3" class="effect-node"/>
+  <text x="300" y="666" class="annotation-text">作業効率向上</text>
+  
+  <rect x="360" y="650" width="60" height="24" rx="3" class="effect-node"/>
+  <text x="390" y="666" class="annotation-text">品質改善</text>
+  
+  <rect x="440" y="650" width="80" height="24" rx="3" class="effect-node"/>
+  <text x="480" y="666" class="annotation-text">チーム連携強化</text>
+  
+  <rect x="360" y="684" width="80" height="24" rx="3" class="effect-node"/>
+  <text x="400" y="700" class="annotation-text">キャリア発展</text>
+  
+  <!-- Main Flow Connections -->
+  <line x1="400" y1="80" x2="400" y2="130" class="chapter-line"/>
+  <line x1="400" y1="158" x2="360" y2="168" class="connection-line"/>
+  <line x1="400" y1="158" x2="460" y2="168" class="connection-line"/>
+  
+  <line x1="460" y1="192" x2="150" y2="250" class="chapter-line"/>
+  <line x1="150" y1="278" x2="60" y2="288" class="connection-line"/>
+  <line x1="60" y1="312" x2="140" y2="288" class="connection-line"/>
+  <line x1="140" y1="312" x2="230" y2="288" class="connection-line"/>
+  <line x1="230" y1="312" x2="80" y2="322" class="connection-line"/>
+  <line x1="230" y1="312" x2="200" y2="322" class="connection-line"/>
+  
+  <line x1="80" y1="346" x2="450" y2="250" class="chapter-line"/>
+  <line x1="200" y1="346" x2="450" y2="250" class="chapter-line"/>
+  <line x1="450" y1="278" x2="370" y2="288" class="connection-line"/>
+  <line x1="370" y1="312" x2="460" y2="288" class="connection-line"/>
+  <line x1="460" y1="312" x2="540" y2="288" class="connection-line"/>
+  <line x1="540" y1="312" x2="420" y2="322" class="connection-line"/>
+  <line x1="420" y1="346" x2="520" y2="322" class="connection-line"/>
+  
+  <line x1="520" y1="346" x2="150" y2="410" class="chapter-line"/>
+  <line x1="150" y1="438" x2="70" y2="448" class="connection-line"/>
+  <line x1="70" y1="472" x2="170" y2="448" class="connection-line"/>
+  <line x1="170" y1="472" x2="270" y2="448" class="connection-line"/>
+  <line x1="270" y1="472" x2="120" y2="482" class="connection-line"/>
+  <line x1="120" y1="506" x2="210" y2="482" class="connection-line"/>
+  
+  <line x1="210" y1="506" x2="450" y2="410" class="chapter-line"/>
+  <line x1="450" y1="438" x2="370" y2="448" class="connection-line"/>
+  <line x1="370" y1="472" x2="460" y2="448" class="connection-line"/>
+  <line x1="460" y1="472" x2="540" y2="448" class="connection-line"/>
+  <line x1="540" y1="472" x2="470" y2="482" class="connection-line"/>
+  
+  <line x1="470" y1="506" x2="360" y2="570" class="chapter-line"/>
+  <line x1="360" y1="594" x2="460" y2="570" class="connection-line"/>
+  
+  <!-- Effects Connections -->
+  <line x1="360" y1="594" x2="300" y2="650" class="connection-line"/>
+  <line x1="360" y1="594" x2="390" y2="650" class="connection-line"/>
+  <line x1="360" y1="594" x2="480" y2="650" class="connection-line"/>
+  <line x1="360" y1="594" x2="400" y2="684" class="connection-line"/>
+  
+</svg>
