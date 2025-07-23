@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      /* Color Palette */
+      :root {
+        --bg-primary: #FFFFFF;
+        --bg-secondary: #F8F9FA;
+        --text-primary: #1A1A1A;
+        --text-secondary: #6B7280;
+        --primary: #3B82F6;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --neutral: #6B7280;
+        --border: #E5E7EB;
+        --legacy-bg: #fff3e0;
+        --wall-bg: #ffebee;
+        --devops-bg: #e8f5e8;
+        --benefit-bg: #c8e6c9;
+      }
+      
+      /* Dark Theme */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-primary: #1A1A1A;
+          --bg-secondary: #2D2D2D;
+          --text-primary: #FFFFFF;
+          --text-secondary: #9CA3AF;
+          --primary: #60A5FA;
+          --success: #34D399;
+          --warning: #FBBF24;
+          --error: #F87171;
+          --neutral: #9CA3AF;
+          --border: #374151;
+          --legacy-bg: #3E2723;
+          --wall-bg: #B71C1C;
+          --devops-bg: #1B5E20;
+          --benefit-bg: #388E3C;
+        }
+      }
+      
+      /* Typography */
+      .title-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .label-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .annotation-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 400;
+        text-anchor: middle;
+        fill: var(--text-secondary);
+      }
+      
+      .section-title {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      /* Node Styles */
+      .legacy-node {
+        fill: var(--legacy-bg);
+        stroke: var(--warning);
+        stroke-width: 1.5;
+      }
+      
+      .wall-node {
+        fill: var(--wall-bg);
+        stroke: var(--error);
+        stroke-width: 2;
+      }
+      
+      .devops-node {
+        fill: var(--devops-bg);
+        stroke: var(--success);
+        stroke-width: 1.5;
+      }
+      
+      .benefit-node {
+        fill: var(--benefit-bg);
+        stroke: var(--success);
+        stroke-width: 1.5;
+      }
+      
+      .practice-node {
+        fill: var(--primary);
+        fill-opacity: 0.8;
+        stroke: var(--primary);
+        stroke-width: 1.5;
+      }
+      
+      .shared-node {
+        fill: var(--success);
+        fill-opacity: 0.6;
+        stroke: var(--success);
+        stroke-width: 1.5;
+      }
+      
+      /* Connection Lines */
+      .connection-line {
+        stroke: var(--neutral);
+        stroke-width: 1.5;
+        opacity: 0.7;
+        marker-end: url(#arrow);
+      }
+      
+      .transformation-line {
+        stroke: var(--primary);
+        stroke-width: 3;
+        stroke-dasharray: 8,4;
+        opacity: 0.8;
+        marker-end: url(#arrow-primary);
+      }
+      
+      .dotted-line {
+        stroke: var(--neutral);
+        stroke-width: 1.5;
+        stroke-dasharray: 4,4;
+        opacity: 0.6;
+        marker-end: url(#arrow);
+      }
+    </style>
+    
+    <!-- Arrow Markers -->
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="var(--neutral)"/>
+    </marker>
+    <marker id="arrow-primary" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="var(--primary)"/>
+    </marker>
+  </defs>
+  
+  <title>DevOps変革による組織改善</title>
+  <desc>従来のサイロ化された開発・運用体制からDevOpsによる協調体制への変革</desc>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="var(--bg-primary)"/>
+  
+  <!-- Main Title -->
+  <text x="400" y="24" class="title-text">DevOpsによる組織変革</text>
+  
+  <!-- Traditional Silo Section -->
+  <rect x="48" y="48" width="320" height="240" rx="8" fill="var(--bg-secondary)" stroke="var(--error)" stroke-width="2"/>
+  <text x="208" y="72" class="section-title">従来のサイロ化</text>
+  
+  <!-- Traditional Teams -->
+  <rect x="68" y="96" width="100" height="32" rx="4" class="legacy-node"/>
+  <text x="118" y="116" class="label-text">開発チーム</text>
+  
+  <rect x="228" y="96" width="100" height="32" rx="4" class="legacy-node"/>
+  <text x="278" y="116" class="label-text">運用チーム</text>
+  
+  <!-- Wall -->
+  <rect x="138" y="144" width="120" height="40" rx="6" class="wall-node"/>
+  <text x="198" y="168" class="label-text">部門間の壁</text>
+  
+  <!-- Problems -->
+  <rect x="68" y="200" width="100" height="28" rx="3" class="wall-node"/>
+  <text x="118" y="218" class="annotation-text">遅いデプロイ</text>
+  
+  <rect x="188" y="200" width="120" height="28" rx="3" class="wall-node"/>
+  <text x="248" y="218" class="annotation-text">責任の押し付け</text>
+  
+  <!-- Traditional Connections -->
+  <line x1="118" y1="128" x2="148" y2="144" class="dotted-line"/>
+  <line x1="278" y1="128" x2="248" y2="144" class="dotted-line"/>
+  <line x1="198" y1="184" x2="118" y2="200" class="connection-line"/>
+  <line x1="198" y1="184" x2="248" y2="200" class="connection-line"/>
+  
+  <!-- DevOps Section -->
+  <rect x="432" y="48" width="320" height="480" rx="8" fill="var(--bg-secondary)" stroke="var(--success)" stroke-width="2"/>
+  <text x="592" y="72" class="section-title">DevOpsによる協調</text>
+  
+  <!-- DevOps Culture -->
+  <rect x="532" y="96" width="120" height="32" rx="4" class="devops-node"/>
+  <text x="592" y="116" class="label-text">DevOps文化</text>
+  
+  <!-- Shared Responsibility Section -->
+  <rect x="452" y="144" width="280" height="20" rx="3" fill="var(--success)" fill-opacity="0.1" stroke="var(--success)" stroke-width="1"/>
+  <text x="592" y="158" class="annotation-text">共有責任</text>
+  
+  <rect x="452" y="172" width="80" height="28" rx="3" class="shared-node"/>
+  <text x="492" y="190" class="annotation-text">共通目標</text>
+  
+  <rect x="544" y="172" width="100" height="28" rx="3" class="shared-node"/>
+  <text x="594" y="186" class="annotation-text">クロスファンク</text>
+  <text x="594" y="196" class="annotation-text">ショナルチーム</text>
+  
+  <rect x="656" y="172" width="76" height="28" rx="3" class="shared-node"/>
+  <text x="694" y="186" class="annotation-text">コード共通</text>
+  <text x="694" y="196" class="annotation-text">言語</text>
+  
+  <!-- Practice Elements Section -->
+  <rect x="452" y="224" width="280" height="20" rx="3" fill="var(--primary)" fill-opacity="0.1" stroke="var(--primary)" stroke-width="1"/>
+  <text x="592" y="238" class="annotation-text">実践要素</text>
+  
+  <rect x="452" y="252" width="80" height="28" rx="3" class="practice-node"/>
+  <text x="492" y="266" class="annotation-text">CI/CD</text>
+  <text x="492" y="276" class="annotation-text">パイプライン</text>
+  
+  <rect x="544" y="252" width="80" height="28" rx="3" class="practice-node"/>
+  <text x="584" y="266" class="annotation-text">Infrastructure</text>
+  <text x="584" y="276" class="annotation-text">as Code</text>
+  
+  <rect x="636" y="252" width="76" height="28" rx="3" class="practice-node"/>
+  <text x="674" y="266" class="annotation-text">監視・ログ</text>
+  <text x="674" y="276" class="annotation-text">分析</text>
+  
+  <rect x="498" y="288" width="100" height="28" rx="3" class="practice-node"/>
+  <text x="548" y="306" class="annotation-text">自動化の推進</text>
+  
+  <!-- Effects Section -->
+  <rect x="452" y="336" width="280" height="20" rx="3" fill="var(--success)" fill-opacity="0.2" stroke="var(--success)" stroke-width="1"/>
+  <text x="592" y="350" class="annotation-text">効果</text>
+  
+  <rect x="452" y="368" width="80" height="28" rx="3" class="benefit-node"/>
+  <text x="492" y="378" class="annotation-text">高速な</text>
+  <text x="492" y="388" class="annotation-text">デリバリー</text>
+  
+  <rect x="544" y="368" width="80" height="28" rx="3" class="benefit-node"/>
+  <text x="584" y="382" class="annotation-text">品質向上</text>
+  
+  <rect x="636" y="368" width="76" height="28" rx="3" class="benefit-node"/>
+  <text x="674" y="382" class="annotation-text">エラー削減</text>
+  
+  <rect x="498" y="408" width="100" height="28" rx="3" class="benefit-node"/>
+  <text x="548" y="422" class="annotation-text">コミュニケーション</text>
+  <text x="548" y="432" class="annotation-text">改善</text>
+  
+  <!-- DevOps Internal Connections -->
+  <line x1="592" y1="128" x2="492" y2="172" class="connection-line"/>
+  <line x1="592" y1="128" x2="594" y2="172" class="connection-line"/>
+  <line x1="592" y1="128" x2="694" y2="172" class="connection-line"/>
+  
+  <line x1="492" y1="200" x2="492" y2="252" class="connection-line"/>
+  <line x1="594" y1="200" x2="584" y2="252" class="connection-line"/>
+  <line x1="694" y1="200" x2="674" y2="252" class="connection-line"/>
+  <line x1="694" y1="200" x2="548" y2="288" class="connection-line"/>
+  
+  <line x1="492" y1="280" x2="492" y2="368" class="connection-line"/>
+  <line x1="584" y1="280" x2="584" y2="368" class="connection-line"/>
+  <line x1="674" y1="280" x2="674" y2="368" class="connection-line"/>
+  <line x1="548" y1="316" x2="548" y2="408" class="connection-line"/>
+  
+  <!-- Transformation Section -->
+  <rect x="320" y="320" width="120" height="48" rx="6" fill="var(--primary)" fill-opacity="0.8" stroke="var(--primary)" stroke-width="2"/>
+  <text x="380" y="340" class="label-text">DevOps変革</text>
+  
+  <!-- Transformation Connections -->
+  <line x1="118" y1="300" x2="330" y2="340" class="transformation-line"/>
+  <line x1="278" y1="300" x2="430" y2="340" class="transformation-line"/>
+  <line x1="440" y1="344" x2="532" y2="112" class="transformation-line"/>
+  
+  <!-- Labels for transformation -->
+  <text x="224" y="308" class="annotation-text">変革の必要性</text>
+  <text x="486" y="224" class="annotation-text">新しい協調体制</text>
+  
+</svg>

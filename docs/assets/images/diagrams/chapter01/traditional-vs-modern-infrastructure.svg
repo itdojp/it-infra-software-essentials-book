@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      /* Color Palette */
+      :root {
+        --bg-primary: #FFFFFF;
+        --bg-secondary: #F8F9FA;
+        --text-primary: #1A1A1A;
+        --text-secondary: #6B7280;
+        --primary: #3B82F6;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --neutral: #6B7280;
+        --border: #E5E7EB;
+        --traditional-bg: #ffebee;
+        --traditional-problem: #ffcdd2;
+        --modern-bg: #e8f5e8;
+        --modern-benefit: #c8e6c9;
+      }
+      
+      /* Dark Theme */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-primary: #1A1A1A;
+          --bg-secondary: #2D2D2D;
+          --text-primary: #FFFFFF;
+          --text-secondary: #9CA3AF;
+          --primary: #60A5FA;
+          --success: #34D399;
+          --warning: #FBBF24;
+          --error: #F87171;
+          --neutral: #9CA3AF;
+          --border: #374151;
+          --traditional-bg: #3E2723;
+          --traditional-problem: #D32F2F;
+          --modern-bg: #1B5E20;
+          --modern-benefit: #388E3C;
+        }
+      }
+      
+      /* Typography */
+      .title-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .label-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .annotation-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 400;
+        text-anchor: start;
+        fill: var(--text-secondary);
+      }
+      
+      .section-title {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      /* Node Styles */
+      .traditional-node {
+        fill: var(--traditional-bg);
+        stroke: var(--error);
+        stroke-width: 1.5;
+      }
+      
+      .traditional-problem {
+        fill: var(--traditional-problem);
+        stroke: var(--error);
+        stroke-width: 1.5;
+      }
+      
+      .modern-node {
+        fill: var(--modern-bg);
+        stroke: var(--success);
+        stroke-width: 1.5;
+      }
+      
+      .modern-benefit {
+        fill: var(--modern-benefit);
+        stroke: var(--success);
+        stroke-width: 1.5;
+      }
+      
+      .technology-node {
+        fill: var(--primary);
+        fill-opacity: 0.8;
+        stroke: var(--primary);
+        stroke-width: 1.5;
+      }
+      
+      .skill-node {
+        fill: var(--warning);
+        fill-opacity: 0.8;
+        stroke: var(--warning);
+        stroke-width: 1.5;
+      }
+      
+      /* Connection Lines */
+      .connection-line {
+        stroke: var(--neutral);
+        stroke-width: 1.5;
+        opacity: 0.7;
+        marker-end: url(#arrow);
+      }
+      
+      .evolution-line {
+        stroke: var(--primary);
+        stroke-width: 3;
+        stroke-dasharray: 8,4;
+        opacity: 0.8;
+        marker-end: url(#arrow-primary);
+      }
+    </style>
+    
+    <!-- Arrow Markers -->
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="var(--neutral)"/>
+    </marker>
+    <marker id="arrow-primary" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="var(--primary)"/>
+    </marker>
+  </defs>
+  
+  <title>従来インフラ vs 現代インフラ</title>
+  <desc>従来の手動インフラ運用から現代の自動化・コード化インフラへの進化</desc>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="var(--bg-primary)"/>
+  
+  <!-- Main Title -->
+  <text x="400" y="24" class="title-text">インフラ運用の進化</text>
+  
+  <!-- Traditional Infrastructure Section -->
+  <rect x="48" y="48" width="320" height="480" rx="8" fill="var(--bg-secondary)" stroke="var(--error)" stroke-width="2"/>
+  <text x="208" y="72" class="section-title">従来のインフラ運用</text>
+  
+  <!-- Traditional Approach -->
+  <rect x="68" y="96" width="120" height="48" rx="6" class="traditional-node"/>
+  <text x="128" y="116" class="label-text">従来のアプローチ</text>
+  <text x="128" y="132" class="annotation-text">手動・手順書ベース</text>
+  
+  <!-- Traditional Methods -->
+  <rect x="68" y="168" width="120" height="32" rx="4" class="traditional-node"/>
+  <text x="128" y="188" class="annotation-text">ハードウェア物理接続</text>
+  
+  <rect x="208" y="168" width="120" height="32" rx="4" class="traditional-node"/>
+  <text x="268" y="188" class="annotation-text">手動設定・構築</text>
+  
+  <rect x="68" y="216" width="120" height="32" rx="4" class="traditional-node"/>
+  <text x="128" y="236" class="annotation-text">手順書ベース</text>
+  
+  <rect x="208" y="216" width="120" height="32" rx="4" class="traditional-node"/>
+  <text x="268" y="236" class="annotation-text">ヒューマンエラー</text>
+  
+  <rect x="138" y="264" width="120" height="32" rx="4" class="traditional-node"/>
+  <text x="198" y="284" class="annotation-text">長時間の作業</text>
+  
+  <!-- Traditional Problems -->
+  <rect x="68" y="320" width="260" height="80" rx="6" class="traditional-problem"/>
+  <text x="198" y="340" class="label-text">課題</text>
+  <text x="80" y="360" class="annotation-text">• 設定の一貫性欠如</text>
+  <text x="80" y="376" class="annotation-text">• スケーラビリティの限界</text>
+  <text x="80" y="392" class="annotation-text">• 変更管理の困難</text>
+  
+  <!-- Traditional Connections -->
+  <line x1="128" y1="144" x2="128" y2="168" class="connection-line"/>
+  <line x1="128" y1="144" x2="268" y2="168" class="connection-line"/>
+  <line x1="128" y1="144" x2="128" y2="216" class="connection-line"/>
+  <line x1="268" y1="200" x2="268" y2="216" class="connection-line"/>
+  <line x1="268" y1="200" x2="198" y2="264" class="connection-line"/>
+  
+  <!-- Modern Infrastructure Section -->
+  <rect x="432" y="48" width="320" height="480" rx="8" fill="var(--bg-secondary)" stroke="var(--success)" stroke-width="2"/>
+  <text x="592" y="72" class="section-title">現代のインフラ運用</text>
+  
+  <!-- Modern Approach -->
+  <rect x="532" y="96" width="120" height="48" rx="6" class="modern-node"/>
+  <text x="592" y="116" class="label-text">モダンなアプローチ</text>
+  <text x="592" y="132" class="annotation-text">自動化・コード化</text>
+  
+  <!-- Technology Trends -->
+  <rect x="452" y="168" width="260" height="20" rx="3" fill="var(--primary)" fill-opacity="0.1" stroke="var(--primary)" stroke-width="1"/>
+  <text x="582" y="182" class="annotation-text">主要技術トレンド</text>
+  
+  <rect x="452" y="200" width="80" height="28" rx="3" class="technology-node"/>
+  <text x="492" y="218" class="annotation-text">クラウド技術</text>
+  
+  <rect x="544" y="200" width="80" height="28" rx="3" class="technology-node"/>
+  <text x="584" y="218" class="annotation-text">仮想化技術</text>
+  
+  <rect x="636" y="200" width="76" height="28" rx="3" class="technology-node"/>
+  <text x="674" y="218" class="annotation-text">DevOps実践</text>
+  
+  <rect x="452" y="240" width="100" height="28" rx="3" class="technology-node"/>
+  <text x="502" y="254" class="annotation-text">Infrastructure</text>
+  <text x="502" y="266" class="annotation-text">as Code</text>
+  
+  <rect x="564" y="240" width="100" height="28" rx="3" class="technology-node"/>
+  <text x="614" y="258" class="annotation-text">API駆動インフラ</text>
+  
+  <!-- Required Skills -->
+  <rect x="452" y="288" width="260" height="20" rx="3" fill="var(--warning)" fill-opacity="0.1" stroke="var(--warning)" stroke-width="1"/>
+  <text x="582" y="302" class="annotation-text">必要なスキル</text>
+  
+  <rect x="452" y="320" width="100" height="28" rx="3" class="skill-node"/>
+  <text x="502" y="338" class="annotation-text">プログラミング基礎</text>
+  
+  <rect x="564" y="320" width="100" height="28" rx="3" class="skill-node"/>
+  <text x="614" y="338" class="annotation-text">自動化スクリプト</text>
+  
+  <rect x="452" y="360" width="100" height="28" rx="3" class="skill-node"/>
+  <text x="502" y="374" class="annotation-text">データ記述言語</text>
+  <text x="502" y="386" class="annotation-text">(JSON/YAML)</text>
+  
+  <rect x="564" y="360" width="100" height="28" rx="3" class="skill-node"/>
+  <text x="614" y="374" class="annotation-text">バージョン管理</text>
+  <text x="614" y="386" class="annotation-text">(Git)</text>
+  
+  <rect x="676" y="360" width="76" height="28" rx="3" class="skill-node"/>
+  <text x="714" y="374" class="annotation-text">API理解</text>
+  <text x="714" y="386" class="annotation-text">操作</text>
+  
+  <!-- Modern Benefits -->
+  <rect x="452" y="416" width="260" height="80" rx="6" class="modern-benefit"/>
+  <text x="582" y="436" class="label-text">効果</text>
+  <text x="464" y="456" class="annotation-text">• 高い再現性</text>
+  <text x="464" y="472" class="annotation-text">• 迅速な変更対応</text>
+  <text x="464" y="488" class="annotation-text">• ヒューマンエラー削減・大規模運用対応</text>
+  
+  <!-- Modern Connections -->
+  <line x1="592" y1="144" x2="492" y2="200" class="connection-line"/>
+  <line x1="592" y1="144" x2="584" y2="200" class="connection-line"/>
+  <line x1="592" y1="144" x2="674" y2="200" class="connection-line"/>
+  <line x1="592" y1="144" x2="502" y2="240" class="connection-line"/>
+  <line x1="592" y1="144" x2="614" y2="240" class="connection-line"/>
+  
+  <line x1="492" y1="228" x2="502" y2="320" class="connection-line"/>
+  <line x1="502" y1="268" x2="502" y2="360" class="connection-line"/>
+  <line x1="674" y1="228" x2="614" y2="320" class="connection-line"/>
+  <line x1="614" y1="268" x2="714" y2="360" class="connection-line"/>
+  <line x1="614" y1="348" x2="614" y2="360" class="connection-line"/>
+  
+  <!-- Evolution Arrow -->
+  <line x1="368" y1="300" x2="432" y2="300" class="evolution-line"/>
+  <text x="400" y="280" class="label-text">技術革新により変化</text>
+  
+</svg>
