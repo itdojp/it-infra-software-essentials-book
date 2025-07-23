@@ -56,7 +56,7 @@ graph TD
         
         subgraph "開発・実行環境"
             DevEnv["開発環境"]
-            TestEnv["テスト環境"] 
+            TestEnv["テスト環境"]
             ProdEnv["本番環境"]
             
             DevTools["・エディタ/IDE<br/>・デバッガー<br/>・バージョン管理<br/>・ローカルテスト"]
