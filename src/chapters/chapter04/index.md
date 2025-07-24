@@ -285,7 +285,7 @@ def create_session_with_retry() -> requests.Session:
         total=3,  # 最大リトライ回数
         backoff_factor=1,  # リトライ間の待機時間（指数バックオフ）
         status_forcelist=[429, 500, 502, 503, 504],  # リトライ対象のステータスコード
-        method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
+        allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
         raise_on_status=False
     )
     
@@ -589,7 +589,7 @@ def robust_api_request(
         total=max_retries,
         backoff_factor=backoff_factor,
         status_forcelist=[429, 500, 502, 503, 504, 522, 524],
-        method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
+        allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
         raise_on_status=False
     )
     
@@ -757,7 +757,7 @@ class APIClient:
             total=3,
             backoff_factor=1,
             status_forcelist=[408, 429, 500, 502, 503, 504],
-            method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"]
+            allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"]
         )
         
         adapter = HTTPAdapter(max_retries=retry_strategy)
