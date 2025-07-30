@@ -12,7 +12,7 @@ chapter: 1
 
 ## **1.1 なぜインフラエンジニアにソフトウェア知識が必要か**
 
-![従来インフラ vs 現代インフラ](../assets/images/diagrams/chapter01/traditional-vs-modern-infrastructure.svg)
+![従来インフラ vs 現代インフラ]({{ '/assets/images/diagrams/chapter01/traditional-vs-modern-infrastructure.svg' | relative_url }})
 
 かつてのインフラ運用は、ハードウェアの物理的な接続、OSのインストール、ミドルウェアの手動設定が中心でした。しかし、仮想化技術の進化、クラウドサービスの登場、そしてDevOpsのプラクティスが普及するにつれて、インフラは「コード」として扱われるようになり、その管理はソフトウェアエンジニアリングの手法を取り入れるようになりました。
 
@@ -50,7 +50,7 @@ chapter: 1
 
 ### **DevOpsの推進**
 
-![DevOps変革フロー](../assets/images/diagrams/chapter01/devops-transformation.svg)
+![DevOps変革フロー]({{ '/assets/images/diagrams/chapter01/devops-transformation.svg' | relative_url }})
 
 * **開発と運用の連携強化**:  
   * DevOpsの文化は、開発チームと運用チームの間の壁を取り払い、ソフトウェアのライフサイクル全体（開発、テスト、デプロイ、運用）を迅速かつ効率的に進めることを目指します。  
@@ -61,7 +61,7 @@ chapter: 1
 
 ### **SRE (Site Reliability Engineering) の実践**
 
-![SRE概念図](../assets/images/diagrams/chapter01/sre-concepts.svg)
+![SRE概念図]({{ '/assets/images/diagrams/chapter01/sre-concepts.svg' | relative_url }})
 
 * **信頼性向上のための自動化と計測**:  
   * SREは、Googleが提唱した運用モデルであり、ソフトウェアエンジニアリングの原則を運用に適用し、システムの信頼性（Reliability）を体系的に高めることを目指します。  
@@ -87,7 +87,7 @@ chapter: 1
 
 ### **各章の概要と、実践的な演習の重要性**
 
-![学習ロードマップ](../assets/images/diagrams/chapter01/learning-roadmap.svg)
+![学習ロードマップ]({{ '/assets/images/diagrams/chapter01/learning-roadmap.svg' | relative_url }})
 
 本書は以下の5つの章で構成され、段階的に知識を深めていきます。各章では、概念の説明だけでなく、実際に手を動かすための具体的なサンプルコードや演習問題を豊富に用意します。理論と実践を組み合わせることで、知識の定着と応用力の向上を目指します。
 
