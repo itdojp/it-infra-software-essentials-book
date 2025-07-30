@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'ja' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ '/assets/css/book-style.css' | relative_url }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ '/favicon.png' | relative_url }}">
+    
+    <!-- MathJax for mathematical expressions -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Mermaid for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="book-header">
+        <div class="header-container">
+            <h1 class="site-title">
+                <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+            </h1>
+            <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <h2>目次</h2>
+            <button class="close-menu" id="closeMenu" aria-label="メニューを閉じる">&times;</button>
+        </div>
+        <ul class="mobile-nav-list">
+            <li><a href="{{ '/' | relative_url }}">ホーム</a></li>
+            {% for chapter in site.data.navigation.chapters %}
+            <li>
+                <a href="{{ chapter.url | relative_url }}" 
+                   {% if page.url == chapter.url %}class="active"{% endif %}>
+                    {{ chapter.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="book-container">
+        <!-- Sidebar Navigation -->
+        <nav class="book-sidebar">
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="{{ '/' | relative_url }}" 
+                       {% if page.url == '/' %}class="active"{% endif %}>
+                        ホーム
+                    </a>
+                </li>
+                {% for chapter in site.data.navigation.chapters %}
+                <li>
+                    <a href="{{ chapter.url | relative_url }}" 
+                       {% if page.url == chapter.url %}class="active"{% endif %}>
+                        {{ chapter.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="book-content">
+            <article class="chapter-content">
+                {{ content }}
+            </article>
+
+            <!-- Chapter Navigation -->
+            {% if page.chapter %}
+            <nav class="chapter-navigation">
+                {% assign chapters = site.data.navigation.chapters %}
+                {% assign current_index = page.chapter | minus: 1 %}
+                {% assign prev_index = current_index | minus: 1 %}
+                {% assign next_index = current_index | plus: 1 %}
+                
+                <div class="chapter-nav-links">
+                    {% if prev_index >= 0 %}
+                        {% assign prev_chapter = chapters[prev_index] %}
+                        <a href="{{ prev_chapter.url | relative_url }}" class="nav-prev">
+                            <span class="nav-arrow">←</span>
+                            <span class="nav-text">
+                                <span class="nav-label">前の章</span>
+                                <span class="nav-title">{{ prev_chapter.title }}</span>
+                            </span>
+                        </a>
+                    {% else %}
+                        <a href="{{ '/' | relative_url }}" class="nav-prev">
+                            <span class="nav-arrow">←</span>
+                            <span class="nav-text">
+                                <span class="nav-label">ホーム</span>
+                            </span>
+                        </a>
+                    {% endif %}
+                    
+                    {% if next_index < chapters.size %}
+                        {% assign next_chapter = chapters[next_index] %}
+                        <a href="{{ next_chapter.url | relative_url }}" class="nav-next">
+                            <span class="nav-text">
+                                <span class="nav-label">次の章</span>
+                                <span class="nav-title">{{ next_chapter.title }}</span>
+                            </span>
+                            <span class="nav-arrow">→</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </nav>
+            {% endif %}
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="book-footer">
+        <div class="footer-container">
+            <p>&copy; {{ 'now' | date: '%Y' }} {{ site.author.name }}. All rights reserved.</p>
+            <p class="footer-links">
+                {% if site.repository %}
+                <a href="{{ site.repository }}" target="_blank">GitHub</a>
+                {% endif %}
+                {% if site.author.email %}
+                <span class="separator">|</span>
+                <a href="mailto:{{ site.author.email }}">お問い合わせ</a>
+                {% endif %}
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const closeMenu = document.getElementById('closeMenu');
+        const body = document.body;
+
+        menuToggle.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            body.style.overflow = 'hidden';
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            body.style.overflow = '';
+        });
+
+        // Close menu when clicking outside
+        mobileNav.addEventListener('click', (e) => {
+            if (e.target === mobileNav) {
+                mobileNav.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+
+        // Code block copy button
+        document.querySelectorAll('pre').forEach(pre => {
+            const button = document.createElement('button');
+            button.className = 'copy-button';
+            button.textContent = 'コピー';
+            button.addEventListener('click', () => {
+                const code = pre.querySelector('code');
+                const text = code ? code.textContent : pre.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    button.textContent = 'コピーしました！';
+                    setTimeout(() => {
+                        button.textContent = 'コピー';
+                    }, 2000);
+                });
+            });
+            pre.appendChild(button);
+        });
+    </script>
+</body>
+</html>
