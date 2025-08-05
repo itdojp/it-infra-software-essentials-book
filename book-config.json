@@ -1,0 +1,29 @@
+{
+  "title": "ITインフラエンジニアのためのソフトウェア基礎知識",
+  "description": "ITインフラエンジニアのためのソフトウェア基礎知識",
+  "author": "ITDO Inc.（株式会社アイティードゥ）",
+  "version": "1.0.0",
+  "language": "ja",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/itdojp/it-infra-software-essentials-book.git",
+    "branch": "main"
+  },
+  "structure": {
+    "chapters": [
+      {
+        "id": "chapter01",
+        "title": "第1章：基礎概念",
+        "description": "基本的な概念と原理"
+      }
+    ]
+  },
+  "build": {
+    "outputDirectory": "docs",
+    "framework": "book-formatter",
+    "enableNavigation": true,
+    "enableSyntaxHighlighting": true,
+    "enableMobileOptimization": true
+  }
+}
+EOF < /dev/null
