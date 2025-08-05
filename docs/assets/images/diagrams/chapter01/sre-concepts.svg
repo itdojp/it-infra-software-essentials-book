@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      /* Color Palette */
+      :root {
+        --bg-primary: #FFFFFF;
+        --bg-secondary: #F8F9FA;
+        --text-primary: #1A1A1A;
+        --text-secondary: #6B7280;
+        --primary: #3B82F6;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --neutral: #6B7280;
+        --border: #E5E7EB;
+        --sre-bg: #e3f2fd;
+        --reliability-bg: #fff3e0;
+        --toil-bg: #e8f5e8;
+        --outcome-bg: #c8e6c9;
+      }
+      
+      /* Dark Theme */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-primary: #1A1A1A;
+          --bg-secondary: #2D2D2D;
+          --text-primary: #FFFFFF;
+          --text-secondary: #9CA3AF;
+          --primary: #60A5FA;
+          --success: #34D399;
+          --warning: #FBBF24;
+          --error: #F87171;
+          --neutral: #9CA3AF;
+          --border: #374151;
+          --sre-bg: #1A237E;
+          --reliability-bg: #E65100;
+          --toil-bg: #1B5E20;
+          --outcome-bg: #2E7D32;
+        }
+      }
+      
+      /* Typography */
+      .title-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .label-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .annotation-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 400;
+        text-anchor: middle;
+        fill: var(--text-secondary);
+      }
+      
+      .section-title {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      /* Node Styles */
+      .sre-node {
+        fill: var(--sre-bg);
+        stroke: var(--primary);
+        stroke-width: 2;
+      }
+      
+      .reliability-node {
+        fill: var(--reliability-bg);
+        stroke: var(--warning);
+        stroke-width: 1.5;
+      }
+      
+      .practice-node {
+        fill: var(--primary);
+        fill-opacity: 0.7;
+        stroke: var(--primary);
+        stroke-width: 1.5;
+      }
+      
+      .skill-node {
+        fill: var(--warning);
+        fill-opacity: 0.7;
+        stroke: var(--warning);
+        stroke-width: 1.5;
+      }
+      
+      .toil-node {
+        fill: var(--toil-bg);
+        stroke: var(--success);
+        stroke-width: 1.5;
+      }
+      
+      .outcome-node {
+        fill: var(--outcome-bg);
+        stroke: var(--success);
+        stroke-width: 2;
+      }
+      
+      /* Connection Lines */
+      .connection-line {
+        stroke: var(--neutral);
+        stroke-width: 1.5;
+        opacity: 0.7;
+        marker-end: url(#arrow);
+      }
+      
+      .primary-line {
+        stroke: var(--primary);
+        stroke-width: 2;
+        opacity: 0.8;
+        marker-end: url(#arrow-primary);
+      }
+    </style>
+    
+    <!-- Arrow Markers -->
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="var(--neutral)"/>
+    </marker>
+    <marker id="arrow-primary" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="var(--primary)"/>
+    </marker>
+  </defs>
+  
+  <title>SRE核心概念とプラクティス</title>
+  <desc>Site Reliability Engineeringの基本原則、実践活動、必要スキル、成果の体系的な関係性</desc>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="var(--bg-primary)"/>
+  
+  <!-- Main Title -->
+  <text x="400" y="24" class="title-text">SREの核心概念</text>
+  
+  <!-- Central SRE Node -->
+  <rect x="320" y="48" width="160" height="40" rx="8" class="sre-node"/>
+  <text x="400" y="64" class="label-text">Site Reliability</text>
+  <text x="400" y="80" class="label-text">Engineering</text>
+  
+  <!-- Basic Principles Section -->
+  <rect x="48" y="120" width="280" height="20" rx="3" fill="var(--warning)" fill-opacity="0.1" stroke="var(--warning)" stroke-width="1"/>
+  <text x="188" y="134" class="section-title">基本原則</text>
+  
+  <rect x="48" y="152" width="120" height="32" rx="4" class="reliability-node"/>
+  <text x="108" y="172" class="label-text">信頼性重視</text>
+  
+  <rect x="188" y="152" width="140" height="32" rx="4" class="reliability-node"/>
+  <text x="258" y="168" class="annotation-text">ソフトウェア</text>
+  <text x="258" y="180" class="annotation-text">エンジニアリング原則</text>
+  
+  <rect x="48" y="200" width="120" height="32" rx="4" class="reliability-node"/>
+  <text x="108" y="216" class="annotation-text">データ駆動の</text>
+  <text x="108" y="228" class="annotation-text">改善</text>
+  
+  <rect x="188" y="200" width="140" height="32" rx="4" class="reliability-node"/>
+  <text x="258" y="220" class="label-text">エラーバジェット</text>
+  
+  <!-- Practice Activities Section -->
+  <rect x="472" y="120" width="280" height="20" rx="3" fill="var(--primary)" fill-opacity="0.1" stroke="var(--primary)" stroke-width="1"/>
+  <text x="612" y="134" class="section-title">実践活動</text>
+  
+  <rect x="472" y="152" width="120" height="32" rx="4" class="practice-node"/>
+  <text x="532" y="168" class="annotation-text">Toil（手作業）</text>
+  <text x="532" y="180" class="annotation-text">の削減</text>
+  
+  <rect x="612" y="152" width="120" height="32" rx="4" class="practice-node"/>
+  <text x="672" y="172" class="label-text">自動化の推進</text>
+  
+  <rect x="472" y="200" width="120" height="32" rx="4" class="practice-node"/>
+  <text x="532" y="220" class="label-text">包括的な監視</text>
+  
+  <rect x="612" y="200" width="120" height="32" rx="4" class="practice-node"/>
+  <text x="672" y="220" class="label-text">インシデント管理</text>
+  
+  <rect x="542" y="248" width="120" height="32" rx="4" class="practice-node"/>
+  <text x="602" y="264" class="annotation-text">キャパシティ</text>
+  <text x="602" y="276" class="annotation-text">プランニング</text>
+  
+  <!-- Required Skills Section -->
+  <rect x="48" y="320" width="280" height="20" rx="3" fill="var(--warning)" fill-opacity="0.1" stroke="var(--warning)" stroke-width="1"/>
+  <text x="188" y="334" class="section-title">必要スキル</text>
+  
+  <rect x="48" y="352" width="120" height="32" rx="4" class="skill-node"/>
+  <text x="108" y="372" class="label-text">プログラミング</text>
+  
+  <rect x="188" y="352" width="120" height="32" rx="4" class="skill-node"/>
+  <text x="248" y="372" class="label-text">スクリプト作成</text>
+  
+  <rect x="48" y="400" width="120" height="32" rx="4" class="skill-node"/>
+  <text x="108" y="420" class="label-text">データ解析</text>
+  
+  <rect x="188" y="400" width="120" height="32" rx="4" class="skill-node"/>
+  <text x="248" y="420" class="label-text">システム設計</text>
+  
+  <!-- Outcomes Section -->
+  <rect x="472" y="320" width="280" height="20" rx="3" fill="var(--success)" fill-opacity="0.1" stroke="var(--success)" stroke-width="1"/>
+  <text x="612" y="334" class="section-title">成果</text>
+  
+  <rect x="472" y="352" width="120" height="32" rx="4" class="outcome-node"/>
+  <text x="532" y="372" class="label-text">高可用性</text>
+  
+  <rect x="612" y="352" width="120" height="32" rx="4" class="outcome-node"/>
+  <text x="672" y="372" class="label-text">迅速な復旧</text>
+  
+  <rect x="472" y="400" width="120" height="32" rx="4" class="outcome-node"/>
+  <text x="532" y="416" class="annotation-text">予測可能な</text>
+  <text x="532" y="428" class="annotation-text">性能</text>
+  
+  <rect x="612" y="400" width="120" height="32" rx="4" class="outcome-node"/>
+  <text x="672" y="420" class="label-text">効率的な運用</text>
+  
+  <!-- SRE to Principles Connections -->
+  <line x1="320" y1="68" x2="108" y2="152" class="primary-line"/>
+  <line x1="320" y1="68" x2="258" y2="152" class="primary-line"/>
+  <line x1="360" y1="88" x2="108" y2="200" class="primary-line"/>
+  <line x1="360" y1="88" x2="258" y2="200" class="primary-line"/>
+  
+  <!-- SRE to Practices Connections -->
+  <line x1="480" y1="68" x2="532" y2="152" class="primary-line"/>
+  <line x1="480" y1="68" x2="672" y2="152" class="primary-line"/>
+  <line x1="440" y1="88" x2="532" y2="200" class="primary-line"/>
+  <line x1="440" y1="88" x2="672" y2="200" class="primary-line"/>
+  <line x1="400" y1="88" x2="602" y2="248" class="primary-line"/>
+  
+  <!-- Principles to Practices Connections -->
+  <line x1="108" y1="184" x2="532" y2="152" class="connection-line"/>
+  <line x1="258" y1="184" x2="672" y2="152" class="connection-line"/>
+  <line x1="108" y1="232" x2="532" y2="200" class="connection-line"/>
+  <line x1="258" y1="232" x2="672" y2="200" class="connection-line"/>
+  <line x1="108" y1="232" x2="602" y2="248" class="connection-line"/>
+  
+  <!-- Practices to Skills Connections -->
+  <line x1="532" y1="184" x2="108" y2="352" class="connection-line"/>
+  <line x1="672" y1="184" x2="248" y2="352" class="connection-line"/>
+  <line x1="532" y1="232" x2="108" y2="400" class="connection-line"/>
+  <line x1="672" y1="232" x2="248" y2="400" class="connection-line"/>
+  
+  <!-- Skills to Outcomes Connections -->
+  <line x1="108" y1="384" x2="532" y2="352" class="connection-line"/>
+  <line x1="248" y1="384" x2="672" y2="352" class="connection-line"/>
+  <line x1="108" y1="432" x2="532" y2="400" class="connection-line"/>
+  <line x1="248" y1="432" x2="672" y2="400" class="connection-line"/>
+  
+  <!-- Additional Labels -->
+  <text x="214" y="108" class="annotation-text">基盤となる考え方</text>
+  <text x="586" y="108" class="annotation-text">具体的な活動</text>
+  <text x="214" y="308" class="annotation-text">習得すべき技術</text>
+  <text x="586" y="308" class="annotation-text">達成される効果</text>
+  
+</svg>

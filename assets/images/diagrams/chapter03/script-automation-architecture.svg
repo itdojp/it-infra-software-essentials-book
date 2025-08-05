@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="900" viewBox="0 0 800 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      /* Color Palette */
+      :root {
+        --bg-primary: #FFFFFF;
+        --bg-secondary: #F8F9FA;
+        --text-primary: #1A1A1A;
+        --text-secondary: #6B7280;
+        --primary: #3B82F6;
+        --success: #10B981;
+        --warning: #F59E0B;
+        --error: #EF4444;
+        --neutral: #6B7280;
+        --border: #E5E7EB;
+        --shell-bg: #e3f2fd;
+        --python-bg: #fff3e0;
+        --manual-bg: #ffebee;
+        --framework-bg: #e8f5e8;
+        --system-bg: #f3e5f5;
+        --devenv-bg: #ffe0b2;
+      }
+      
+      /* Dark Theme */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-primary: #1A1A1A;
+          --bg-secondary: #2D2D2D;
+          --text-primary: #FFFFFF;
+          --text-secondary: #9CA3AF;
+          --primary: #60A5FA;
+          --success: #34D399;
+          --warning: #FBBF24;
+          --error: #F87171;
+          --neutral: #9CA3AF;
+          --border: #374151;
+          --shell-bg: #1A237E;
+          --python-bg: #E65100;
+          --manual-bg: #B71C1C;
+          --framework-bg: #1B5E20;
+          --system-bg: #4A148C;
+          --devenv-bg: #FF6F00;
+        }
+      }
+      
+      /* Typography */
+      .title-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .label-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      .annotation-text {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 400;
+        text-anchor: start;
+        fill: var(--text-secondary);
+      }
+      
+      .annotation-center {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 400;
+        text-anchor: middle;
+        fill: var(--text-secondary);
+      }
+      
+      .section-title {
+        font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        text-anchor: middle;
+        fill: var(--text-primary);
+      }
+      
+      /* Node Styles */
+      .shell-node {
+        fill: var(--shell-bg);
+        stroke: var(--primary);
+        stroke-width: 1.5;
+      }
+      
+      .python-node {
+        fill: var(--python-bg);
+        stroke: var(--warning);
+        stroke-width: 1.5;
+      }
+      
+      .manual-node {
+        fill: var(--manual-bg);
+        stroke: var(--error);
+        stroke-width: 1.5;
+      }
+      
+      .framework-node {
+        fill: var(--framework-bg);
+        stroke: var(--success);
+        stroke-width: 1.5;
+      }
+      
+      .system-node {
+        fill: var(--system-bg);
+        stroke: var(--error);
+        stroke-width: 1.5;
+      }
+      
+      .devenv-node {
+        fill: var(--devenv-bg);
+        stroke: var(--warning);
+        stroke-width: 1.5;
+      }
+      
+      .feature-node {
+        fill: var(--bg-secondary);
+        stroke: var(--neutral);
+        stroke-width: 1;
+      }
+      
+      /* Connection Lines */
+      .connection-line {
+        stroke: var(--neutral);
+        stroke-width: 1.5;
+        opacity: 0.7;
+        marker-end: url(#arrow);
+      }
+      
+      .evolution-line {
+        stroke: var(--primary);
+        stroke-width: 2;
+        opacity: 0.8;
+        marker-end: url(#arrow-primary);
+      }
+    </style>
+    
+    <!-- Arrow Markers -->
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="var(--neutral)"/>
+    </marker>
+    <marker id="arrow-primary" markerWidth="10" markerHeight="8" refX="10" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="var(--primary)"/>
+    </marker>
+  </defs>
+  
+  <title>スクリプト言語による自動化アーキテクチャ</title>
+  <desc>シェルスクリプトとPythonの比較、自動化の段階的発展、実用的なシナリオと開発環境</desc>
+  
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="var(--bg-primary)"/>
+  
+  <!-- Main Title -->
+  <text x="400" y="24" class="title-text">スクリプト言語による自動化アーキテクチャ</text>
+  
+  <!-- Shell vs Python Comparison Section -->
+  <rect x="50" y="50" width="700" height="20" rx="3" fill="var(--primary)" fill-opacity="0.1" stroke="var(--primary)" stroke-width="1"/>
+  <text x="400" y="64" class="section-title">シェルスクリプト vs Python比較</text>
+  
+  <!-- Language Nodes -->
+  <rect x="100" y="80" width="120" height="32" rx="4" class="shell-node"/>
+  <text x="160" y="92" class="label-text">シェルスクリプト</text>
+  <text x="160" y="104" class="annotation-center">(Bash/Zsh)</text>
+  
+  <rect x="480" y="80" width="120" height="32" rx="4" class="python-node"/>
+  <text x="540" y="100" class="label-text">Python</text>
+  
+  <!-- Features -->
+  <rect x="80" y="124" width="160" height="56" rx="3" class="feature-node"/>
+  <text x="160" y="136" class="annotation-center">特徴:</text>
+  <text x="160" y="148" class="annotation-center">• システムコマンド実行</text>
+  <text x="160" y="158" class="annotation-center">• ファイル操作</text>
+  <text x="160" y="168" class="annotation-center">• 軽量で高速起動</text>
+  <text x="160" y="178" class="annotation-center">• OS標準搭載</text>
+  
+  <rect x="460" y="124" width="160" height="56" rx="3" class="feature-node"/>
+  <text x="540" y="136" class="annotation-center">特徴:</text>
+  <text x="540" y="148" class="annotation-center">• 豊富なライブラリ</text>
+  <text x="540" y="158" class="annotation-center">• 複雑なロジック</text>
+  <text x="540" y="168" class="annotation-center">• クロスプラットフォーム</text>
+  <text x="540" y="178" class="annotation-center">• 可読性の高いコード</text>
+  
+  <!-- Use Cases -->
+  <rect x="80" y="192" width="160" height="56" rx="3" class="feature-node"/>
+  <text x="160" y="204" class="annotation-center">適用場面:</text>
+  <text x="160" y="216" class="annotation-center">• 簡単なファイル操作</text>
+  <text x="160" y="226" class="annotation-center">• システム設定変更</text>
+  <text x="160" y="236" class="annotation-center">• バックアップスクリプト</text>
+  <text x="160" y="246" class="annotation-center">• ログローテーション</text>
+  
+  <rect x="460" y="192" width="160" height="56" rx="3" class="feature-node"/>
+  <text x="540" y="204" class="annotation-center">適用場面:</text>
+  <text x="540" y="216" class="annotation-center">• API呼び出し</text>
+  <text x="540" y="226" class="annotation-center">• データ処理・変換</text>
+  <text x="540" y="236" class="annotation-center">• 複雑な条件分岐</text>
+  <text x="540" y="246" class="annotation-center">• エラーハンドリング</text>
+  
+  <!-- Automation Evolution Section -->
+  <rect x="50" y="270" width="700" height="20" rx="3" fill="var(--warning)" fill-opacity="0.1" stroke="var(--warning)" stroke-width="1"/>
+  <text x="400" y="284" class="section-title">自動化の段階的発展</text>
+  
+  <!-- Evolution Stages -->
+  <rect x="80" y="300" width="100" height="32" rx="4" class="manual-node"/>
+  <text x="130" y="312" class="annotation-center">手作業</text>
+  <text x="130" y="324" class="annotation-center">コマンドライン実行</text>
+  
+  <rect x="200" y="300" width="120" height="32" rx="4" class="feature-node"/>
+  <text x="260" y="312" class="annotation-center">簡単なスクリプト</text>
+  <text x="260" y="324" class="annotation-center">コマンドの組み合わせ</text>
+  
+  <rect x="340" y="300" width="120" height="32" rx="4" class="feature-node"/>
+  <text x="400" y="312" class="annotation-center">高度なスクリプト</text>
+  <text x="400" y="324" class="annotation-center">変数・条件分岐・ループ</text>
+  
+  <rect x="480" y="300" width="140" height="32" rx="4" class="framework-node"/>
+  <text x="550" y="312" class="annotation-center">自動化フレームワーク</text>
+  <text x="550" y="324" class="annotation-center">Ansible/Terraform</text>
+  
+  <!-- Evolution Examples -->
+  <rect x="80" y="344" width="100" height="48" rx="3" class="feature-node"/>
+  <text x="130" y="356" class="annotation-center">例: 手動でサーバー設定</text>
+  <text x="130" y="368" class="annotation-center">毎回同じコマンドを実行</text>
+  
+  <rect x="200" y="344" width="120" height="48" rx="3" class="feature-node"/>
+  <text x="260" y="356" class="annotation-center">例: setup.sh</text>
+  <text x="260" y="368" class="annotation-center">基本的なコマンド羅列</text>
+  
+  <rect x="340" y="344" width="120" height="48" rx="3" class="feature-node"/>
+  <text x="400" y="356" class="annotation-center">例: deploy.py</text>
+  <text x="400" y="368" class="annotation-center">条件分岐、エラー処理</text>
+  
+  <rect x="480" y="344" width="140" height="48" rx="3" class="feature-node"/>
+  <text x="550" y="356" class="annotation-center">例: playbook.yml</text>
+  <text x="550" y="368" class="annotation-center">宣言的設定管理</text>
+  
+  <!-- Practical Scenarios Section -->
+  <rect x="50" y="410" width="700" height="20" rx="3" fill="var(--success)" fill-opacity="0.1" stroke="var(--success)" stroke-width="1"/>
+  <text x="400" y="424" class="section-title">実用的な自動化シナリオ</text>
+  
+  <!-- Scenario Categories -->
+  <rect x="80" y="440" width="120" height="24" rx="3" class="system-node"/>
+  <text x="140" y="456" class="annotation-center">システム管理</text>
+  
+  <rect x="220" y="440" width="120" height="24" rx="3" class="feature-node"/>
+  <text x="280" y="456" class="annotation-center">監視・アラート</text>
+  
+  <rect x="360" y="440" width="120" height="24" rx="3" class="feature-node"/>
+  <text x="420" y="456" class="annotation-center">バックアップ</text>
+  
+  <rect x="500" y="440" width="120" height="24" rx="3" class="feature-node"/>
+  <text x="560" y="456" class="annotation-center">デプロイ</text>
+  
+  <rect x="300" y="474" width="120" height="24" rx="3" class="feature-node"/>
+  <text x="360" y="490" class="annotation-center">設定管理</text>
+  
+  <!-- Scenario Details -->
+  <rect x="80" y="508" width="120" height="56" rx="3" class="feature-node"/>
+  <text x="140" y="520" class="annotation-center">• サービス起動/停止</text>
+  <text x="140" y="532" class="annotation-center">• ログローテーション</text>
+  <text x="140" y="544" class="annotation-center">• ディスク容量チェック</text>
+  <text x="140" y="556" class="annotation-center">• ユーザー管理</text>
+  
+  <rect x="220" y="508" width="120" height="56" rx="3" class="feature-node"/>
+  <text x="280" y="520" class="annotation-center">• ヘルスチェック</text>
+  <text x="280" y="532" class="annotation-center">• メトリクス収集</text>
+  <text x="280" y="544" class="annotation-center">• アラート通知</text>
+  <text x="280" y="556" class="annotation-center">• レポート生成</text>
+  
+  <rect x="360" y="508" width="120" height="56" rx="3" class="feature-node"/>
+  <text x="420" y="520" class="annotation-center">• データベース</text>
+  <text x="420" y="532" class="annotation-center">• ファイルシステム</text>
+  <text x="420" y="544" class="annotation-center">• 設定ファイル</text>
+  <text x="420" y="556" class="annotation-center">• 圧縮・暗号化</text>
+  
+  <rect x="500" y="508" width="120" height="56" rx="3" class="feature-node"/>
+  <text x="560" y="520" class="annotation-center">• アプリケーション</text>
+  <text x="560" y="532" class="annotation-center">• 設定ファイル</text>
+  <text x="560" y="544" class="annotation-center">• データベース移行</text>
+  <text x="560" y="556" class="annotation-center">• ロールバック</text>
+  
+  <rect x="300" y="574" width="120" height="56" rx="3" class="feature-node"/>
+  <text x="360" y="586" class="annotation-center">• 環境変数設定</text>
+  <text x="360" y="598" class="annotation-center">• ネットワーク設定</text>
+  <text x="360" y="610" class="annotation-center">• セキュリティ設定</text>
+  <text x="360" y="622" class="annotation-center">• サービス設定</text>
+  
+  <!-- Development Environments Section -->
+  <rect x="50" y="650" width="700" height="20" rx="3" fill="var(--devenv-bg)" stroke="var(--warning)" stroke-width="1"/>
+  <text x="400" y="664" class="section-title">開発・実行環境</text>
+  
+  <!-- Environment Types -->
+  <rect x="140" y="680" width="100" height="24" rx="3" class="devenv-node"/>
+  <text x="190" y="696" class="annotation-center">開発環境</text>
+  
+  <rect x="280" y="680" width="100" height="24" rx="3" class="feature-node"/>
+  <text x="330" y="696" class="annotation-center">テスト環境</text>
+  
+  <rect x="420" y="680" width="100" height="24" rx="3" class="feature-node"/>
+  <text x="470" y="696" class="annotation-center">本番環境</text>
+  
+  <!-- Environment Details -->
+  <rect x="140" y="714" width="100" height="56" rx="3" class="feature-node"/>
+  <text x="190" y="726" class="annotation-center">• エディタ/IDE</text>
+  <text x="190" y="738" class="annotation-center">• デバッガー</text>
+  <text x="190" y="750" class="annotation-center">• バージョン管理</text>
+  <text x="190" y="762" class="annotation-center">• ローカルテスト</text>
+  
+  <rect x="280" y="714" width="100" height="56" rx="3" class="feature-node"/>
+  <text x="330" y="726" class="annotation-center">• ステージング</text>
+  <text x="330" y="738" class="annotation-center">• 結合テスト</text>
+  <text x="330" y="750" class="annotation-center">• 性能テスト</text>
+  <text x="330" y="762" class="annotation-center">• 安全性検証</text>
+  
+  <rect x="420" y="714" width="100" height="56" rx="3" class="feature-node"/>
+  <text x="470" y="726" class="annotation-center">• 自動デプロイ</text>
+  <text x="470" y="738" class="annotation-center">• 監視・ログ</text>
+  <text x="470" y="750" class="annotation-center">• 障害対応</text>
+  <text x="470" y="762" class="annotation-center">• スケーリング</text>
+  
+  <!-- Connection Lines -->
+  <!-- Language to Features -->
+  <line x1="160" y1="112" x2="160" y2="124" class="connection-line"/>
+  <line x1="540" y1="112" x2="540" y2="124" class="connection-line"/>
+  <line x1="160" y1="180" x2="160" y2="192" class="connection-line"/>
+  <line x1="540" y1="180" x2="540" y2="192" class="connection-line"/>
+  
+  <!-- Evolution Flow -->
+  <line x1="180" y1="316" x2="200" y2="316" class="evolution-line"/>
+  <line x1="320" y1="316" x2="340" y2="316" class="evolution-line"/>
+  <line x1="460" y1="316" x2="480" y2="316" class="evolution-line"/>
+  
+  <!-- Evolution to Examples -->
+  <line x1="130" y1="332" x2="130" y2="344" class="connection-line"/>
+  <line x1="260" y1="332" x2="260" y2="344" class="connection-line"/>
+  <line x1="400" y1="332" x2="400" y2="344" class="connection-line"/>
+  <line x1="550" y1="332" x2="550" y2="344" class="connection-line"/>
+  
+  <!-- Scenarios to Details -->
+  <line x1="140" y1="464" x2="140" y2="508" class="connection-line"/>
+  <line x1="280" y1="464" x2="280" y2="508" class="connection-line"/>
+  <line x1="420" y1="464" x2="420" y2="508" class="connection-line"/>
+  <line x1="560" y1="464" x2="560" y2="508" class="connection-line"/>
+  <line x1="360" y1="498" x2="360" y2="574" class="connection-line"/>
+  
+  <!-- Environments to Details -->
+  <line x1="190" y1="704" x2="190" y2="714" class="connection-line"/>
+  <line x1="330" y1="704" x2="330" y2="714" class="connection-line"/>
+  <line x1="470" y1="704" x2="470" y2="714" class="connection-line"/>
+  
+</svg>

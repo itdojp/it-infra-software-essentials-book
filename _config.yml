@@ -1,0 +1,101 @@
+# Jekyll Configuration for ITDO book-formatter v3.0
+title: ITインフラエンジニアのためのソフトウェア基礎知識
+description: YAML, JSON, スクリプト, APIで学ぶ自動化の基本
+author: 
+  name: ITDO Inc.
+  email: knowledge@itdo.jp
+url: "https://itdojp.github.io"
+baseurl: "/it-infra-software-essentials-book"
+
+# Repository
+repository: https://github.com/itdojp/it-infra-software-essentials-book
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    block:
+      line_numbers: false
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+
+# Book-specific settings
+book:
+  version: "1.0.0"
+  language: "ja"
+  license: "MIT"
+  format: "web"
+  theme: "technical"
+
+# Collections - standardized structure
+collections:
+  chapters:
+    output: true
+    permalink: /chapters/:name/
+  appendices:
+    output: true
+    permalink: /appendices/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "chapters"
+    values:
+      layout: "chapter"
+  - scope:
+      path: ""
+      type: "appendices"
+    values:
+      layout: "appendix"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Navigation - auto-generated from book-config.yaml
+navigation:
+  chapters:
+    - title: "第1章：インフラエンジニアとソフトウェアの接点"
+      url: /chapters/chapter01/
+      description: "現代インフラにおけるソフトウェア知識の重要性"
+    - title: "第2章：データ記述言語の基本と実践"
+      url: /chapters/chapter02/
+      description: "JSON、YAMLを中心としたデータ形式の理解"
+    - title: "第3章：スクリプト言語による自動化の初歩"
+      url: /chapters/chapter03/
+      description: "シェルスクリプトとPythonによる自動化"
+    - title: "第4章：APIによるインフラ連携"
+      url: /chapters/chapter04/
+      description: "RESTful APIとクラウドサービス連携"
+    - title: "第5章：インフラ運用を支えるその他のソフトウェア知識"
+      url: /chapters/chapter05/
+      description: "Git、正規表現、データ構造の基礎"
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - package.json
+  - package-lock.json
+  - README.md
+  - scripts/
+  - tests/
+  - .gitignore
+  - book-config.yaml
+  - Dockerfile
+  - docker-compose.yml
+
+# Include
+include:
+  - _pages
+  - assets
