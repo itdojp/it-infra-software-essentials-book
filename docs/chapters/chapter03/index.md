@@ -1,7 +1,7 @@
 ---
-layout: chapter
+layout: book
 title: 第3章：スクリプト言語による自動化の初歩
-chapter: 3
+order: 4
 ---
 
 # **第3章：スクリプト言語による自動化の初歩**

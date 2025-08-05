@@ -1,7 +1,7 @@
 ---
-layout: chapter
+layout: book
 title: 第2章：データ記述言語の基本と実践
-chapter: 2
+order: 3
 ---
 
 # **第2章：データ記述言語の基本と実践**

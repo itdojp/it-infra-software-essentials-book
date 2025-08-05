@@ -1,56 +1,40 @@
-# Jekyll Configuration
-title: ITインフラエンジニアのためのソフトウェア基礎知識
-description: YAML, JSON, スクリプト, APIで学ぶ自動化の基本
-author: 
-  name: ITDO Inc.
-  email: knowledge@itdo.jp
-url: "https://itdojp.github.io"
-baseurl: "/it-infra-software-essentials-book"
+title: "ITインフラエンジニアのためのソフトウェア基礎知識"
+description: "YAML, JSON, スクリプト, APIで学ぶ自動化の基本"
+author: "株式会社アイティードゥ"
+version: "1.0.0"
+lang: "ja"
 
-# Repository
-repository: https://github.com/itdojp/it-infra-software-essentials-book
-
-# Build settings
+# Jekyll設定
 markdown: kramdown
 highlighter: rouge
+theme: minima
+
+# プラグイン
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-remote-theme
+
+# 除外ファイル
+exclude:
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - scripts/
+  - tests/
+  - "README.md"
+  - vendor/
+  - .bundle/
+  - Gemfile
+  - Gemfile.lock
+
+# 日本語対応
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    css_class: 'highlight'
-    block:
-      line_numbers: false
-
-# Plugins
-plugins:
-  - jekyll-sitemap
-  - jekyll-seo-tag
-
-# Navigation
-collections:
-  chapters:
-    output: true
-    permalink: /chapters/:name/
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: "chapters"
-    values:
-      layout: "chapter"
-  - scope:
-      path: ""
-    values:
-      layout: "default"
-
-# Exclude from build
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - package.json
-  - package-lock.json
-  - README.md
-  - scripts/
-  - .gitignore
+  
+# GitHub Pages設定
+url: "https://itdojp.github.io"
+baseurl: "/it-infra-software-essentials-book"
+repository: "itdojp/it-infra-software-essentials-book"

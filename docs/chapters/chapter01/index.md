@@ -1,7 +1,7 @@
 ---
-layout: chapter
+layout: book
 title: 第1章：インフラエンジニアとソフトウェアの接点
-chapter: 1
+order: 2
 ---
 
 # **第1章：インフラエンジニアとソフトウェアの接点**

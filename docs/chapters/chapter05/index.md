@@ -1,7 +1,7 @@
 ---
-layout: chapter
+layout: book
 title: 第5章：インフラ運用を支えるその他のソフトウェア知識
-chapter: 5
+order: 6
 ---
 
 # **第5章：インフラ運用を支えるその他のソフトウェア知識**

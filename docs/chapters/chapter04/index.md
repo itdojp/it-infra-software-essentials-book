@@ -1,7 +1,7 @@
 ---
-layout: chapter
+layout: book
 title: 第4章：APIによるインフラ連携
-chapter: 4
+order: 5
 ---
 
 # **第4章：APIによるインフラ連携**

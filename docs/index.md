@@ -1,6 +1,7 @@
 ---
 layout: book
 title: ホーム
+order: 1
 ---
 
 # ITインフラエンジニアのためのソフトウェア基礎知識
