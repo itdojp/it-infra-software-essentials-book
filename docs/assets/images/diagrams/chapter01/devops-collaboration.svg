@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title-text { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
+      .team-title { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; font-weight: bold; fill: #fff; }
+      .role-text { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; fill: #34495e; }
+      .shared-text { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; fill: #2c3e50; font-weight: bold; }
+      .connector { stroke: #95a5a6; stroke-width: 2; fill: none; stroke-dasharray: 3,3; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" class="title-text" text-anchor="middle">DevOps 協働モデル</text>
+
+  <!-- Development Team -->
+  <g id="dev-team">
+    <rect x="50" y="80" width="250" height="180" fill="#e8f4f8" stroke="#3498db" stroke-width="2" rx="10"/>
+    <rect x="60" y="90" width="230" height="35" fill="#3498db"/>
+    <text x="175" y="112" class="team-title" text-anchor="middle">開発チーム</text>
+    
+    <rect x="70" y="140" width="100" height="40" fill="#fff" stroke="#3498db" stroke-width="1" rx="5"/>
+    <text x="120" y="165" class="role-text" text-anchor="middle">開発者</text>
+    
+    <rect x="180" y="140" width="100" height="40" fill="#fff" stroke="#3498db" stroke-width="1" rx="5"/>
+    <text x="230" y="165" class="role-text" text-anchor="middle">QAエンジニア</text>
+    
+    <rect x="125" y="200" width="100" height="40" fill="#fff" stroke="#3498db" stroke-width="1" rx="5"/>
+    <text x="175" y="225" class="role-text" text-anchor="middle">アーキテクト</text>
+  </g>
+
+  <!-- Operations Team -->
+  <g id="ops-team">
+    <rect x="500" y="80" width="250" height="180" fill="#fef5e7" stroke="#f39c12" stroke-width="2" rx="10"/>
+    <rect x="510" y="90" width="230" height="35" fill="#f39c12"/>
+    <text x="625" y="112" class="team-title" text-anchor="middle">運用チーム</text>
+    
+    <rect x="520" y="140" width="100" height="40" fill="#fff" stroke="#f39c12" stroke-width="1" rx="5"/>
+    <text x="570" y="165" class="role-text" text-anchor="middle">運用エンジニア</text>
+    
+    <rect x="630" y="140" width="100" height="40" fill="#fff" stroke="#f39c12" stroke-width="1" rx="5"/>
+    <text x="680" y="165" class="role-text" text-anchor="middle">SRE</text>
+    
+    <rect x="575" y="200" width="100" height="40" fill="#fff" stroke="#f39c12" stroke-width="1" rx="5"/>
+    <text x="625" y="225" class="role-text" text-anchor="middle">セキュリティ</text>
+  </g>
+
+  <!-- Shared Responsibilities -->
+  <g id="shared-area">
+    <rect x="150" y="320" width="500" height="240" fill="#f8f9fa" stroke="#2c3e50" stroke-width="2" rx="10"/>
+    <text x="400" y="345" class="shared-text" text-anchor="middle">共有責任領域</text>
+    
+    <!-- CI/CD Pipeline -->
+    <rect x="180" y="370" width="200" height="60" fill="#e6f3ff" stroke="#3498db" stroke-width="2" rx="5"/>
+    <text x="280" y="395" class="role-text" text-anchor="middle" font-weight="bold">CI/CD パイプライン</text>
+    <text x="280" y="415" class="role-text" text-anchor="middle" font-size="10">継続的統合・デプロイ</text>
+    
+    <!-- Monitoring -->
+    <rect x="420" y="370" width="200" height="60" fill="#ffe6e6" stroke="#e74c3c" stroke-width="2" rx="5"/>
+    <text x="520" y="395" class="role-text" text-anchor="middle" font-weight="bold">モニタリング</text>
+    <text x="520" y="415" class="role-text" text-anchor="middle" font-size="10">パフォーマンス・可用性監視</text>
+    
+    <!-- Automation -->
+    <rect x="180" y="460" width="200" height="60" fill="#e6ffe6" stroke="#27ae60" stroke-width="2" rx="5"/>
+    <text x="280" y="485" class="role-text" text-anchor="middle" font-weight="bold">自動化</text>
+    <text x="280" y="505" class="role-text" text-anchor="middle" font-size="10">インフラ・デプロイ自動化</text>
+    
+    <!-- Infrastructure as Code -->
+    <rect x="420" y="460" width="200" height="60" fill="#fff0e6" stroke="#f39c12" stroke-width="2" rx="5"/>
+    <text x="520" y="485" class="role-text" text-anchor="middle" font-weight="bold">Infrastructure as Code</text>
+    <text x="520" y="505" class="role-text" text-anchor="middle" font-size="10">構成管理・バージョン管理</text>
+  </g>
+
+  <!-- Connection Lines -->
+  <path d="M 175 260 L 280 370" class="connector"/>
+  <path d="M 175 260 L 280 460" class="connector"/>
+  <path d="M 625 260 L 520 370" class="connector"/>
+  <path d="M 625 260 L 520 460" class="connector"/>
+  
+  <!-- Bidirectional Arrows -->
+  <g>
+    <path d="M 300 170 L 500 170" stroke="#2c3e50" stroke-width="3" fill="none"/>
+    <polygon points="495,165 505,170 495,175" fill="#2c3e50"/>
+    <polygon points="305,165 295,170 305,175" fill="#2c3e50"/>
+    <text x="400" y="160" class="role-text" text-anchor="middle" font-weight="bold">協働・コミュニケーション</text>
+  </g>
+</svg>
