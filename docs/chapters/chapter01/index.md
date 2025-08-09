@@ -14,6 +14,8 @@ order: 2
 
 ![従来インフラ vs 現代インフラ]({{ '/assets/images/diagrams/chapter01/traditional-vs-modern-infrastructure.svg' | relative_url }})
 
+> 📊 **図表**: [APIワークフローとエラーハンドリング](../../assets/images/diagrams/chapter01/api-workflow.md#api-requestresponse-cycle-with-error-handling)、[DevOps協働モデル](../../assets/images/diagrams/chapter01/api-workflow.md#devops-collaboration-model)、[インフラ自動化プロセス](../../assets/images/diagrams/chapter01/api-workflow.md#infrastructure-automation-process)で詳細な流れを確認できます。
+
 かつてのインフラ運用は、ハードウェアの物理的な接続、OSのインストール、ミドルウェアの手動設定が中心でした。しかし、仮想化技術の進化、クラウドサービスの登場、そしてDevOpsのプラクティスが普及するにつれて、インフラは「コード」として扱われるようになり、その管理はソフトウェアエンジニアリングの手法を取り入れるようになりました。
 
 ### **自動化の必要性**
