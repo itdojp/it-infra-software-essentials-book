@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="700" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
+      .paradigm-title { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; font-weight: bold; fill: #fff; }
+      .feature-title { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; }
+      .text-content { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; fill: #2c3e50; }
+      .small-text { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .code-text { font-family: 'Courier New', monospace; font-size: 9px; fill: #2c3e50; }
+      .procedural-box { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .oop-box { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .functional-box { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+      .reactive-box { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .declarative-box { fill: #9b59b6; stroke: #8e44ad; stroke-width: 2; }
+      .component { fill: #fff; stroke: #95a5a6; stroke-width: 1; }
+      .evolution-arrow { stroke: #34495e; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495e"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" class="title" text-anchor="middle">プログラミングパラダイムの進化</text>
+
+  <!-- Procedural Programming -->
+  <g id="procedural">
+    <rect x="50" y="80" width="200" height="150" class="procedural-box" rx="10"/>
+    <text x="150" y="105" class="paradigm-title" text-anchor="middle">手続き型プログラミング</text>
+    
+    <rect x="65" y="120" width="170" height="95" class="component" rx="3"/>
+    <text x="150" y="140" class="feature-title" text-anchor="middle">特徴</text>
+    <text x="75" y="155" class="text-content">• 上から順次実行</text>
+    <text x="75" y="170" class="text-content">• 関数による構造化</text>
+    <text x="75" y="185" class="text-content">• グローバル変数</text>
+    <text x="75" y="200" class="small-text">言語: C, Pascal, FORTRAN</text>
+  </g>
+
+  <!-- Object-Oriented Programming -->
+  <g id="oop">
+    <rect x="280" y="80" width="200" height="150" class="oop-box" rx="10"/>
+    <text x="380" y="105" class="paradigm-title" text-anchor="middle">オブジェクト指向</text>
+    
+    <rect x="295" y="120" width="170" height="95" class="component" rx="3"/>
+    <text x="380" y="140" class="feature-title" text-anchor="middle">特徴</text>
+    <text x="305" y="155" class="text-content">• カプセル化</text>
+    <text x="305" y="170" class="text-content">• 継承</text>
+    <text x="305" y="185" class="text-content">• ポリモーフィズム</text>
+    <text x="305" y="200" class="small-text">言語: Java, C++, Python</text>
+  </g>
+
+  <!-- Functional Programming -->
+  <g id="functional">
+    <rect x="510" y="80" width="200" height="150" class="functional-box" rx="10"/>
+    <text x="610" y="105" class="paradigm-title" text-anchor="middle">関数型プログラミング</text>
+    
+    <rect x="525" y="120" width="170" height="95" class="component" rx="3"/>
+    <text x="610" y="140" class="feature-title" text-anchor="middle">特徴</text>
+    <text x="535" y="155" class="text-content">• 不変性</text>
+    <text x="535" y="170" class="text-content">• 高階関数</text>
+    <text x="535" y="185" class="text-content">• 副作用なし</text>
+    <text x="535" y="200" class="small-text">言語: Haskell, Scala, F#</text>
+  </g>
+
+  <!-- Evolution Timeline -->
+  <g id="timeline">
+    <text x="450" y="270" class="feature-title" text-anchor="middle">パラダイムの進化</text>
+    
+    <line x1="100" y1="300" x2="800" y2="300" stroke="#34495e" stroke-width="2"/>
+    
+    <!-- Timeline markers -->
+    <circle cx="150" cy="300" r="5" fill="#3498db"/>
+    <text x="150" y="320" class="small-text" text-anchor="middle">1950s</text>
+    <text x="150" y="335" class="small-text" text-anchor="middle">手続き型</text>
+    
+    <circle cx="350" cy="300" r="5" fill="#e74c3c"/>
+    <text x="350" y="320" class="small-text" text-anchor="middle">1980s</text>
+    <text x="350" y="335" class="small-text" text-anchor="middle">オブジェクト指向</text>
+    
+    <circle cx="550" cy="300" r="5" fill="#2ecc71"/>
+    <text x="550" y="320" class="small-text" text-anchor="middle">1990s</text>
+    <text x="550" y="335" class="small-text" text-anchor="middle">関数型復活</text>
+    
+    <circle cx="750" cy="300" r="5" fill="#f39c12"/>
+    <text x="750" y="320" class="small-text" text-anchor="middle">2010s</text>
+    <text x="750" y="335" class="small-text" text-anchor="middle">リアクティブ</text>
+  </g>
+
+  <!-- Modern Paradigms -->
+  <g id="modern">
+    <!-- Reactive Programming -->
+    <rect x="50" y="370" width="250" height="140" class="reactive-box" rx="10"/>
+    <text x="175" y="395" class="paradigm-title" text-anchor="middle">リアクティブプログラミング</text>
+    
+    <rect x="65" y="410" width="220" height="85" class="component" rx="3"/>
+    <text x="75" y="430" class="text-content">• 非同期データストリーム</text>
+    <text x="75" y="445" class="text-content">• Observable/Observer</text>
+    <text x="75" y="460" class="text-content">• バックプレッシャー</text>
+    <text x="75" y="475" class="small-text">フレームワーク: RxJS, Reactor, Akka</text>
+    <text x="75" y="490" class="small-text">用途: リアルタイムUI, IoT</text>
+    
+    <!-- Declarative Programming -->
+    <rect x="330" y="370" width="250" height="140" class="declarative-box" rx="10"/>
+    <text x="455" y="395" class="paradigm-title" text-anchor="middle">宣言型プログラミング</text>
+    
+    <rect x="345" y="410" width="220" height="85" class="component" rx="3"/>
+    <text x="355" y="430" class="text-content">• 「何を」を記述</text>
+    <text x="355" y="445" class="text-content">• 実装詳細を隠蔽</text>
+    <text x="355" y="460" class="text-content">• DSL活用</text>
+    <text x="355" y="475" class="small-text">例: SQL, HTML/CSS, Terraform</text>
+    <text x="355" y="490" class="small-text">用途: 設定管理, IaC</text>
+    
+    <!-- Event-Driven -->
+    <rect x="610" y="370" width="240" height="140" fill="#1abc9c" stroke="#16a085" stroke-width="2" rx="10"/>
+    <text x="730" y="395" class="paradigm-title" text-anchor="middle">イベント駆動</text>
+    
+    <rect x="625" y="410" width="210" height="85" class="component" rx="3"/>
+    <text x="635" y="430" class="text-content">• イベントループ</text>
+    <text x="635" y="445" class="text-content">• 非同期処理</text>
+    <text x="635" y="460" class="text-content">• Pub/Sub</text>
+    <text x="635" y="475" class="small-text">言語: Node.js, Go</text>
+    <text x="635" y="490" class="small-text">用途: マイクロサービス</text>
+  </g>
+
+  <!-- Comparison Table -->
+  <g id="comparison">
+    <rect x="50" y="530" width="800" height="140" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" rx="5"/>
+    <text x="450" y="555" class="feature-title" text-anchor="middle">パラダイム比較</text>
+    
+    <text x="70" y="580" class="text-content" font-weight="bold">パラダイム</text>
+    <text x="200" y="580" class="text-content" font-weight="bold">状態管理</text>
+    <text x="350" y="580" class="text-content" font-weight="bold">制御フロー</text>
+    <text x="500" y="580" class="text-content" font-weight="bold">並行性</text>
+    <text x="650" y="580" class="text-content" font-weight="bold">適用領域</text>
+    
+    <line x1="60" y1="590" x2="840" y2="590" stroke="#95a5a6" stroke-width="1"/>
+    
+    <text x="70" y="605" class="small-text">手続き型</text>
+    <text x="200" y="605" class="small-text">可変状態</text>
+    <text x="350" y="605" class="small-text">順次実行</text>
+    <text x="500" y="605" class="small-text">スレッド</text>
+    <text x="650" y="605" class="small-text">システム開発</text>
+    
+    <text x="70" y="625" class="small-text">オブジェクト指向</text>
+    <text x="200" y="625" class="small-text">カプセル化</text>
+    <text x="350" y="625" class="small-text">メッセージ</text>
+    <text x="500" y="625" class="small-text">同期/非同期</text>
+    <text x="650" y="625" class="small-text">大規模アプリ</text>
+    
+    <text x="70" y="645" class="small-text">関数型</text>
+    <text x="200" y="645" class="small-text">不変状態</text>
+    <text x="350" y="645" class="small-text">関数合成</text>
+    <text x="500" y="645" class="small-text">Actor</text>
+    <text x="650" y="645" class="small-text">データ処理</text>
+    
+    <text x="70" y="665" class="small-text">リアクティブ</text>
+    <text x="200" y="665" class="small-text">ストリーム</text>
+    <text x="350" y="665" class="small-text">イベント</text>
+    <text x="500" y="665" class="small-text">非同期</text>
+    <text x="650" y="665" class="small-text">リアルタイム</text>
+  </g>
+</svg>
