@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="700" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
+      .section-title { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; font-weight: bold; fill: #2c3e50; }
+      .structure-title { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: bold; fill: #fff; }
+      .text-content { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; fill: #2c3e50; }
+      .small-text { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .complexity-text { font-family: 'Courier New', monospace; font-size: 10px; fill: #2c3e50; }
+      .array-box { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .list-box { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+      .tree-box { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .hash-box { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .graph-box { fill: #9b59b6; stroke: #8e44ad; stroke-width: 2; }
+      .data-cell { fill: #fff; stroke: #34495e; stroke-width: 1; }
+      .pointer-arrow { stroke: #34495e; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .tree-edge { stroke: #34495e; stroke-width: 2; fill: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495e"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" class="title" text-anchor="middle">基本データ構造と計算量</text>
+
+  <!-- Linear Structures -->
+  <g id="linear">
+    <text x="200" y="70" class="section-title" text-anchor="middle">線形データ構造</text>
+    
+    <!-- Array -->
+    <g id="array">
+      <rect x="50" y="90" width="300" height="100" class="array-box" rx="5"/>
+      <text x="200" y="110" class="structure-title" text-anchor="middle">配列 (Array)</text>
+      
+      <!-- Array visualization -->
+      <rect x="70" y="125" width="40" height="30" class="data-cell"/>
+      <text x="90" y="145" class="text-content" text-anchor="middle">0</text>
+      <rect x="110" y="125" width="40" height="30" class="data-cell"/>
+      <text x="130" y="145" class="text-content" text-anchor="middle">1</text>
+      <rect x="150" y="125" width="40" height="30" class="data-cell"/>
+      <text x="170" y="145" class="text-content" text-anchor="middle">2</text>
+      <rect x="190" y="125" width="40" height="30" class="data-cell"/>
+      <text x="210" y="145" class="text-content" text-anchor="middle">3</text>
+      <rect x="230" y="125" width="40" height="30" class="data-cell"/>
+      <text x="250" y="145" class="text-content" text-anchor="middle">4</text>
+      
+      <text x="70" y="175" class="complexity-text">アクセス: O(1)</text>
+      <text x="200" y="175" class="complexity-text">挿入/削除: O(n)</text>
+    </g>
+    
+    <!-- Linked List -->
+    <g id="linked-list">
+      <rect x="50" y="200" width="300" height="100" class="list-box" rx="5"/>
+      <text x="200" y="220" class="structure-title" text-anchor="middle">連結リスト (Linked List)</text>
+      
+      <!-- Linked list visualization -->
+      <rect x="70" y="235" width="40" height="30" class="data-cell"/>
+      <text x="90" y="255" class="text-content" text-anchor="middle">A</text>
+      <path d="M 110 250 L 130 250" class="pointer-arrow"/>
+      <rect x="130" y="235" width="40" height="30" class="data-cell"/>
+      <text x="150" y="255" class="text-content" text-anchor="middle">B</text>
+      <path d="M 170 250 L 190 250" class="pointer-arrow"/>
+      <rect x="190" y="235" width="40" height="30" class="data-cell"/>
+      <text x="210" y="255" class="text-content" text-anchor="middle">C</text>
+      <path d="M 230 250 L 250 250" class="pointer-arrow"/>
+      <text x="260" y="255" class="text-content">null</text>
+      
+      <text x="70" y="285" class="complexity-text">アクセス: O(n)</text>
+      <text x="200" y="285" class="complexity-text">挿入/削除: O(1)</text>
+    </g>
+    
+    <!-- Stack/Queue -->
+    <g id="stack-queue">
+      <rect x="50" y="310" width="140" height="90" fill="#1abc9c" stroke="#16a085" stroke-width="2" rx="5"/>
+      <text x="120" y="330" class="structure-title" text-anchor="middle">スタック</text>
+      
+      <rect x="85" y="340" width="70" height="20" class="data-cell"/>
+      <text x="120" y="354" class="small-text" text-anchor="middle">Top</text>
+      <rect x="85" y="360" width="70" height="20" class="data-cell"/>
+      <rect x="85" y="380" width="70" height="20" class="data-cell"/>
+      <text x="120" y="394" class="small-text" text-anchor="middle">LIFO</text>
+      
+      <rect x="210" y="310" width="140" height="90" fill="#1abc9c" stroke="#16a085" stroke-width="2" rx="5"/>
+      <text x="280" y="330" class="structure-title" text-anchor="middle">キュー</text>
+      
+      <rect x="230" y="350" width="100" height="25" class="data-cell"/>
+      <text x="220" y="365" class="small-text">←Front</text>
+      <text x="340" y="365" class="small-text">Rear→</text>
+      <text x="280" y="394" class="small-text" text-anchor="middle">FIFO</text>
+    </g>
+  </g>
+
+  <!-- Non-Linear Structures -->
+  <g id="non-linear">
+    <text x="650" y="70" class="section-title" text-anchor="middle">非線形データ構造</text>
+    
+    <!-- Binary Tree -->
+    <g id="tree">
+      <rect x="450" y="90" width="200" height="150" class="tree-box" rx="5"/>
+      <text x="550" y="110" class="structure-title" text-anchor="middle">二分木 (Binary Tree)</text>
+      
+      <!-- Tree visualization -->
+      <circle cx="550" cy="135" r="10" class="data-cell"/>
+      <text x="550" y="140" class="small-text" text-anchor="middle">A</text>
+      
+      <line x1="550" y1="145" x2="520" y2="170" class="tree-edge"/>
+      <circle cx="520" cy="175" r="10" class="data-cell"/>
+      <text x="520" y="180" class="small-text" text-anchor="middle">B</text>
+      
+      <line x1="550" y1="145" x2="580" y2="170" class="tree-edge"/>
+      <circle cx="580" cy="175" r="10" class="data-cell"/>
+      <text x="580" y="180" class="small-text" text-anchor="middle">C</text>
+      
+      <line x1="520" y1="185" x2="505" y2="205" class="tree-edge"/>
+      <circle cx="505" cy="210" r="10" class="data-cell"/>
+      <text x="505" y="215" class="small-text" text-anchor="middle">D</text>
+      
+      <line x1="520" y1="185" x2="535" y2="205" class="tree-edge"/>
+      <circle cx="535" cy="210" r="10" class="data-cell"/>
+      <text x="535" y="215" class="small-text" text-anchor="middle">E</text>
+      
+      <text x="470" y="230" class="complexity-text">探索: O(log n)〜O(n)</text>
+    </g>
+    
+    <!-- Hash Table -->
+    <g id="hash">
+      <rect x="670" y="90" width="200" height="150" class="hash-box" rx="5"/>
+      <text x="770" y="110" class="structure-title" text-anchor="middle">ハッシュテーブル</text>
+      
+      <!-- Hash table visualization -->
+      <rect x="690" y="125" width="30" height="25" class="data-cell"/>
+      <text x="705" y="142" class="small-text" text-anchor="middle">0</text>
+      <rect x="720" y="125" width="60" height="25" class="data-cell"/>
+      
+      <rect x="690" y="150" width="30" height="25" class="data-cell"/>
+      <text x="705" y="167" class="small-text" text-anchor="middle">1</text>
+      <rect x="720" y="150" width="60" height="25" class="data-cell"/>
+      <text x="750" y="167" class="small-text" text-anchor="middle">data</text>
+      
+      <rect x="690" y="175" width="30" height="25" class="data-cell"/>
+      <text x="705" y="192" class="small-text" text-anchor="middle">2</text>
+      <rect x="720" y="175" width="60" height="25" class="data-cell"/>
+      
+      <rect x="690" y="200" width="30" height="25" class="data-cell"/>
+      <text x="705" y="217" class="small-text" text-anchor="middle">3</text>
+      <rect x="720" y="200" width="60" height="25" class="data-cell"/>
+      <text x="750" y="217" class="small-text" text-anchor="middle">data</text>
+      
+      <text x="800" y="145" class="small-text">Hash(key)</text>
+      <text x="800" y="160" class="small-text">→ index</text>
+      
+      <text x="690" y="235" class="complexity-text">平均: O(1)</text>
+    </g>
+    
+    <!-- Graph -->
+    <g id="graph">
+      <rect x="450" y="250" width="420" height="150" class="graph-box" rx="5"/>
+      <text x="660" y="270" class="structure-title" text-anchor="middle">グラフ (Graph)</text>
+      
+      <!-- Graph visualization -->
+      <circle cx="500" cy="320" r="12" class="data-cell"/>
+      <text x="500" y="325" class="small-text" text-anchor="middle">A</text>
+      
+      <circle cx="570" cy="300" r="12" class="data-cell"/>
+      <text x="570" y="305" class="small-text" text-anchor="middle">B</text>
+      
+      <circle cx="640" cy="320" r="12" class="data-cell"/>
+      <text x="640" y="325" class="small-text" text-anchor="middle">C</text>
+      
+      <circle cx="570" cy="360" r="12" class="data-cell"/>
+      <text x="570" y="365" class="small-text" text-anchor="middle">D</text>
+      
+      <line x1="512" y1="320" x2="558" y2="300" class="tree-edge"/>
+      <line x1="582" y1="300" x2="628" y2="320" class="tree-edge"/>
+      <line x1="570" y1="312" x2="570" y2="348" class="tree-edge"/>
+      <line x1="512" y1="320" x2="558" y2="360" class="tree-edge"/>
+      <line x1="582" y1="360" x2="628" y2="320" class="tree-edge"/>
+      
+      <text x="720" y="310" class="text-content">隣接リスト/隣接行列</text>
+      <text x="720" y="330" class="complexity-text">DFS/BFS: O(V+E)</text>
+      <text x="720" y="350" class="complexity-text">最短経路: O(E log V)</text>
+      <text x="720" y="370" class="small-text">V:頂点数, E:辺数</text>
+    </g>
+  </g>
+
+  <!-- Complexity Comparison -->
+  <g id="complexity">
+    <rect x="50" y="420" width="820" height="250" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" rx="5"/>
+    <text x="460" y="445" class="section-title" text-anchor="middle">データ構造の選択基準</text>
+    
+    <!-- Comparison table -->
+    <text x="70" y="470" class="text-content" font-weight="bold">データ構造</text>
+    <text x="200" y="470" class="text-content" font-weight="bold">アクセス</text>
+    <text x="300" y="470" class="text-content" font-weight="bold">検索</text>
+    <text x="400" y="470" class="text-content" font-weight="bold">挿入</text>
+    <text x="500" y="470" class="text-content" font-weight="bold">削除</text>
+    <text x="600" y="470" class="text-content" font-weight="bold">メモリ</text>
+    <text x="720" y="470" class="text-content" font-weight="bold">用途</text>
+    
+    <line x1="60" y1="480" x2="840" y2="480" stroke="#95a5a6" stroke-width="1"/>
+    
+    <!-- Array -->
+    <text x="70" y="500" class="small-text">配列</text>
+    <text x="200" y="500" class="complexity-text">O(1)</text>
+    <text x="300" y="500" class="complexity-text">O(n)</text>
+    <text x="400" y="500" class="complexity-text">O(n)</text>
+    <text x="500" y="500" class="complexity-text">O(n)</text>
+    <text x="600" y="500" class="small-text">連続</text>
+    <text x="720" y="500" class="small-text">固定長データ</text>
+    
+    <!-- Linked List -->
+    <text x="70" y="525" class="small-text">連結リスト</text>
+    <text x="200" y="525" class="complexity-text">O(n)</text>
+    <text x="300" y="525" class="complexity-text">O(n)</text>
+    <text x="400" y="525" class="complexity-text">O(1)</text>
+    <text x="500" y="525" class="complexity-text">O(1)</text>
+    <text x="600" y="525" class="small-text">分散</text>
+    <text x="720" y="525" class="small-text">頻繁な挿入削除</text>
+    
+    <!-- Binary Search Tree -->
+    <text x="70" y="550" class="small-text">二分探索木</text>
+    <text x="200" y="550" class="complexity-text">O(log n)</text>
+    <text x="300" y="550" class="complexity-text">O(log n)</text>
+    <text x="400" y="550" class="complexity-text">O(log n)</text>
+    <text x="500" y="550" class="complexity-text">O(log n)</text>
+    <text x="600" y="550" class="small-text">分散</text>
+    <text x="720" y="550" class="small-text">順序付きデータ</text>
+    
+    <!-- Hash Table -->
+    <text x="70" y="575" class="small-text">ハッシュテーブル</text>
+    <text x="200" y="575" class="complexity-text">-</text>
+    <text x="300" y="575" class="complexity-text">O(1)</text>
+    <text x="400" y="575" class="complexity-text">O(1)</text>
+    <text x="500" y="575" class="complexity-text">O(1)</text>
+    <text x="600" y="575" class="small-text">多め</text>
+    <text x="720" y="575" class="small-text">高速検索</text>
+    
+    <!-- Heap -->
+    <text x="70" y="600" class="small-text">ヒープ</text>
+    <text x="200" y="600" class="complexity-text">O(n)</text>
+    <text x="300" y="600" class="complexity-text">O(n)</text>
+    <text x="400" y="600" class="complexity-text">O(log n)</text>
+    <text x="500" y="600" class="complexity-text">O(log n)</text>
+    <text x="600" y="600" class="small-text">連続</text>
+    <text x="720" y="600" class="small-text">優先度キュー</text>
+    
+    <!-- Graph -->
+    <text x="70" y="625" class="small-text">グラフ</text>
+    <text x="200" y="625" class="complexity-text">-</text>
+    <text x="300" y="625" class="complexity-text">O(V+E)</text>
+    <text x="400" y="625" class="complexity-text">O(1)</text>
+    <text x="500" y="625" class="complexity-text">O(E)</text>
+    <text x="600" y="625" class="small-text">O(V+E)</text>
+    <text x="720" y="625" class="small-text">関係性表現</text>
+    
+    <text x="70" y="655" class="small-text" font-style="italic">※平均的な計算量を記載</text>
+  </g>
+</svg>
