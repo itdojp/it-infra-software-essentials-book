@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>DevOps 協働モデル</title>
+  <desc>開発チームと運用チームの協働による共有責任領域を示す組織図</desc>
+  <defs>
+    <style>
+      :root {
+        --svg-bg: #ffffff;
+        --svg-text: #1a1a1a;
+        --svg-primary: #0066cc;
+        --svg-success: #16a34a;
+        --svg-warning: #ca8a04;
+        --svg-error: #dc2626;
+        --svg-neutral: #6b7280;
+      }
+      .title-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: var(--svg-text); }
+      .team-title { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 500; fill: var(--svg-bg); }
+      .role-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 400; fill: var(--svg-text); }
+      .shared-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 500; fill: var(--svg-text); }
+      .annotation-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 400; fill: var(--svg-neutral); }
+      .connector { stroke: var(--svg-neutral); stroke-width: 2; fill: none; stroke-dasharray: 3,3; }
+    </style>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="60" class="title-text" text-anchor="middle">DevOps 協働モデル</text>
+
+  <!-- Development Team -->
+  <g id="dev-team">
+    <rect x="60" y="100" width="200" height="130" fill="var(--svg-primary)" fill-opacity="0.1" stroke="var(--svg-primary)" stroke-width="2" rx="4"/>
+    <rect x="70" y="110" width="180" height="25" fill="var(--svg-primary)"/>
+    <text x="160" y="127" class="team-title" text-anchor="middle">開発チーム</text>
+    
+    <rect x="80" y="150" width="70" height="30" fill="var(--svg-bg)" stroke="var(--svg-primary)" stroke-width="1" rx="4"/>
+    <text x="115" y="169" class="role-text" text-anchor="middle">開発者</text>
+    
+    <rect x="160" y="150" width="70" height="30" fill="var(--svg-bg)" stroke="var(--svg-primary)" stroke-width="1" rx="4"/>
+    <text x="195" y="169" class="role-text" text-anchor="middle">QA</text>
+    
+    <rect x="120" y="190" width="70" height="30" fill="var(--svg-bg)" stroke="var(--svg-primary)" stroke-width="1" rx="4"/>
+    <text x="155" y="209" class="role-text" text-anchor="middle">アーキテクト</text>
+  </g>
+
+  <!-- Operations Team -->
+  <g id="ops-team">
+    <rect x="540" y="100" width="200" height="130" fill="var(--svg-warning)" fill-opacity="0.1" stroke="var(--svg-warning)" stroke-width="2" rx="4"/>
+    <rect x="550" y="110" width="180" height="25" fill="var(--svg-warning)"/>
+    <text x="640" y="127" class="team-title" text-anchor="middle">運用チーム</text>
+    
+    <rect x="560" y="150" width="70" height="30" fill="var(--svg-bg)" stroke="var(--svg-warning)" stroke-width="1" rx="4"/>
+    <text x="595" y="169" class="role-text" text-anchor="middle">運用</text>
+    
+    <rect x="640" y="150" width="70" height="30" fill="var(--svg-bg)" stroke="var(--svg-warning)" stroke-width="1" rx="4"/>
+    <text x="675" y="169" class="role-text" text-anchor="middle">SRE</text>
+    
+    <rect x="600" y="190" width="70" height="30" fill="var(--svg-bg)" stroke="var(--svg-warning)" stroke-width="1" rx="4"/>
+    <text x="635" y="209" class="role-text" text-anchor="middle">セキュリティ</text>
+  </g>
+
+  <!-- Shared Responsibilities -->
+  <g id="shared-area">
+    <rect x="160" y="280" width="480" height="180" fill="var(--svg-neutral)" fill-opacity="0.05" stroke="var(--svg-text)" stroke-width="2" rx="4"/>
+    <text x="400" y="305" class="shared-text" text-anchor="middle">共有責任領域</text>
+    
+    <!-- CI/CD Pipeline -->
+    <rect x="180" y="320" width="140" height="50" fill="var(--svg-primary)" fill-opacity="0.1" stroke="var(--svg-primary)" stroke-width="2" rx="4"/>
+    <text x="250" y="340" class="role-text" text-anchor="middle" font-weight="500">CI/CD</text>
+    <text x="250" y="355" class="annotation-text" text-anchor="middle">継続的統合・デプロイ</text>
+    
+    <!-- Monitoring -->
+    <rect x="340" y="320" width="140" height="50" fill="var(--svg-error)" fill-opacity="0.1" stroke="var(--svg-error)" stroke-width="2" rx="4"/>
+    <text x="410" y="340" class="role-text" text-anchor="middle" font-weight="500">モニタリング</text>
+    <text x="410" y="355" class="annotation-text" text-anchor="middle">パフォーマンス監視</text>
+    
+    <!-- Automation -->
+    <rect x="500" y="320" width="120" height="50" fill="var(--svg-success)" fill-opacity="0.1" stroke="var(--svg-success)" stroke-width="2" rx="4"/>
+    <text x="560" y="340" class="role-text" text-anchor="middle" font-weight="500">自動化</text>
+    <text x="560" y="355" class="annotation-text" text-anchor="middle">インフラ自動化</text>
+    
+    <!-- Infrastructure as Code -->
+    <rect x="260" y="390" width="160" height="50" fill="var(--svg-warning)" fill-opacity="0.1" stroke="var(--svg-warning)" stroke-width="2" rx="4"/>
+    <text x="340" y="410" class="role-text" text-anchor="middle" font-weight="500">Infrastructure as Code</text>
+    <text x="340" y="425" class="annotation-text" text-anchor="middle">構成管理・バージョン管理</text>
+    
+    <!-- Team Communication -->
+    <rect x="440" y="390" width="120" height="50" fill="var(--svg-neutral)" fill-opacity="0.1" stroke="var(--svg-neutral)" stroke-width="2" rx="4"/>
+    <text x="500" y="410" class="role-text" text-anchor="middle" font-weight="500">チーム連携</text>
+    <text x="500" y="425" class="annotation-text" text-anchor="middle">コミュニケーション</text>
+  </g>
+
+  <!-- Connection Lines -->
+  <path d="M 160 230 L 250 320" class="connector"/>
+  <path d="M 160 230 L 340 390" class="connector"/>
+  <path d="M 640 230 L 410 320" class="connector"/>
+  <path d="M 640 230 L 500 390" class="connector"/>
+  
+  <!-- Bidirectional Arrows -->
+  <g>
+    <path d="M 260 165 L 540 165" stroke="var(--svg-text)" stroke-width="3" fill="none"/>
+    <polygon points="535,160 545,165 535,170" fill="var(--svg-text)"/>
+    <polygon points="265,160 255,165 265,170" fill="var(--svg-text)"/>
+    <text x="400" y="155" class="role-text" text-anchor="middle" font-weight="500">協働・コミュニケーション</text>
+  </g>
+</svg>
