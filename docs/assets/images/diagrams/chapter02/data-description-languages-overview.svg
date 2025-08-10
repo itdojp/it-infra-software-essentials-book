@@ -1,145 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="900" height="700" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>データ記述言語の全体像</title>
+  <desc>JSON、YAML、XML、TOML、CSVの特徴と用途を比較した概要図</desc>
   <defs>
     <style>
-      .title-text { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
-      .format-title { font-family: 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: bold; fill: #34495e; }
-      .feature-text { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; fill: #2c3e50; }
-      .usage-text { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; fill: #7f8c8d; }
-      .json-box { fill: #e6f3ff; stroke: #3498db; stroke-width: 2; }
-      .yaml-box { fill: #e6ffe6; stroke: #27ae60; stroke-width: 2; }
-      .xml-box { fill: #fff3e6; stroke: #f39c12; stroke-width: 2; }
-      .toml-box { fill: #f3e6ff; stroke: #9b59b6; stroke-width: 2; }
-      .csv-box { fill: #ffe6e6; stroke: #e74c3c; stroke-width: 2; }
-      .code-box { fill: #f8f9fa; stroke: #95a5a6; stroke-width: 1; font-family: monospace; font-size: 10px; }
-      .arrow { stroke: #95a5a6; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      :root {
+        --svg-bg: #ffffff;
+        --svg-text: #1a1a1a;
+        --svg-primary: #0066cc;
+        --svg-success: #16a34a;
+        --svg-warning: #ca8a04;
+        --svg-error: #dc2626;
+        --svg-neutral: #6b7280;
+      }
+      .title-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: var(--svg-text); }
+      .format-title { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 500; fill: var(--svg-text); }
+      .feature-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 400; fill: var(--svg-text); }
+      .usage-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 400; fill: var(--svg-neutral); }
+      .json-box { fill: var(--svg-primary); fill-opacity: 0.1; stroke: var(--svg-primary); stroke-width: 2; }
+      .yaml-box { fill: var(--svg-success); fill-opacity: 0.1; stroke: var(--svg-success); stroke-width: 2; }
+      .xml-box { fill: var(--svg-warning); fill-opacity: 0.1; stroke: var(--svg-warning); stroke-width: 2; }
+      .toml-box { fill: var(--svg-error); fill-opacity: 0.1; stroke: var(--svg-error); stroke-width: 2; }
+      .csv-box { fill: var(--svg-neutral); fill-opacity: 0.1; stroke: var(--svg-neutral); stroke-width: 2; }
+      .code-box { fill: var(--svg-bg); stroke: var(--svg-neutral); stroke-width: 1; font-family: 'Courier New', monospace; font-size: 9px; }
+      .arrow { stroke: var(--svg-neutral); stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
     </style>
     <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#95a5a6"/>
+      <polygon points="0 0, 10 3, 0 6" fill="var(--svg-neutral)"/>
     </marker>
   </defs>
 
   <!-- Title -->
-  <text x="450" y="30" class="title-text" text-anchor="middle">データ記述言語の全体像</text>
+  <text x="400" y="60" class="title-text" text-anchor="middle">データ記述言語の全体像</text>
 
   <!-- JSON Section -->
   <g id="json-section">
-    <rect x="50" y="70" width="240" height="250" class="json-box" rx="10"/>
-    <text x="170" y="100" class="format-title" text-anchor="middle">JSON</text>
+    <rect x="60" y="90" width="200" height="160" class="json-box" rx="4"/>
+    <text x="160" y="110" class="format-title" text-anchor="middle">JSON</text>
     
     <!-- Features -->
-    <text x="60" y="130" class="feature-text">特徴:</text>
-    <text x="70" y="150" class="usage-text">• シンプルで軽量</text>
-    <text x="70" y="170" class="usage-text">• JavaScript互換</text>
-    <text x="70" y="190" class="usage-text">• 広範なサポート</text>
+    <text x="70" y="130" class="feature-text">特徴:</text>
+    <text x="75" y="145" class="usage-text">• シンプルで軽量</text>
+    <text x="75" y="160" class="usage-text">• JavaScript互換</text>
     
     <!-- Code Example -->
-    <rect x="60" y="210" width="220" height="60" class="code-box" rx="5"/>
-    <text x="65" y="230" class="usage-text" font-family="monospace">{</text>
-    <text x="70" y="245" class="usage-text" font-family="monospace">"name": "server01",</text>
-    <text x="70" y="260" class="usage-text" font-family="monospace">"port": 8080</text>
-    <text x="65" y="275" class="usage-text" font-family="monospace">}</text>
+    <rect x="70" y="175" width="180" height="45" class="code-box" rx="4"/>
+    <text x="75" y="190" class="usage-text" font-family="monospace">{</text>
+    <text x="80" y="205" class="usage-text" font-family="monospace">"name": "server01"</text>
+    <text x="75" y="220" class="usage-text" font-family="monospace">}</text>
     
     <!-- Use Cases -->
-    <text x="60" y="295" class="feature-text">用途:</text>
-    <text x="70" y="310" class="usage-text">• Web API</text>
+    <text x="70" y="240" class="usage-text">用途: Web API・設定ファイル</text>
   </g>
 
   <!-- YAML Section -->
   <g id="yaml-section">
-    <rect x="330" y="70" width="240" height="250" class="yaml-box" rx="10"/>
-    <text x="450" y="100" class="format-title" text-anchor="middle">YAML</text>
+    <rect x="280" y="90" width="200" height="160" class="yaml-box" rx="4"/>
+    <text x="380" y="110" class="format-title" text-anchor="middle">YAML</text>
     
     <!-- Features -->
-    <text x="340" y="130" class="feature-text">特徴:</text>
-    <text x="350" y="150" class="usage-text">• 高い可読性</text>
-    <text x="350" y="170" class="usage-text">• インデント構造</text>
-    <text x="350" y="190" class="usage-text">• コメント対応</text>
+    <text x="290" y="130" class="feature-text">特徴:</text>
+    <text x="295" y="145" class="usage-text">• 高い可読性</text>
+    <text x="295" y="160" class="usage-text">• インデント構造</text>
     
     <!-- Code Example -->
-    <rect x="340" y="210" width="220" height="60" class="code-box" rx="5"/>
-    <text x="345" y="230" class="usage-text" font-family="monospace">name: server01</text>
-    <text x="345" y="245" class="usage-text" font-family="monospace">port: 8080</text>
-    <text x="345" y="260" class="usage-text" font-family="monospace"># コメント</text>
+    <rect x="290" y="175" width="180" height="45" class="code-box" rx="4"/>
+    <text x="295" y="190" class="usage-text" font-family="monospace">name: server01</text>
+    <text x="295" y="205" class="usage-text" font-family="monospace">port: 8080</text>
+    <text x="295" y="220" class="usage-text" font-family="monospace"># コメント</text>
     
     <!-- Use Cases -->
-    <text x="340" y="295" class="feature-text">用途:</text>
-    <text x="350" y="310" class="usage-text">• Kubernetes, Ansible</text>
+    <text x="290" y="240" class="usage-text">用途: Kubernetes・Ansible</text>
   </g>
 
   <!-- XML Section -->
   <g id="xml-section">
-    <rect x="610" y="70" width="240" height="250" class="xml-box" rx="10"/>
-    <text x="730" y="100" class="format-title" text-anchor="middle">XML</text>
+    <rect x="500" y="90" width="200" height="160" class="xml-box" rx="4"/>
+    <text x="600" y="110" class="format-title" text-anchor="middle">XML</text>
     
     <!-- Features -->
-    <text x="620" y="130" class="feature-text">特徴:</text>
-    <text x="630" y="150" class="usage-text">• タグベース</text>
-    <text x="630" y="170" class="usage-text">• スキーマ定義</text>
-    <text x="630" y="190" class="usage-text">• 厳密な構造</text>
+    <text x="510" y="130" class="feature-text">特徴:</text>
+    <text x="515" y="145" class="usage-text">• タグベース</text>
+    <text x="515" y="160" class="usage-text">• 厳密な構造</text>
     
     <!-- Code Example -->
-    <rect x="620" y="210" width="220" height="60" class="code-box" rx="5"/>
-    <text x="625" y="230" class="usage-text" font-family="monospace">&lt;server&gt;</text>
-    <text x="635" y="245" class="usage-text" font-family="monospace">&lt;name&gt;server01&lt;/name&gt;</text>
-    <text x="625" y="260" class="usage-text" font-family="monospace">&lt;/server&gt;</text>
+    <rect x="510" y="175" width="180" height="45" class="code-box" rx="4"/>
+    <text x="515" y="190" class="usage-text" font-family="monospace">&lt;server&gt;</text>
+    <text x="520" y="205" class="usage-text" font-family="monospace">&lt;name&gt;server01&lt;/name&gt;</text>
+    <text x="515" y="220" class="usage-text" font-family="monospace">&lt;/server&gt;</text>
     
     <!-- Use Cases -->
-    <text x="620" y="295" class="feature-text">用途:</text>
-    <text x="630" y="310" class="usage-text">• レガシーシステム</text>
+    <text x="510" y="240" class="usage-text">用途: レガシー・企業システム</text>
   </g>
 
   <!-- TOML Section -->
   <g id="toml-section">
-    <rect x="190" y="360" width="240" height="250" class="toml-box" rx="10"/>
-    <text x="310" y="390" class="format-title" text-anchor="middle">TOML</text>
+    <rect x="170" y="270" width="200" height="160" class="toml-box" rx="4"/>
+    <text x="270" y="290" class="format-title" text-anchor="middle">TOML</text>
     
     <!-- Features -->
-    <text x="200" y="420" class="feature-text">特徴:</text>
-    <text x="210" y="440" class="usage-text">• 最小限の構文</text>
-    <text x="210" y="460" class="usage-text">• 設定ファイル特化</text>
-    <text x="210" y="480" class="usage-text">• 明確な型</text>
+    <text x="180" y="310" class="feature-text">特徴:</text>
+    <text x="185" y="325" class="usage-text">• 最小限の構文</text>
+    <text x="185" y="340" class="usage-text">• 設定ファイル特化</text>
     
     <!-- Code Example -->
-    <rect x="200" y="500" width="220" height="60" class="code-box" rx="5"/>
-    <text x="205" y="520" class="usage-text" font-family="monospace">[server]</text>
-    <text x="205" y="535" class="usage-text" font-family="monospace">name = "server01"</text>
-    <text x="205" y="550" class="usage-text" font-family="monospace">port = 8080</text>
+    <rect x="180" y="355" width="180" height="45" class="code-box" rx="4"/>
+    <text x="185" y="370" class="usage-text" font-family="monospace">[server]</text>
+    <text x="185" y="385" class="usage-text" font-family="monospace">name = "server01"</text>
+    <text x="185" y="400" class="usage-text" font-family="monospace">port = 8080</text>
     
     <!-- Use Cases -->
-    <text x="200" y="585" class="feature-text">用途:</text>
-    <text x="210" y="600" class="usage-text">• Rust (Cargo.toml)</text>
+    <text x="180" y="420" class="usage-text">用途: Rust (Cargo.toml)</text>
   </g>
 
   <!-- CSV Section -->
   <g id="csv-section">
-    <rect x="470" y="360" width="240" height="250" class="csv-box" rx="10"/>
-    <text x="590" y="390" class="format-title" text-anchor="middle">CSV</text>
+    <rect x="390" y="270" width="200" height="160" class="csv-box" rx="4"/>
+    <text x="490" y="290" class="format-title" text-anchor="middle">CSV</text>
     
     <!-- Features -->
-    <text x="480" y="420" class="feature-text">特徴:</text>
-    <text x="490" y="440" class="usage-text">• 表形式データ</text>
-    <text x="490" y="460" class="usage-text">• シンプル</text>
-    <text x="490" y="480" class="usage-text">• Excel互換</text>
+    <text x="400" y="310" class="feature-text">特徴:</text>
+    <text x="405" y="325" class="usage-text">• 表形式データ</text>
+    <text x="405" y="340" class="usage-text">• Excel互換</text>
     
     <!-- Code Example -->
-    <rect x="480" y="500" width="220" height="60" class="code-box" rx="5"/>
-    <text x="485" y="520" class="usage-text" font-family="monospace">Name,Port,Status</text>
-    <text x="485" y="535" class="usage-text" font-family="monospace">server01,8080,active</text>
-    <text x="485" y="550" class="usage-text" font-family="monospace">server02,8081,inactive</text>
+    <rect x="400" y="355" width="180" height="45" class="code-box" rx="4"/>
+    <text x="405" y="370" class="usage-text" font-family="monospace">Name,Port,Status</text>
+    <text x="405" y="385" class="usage-text" font-family="monospace">server01,8080,active</text>
+    <text x="405" y="400" class="usage-text" font-family="monospace">server02,8081,inactive</text>
     
     <!-- Use Cases -->
-    <text x="480" y="585" class="feature-text">用途:</text>
-    <text x="490" y="600" class="usage-text">• データリスト、ログ</text>
+    <text x="400" y="420" class="usage-text">用途: データリスト・ログ</text>
   </g>
 
   <!-- Relationship Arrows -->
-  <path d="M 290 195 L 330 195" class="arrow"/>
-  <text x="310" y="190" class="usage-text" text-anchor="middle">スーパーセット</text>
+  <path d="M 260 170 L 280 170" class="arrow"/>
+  <text x="270" y="165" class="usage-text" text-anchor="middle" font-size="8">スーパーセット</text>
   
   <!-- Central Message -->
-  <rect x="100" y="640" width="700" height="40" fill="#f8f9fa" stroke="#2c3e50" stroke-width="2" rx="5"/>
-  <text x="450" y="665" class="feature-text" text-anchor="middle" font-weight="bold">
+  <rect x="80" y="460" width="640" height="40" fill="var(--svg-neutral)" fill-opacity="0.1" stroke="var(--svg-text)" stroke-width="2" rx="4"/>
+  <text x="400" y="485" class="feature-text" text-anchor="middle" font-weight="500">
     インフラエンジニアはJSON/YAMLを中心に、用途に応じて適切な形式を選択
   </text>
+  
+  <!-- Usage Guidelines -->
+  <g id="guidelines">
+    <rect x="120" y="520" width="560" height="60" fill="var(--svg-primary)" fill-opacity="0.05" stroke="var(--svg-primary)" stroke-width="1" rx="4"/>
+    <text x="400" y="540" class="format-title" text-anchor="middle">使い分け指針</text>
+    
+    <text x="130" y="555" class="usage-text">• JSON: Web API・軽量設定</text>
+    <text x="350" y="555" class="usage-text">• YAML: インフラ自動化</text>
+    <text x="550" y="555" class="usage-text">• XML: 企業システム</text>
+    
+    <text x="180" y="570" class="usage-text">• TOML: アプリ設定</text>
+    <text x="400" y="570" class="usage-text">• CSV: データ交換</text>
+  </g>
 </svg>

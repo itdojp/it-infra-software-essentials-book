@@ -1,107 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="900" height="600" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <title>API リクエスト/レスポンスサイクル（エラーハンドリング含む）</title>
+  <desc>クライアントからデータベースまでのAPI処理フローとエラーハンドリングを示すワークフロー図</desc>
   <defs>
     <style>
-      .title-text { font-family: 'Noto Sans JP', sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
-      .component-box { fill: #fff; stroke: #34495e; stroke-width: 2; rx: 5; }
-      .service-text { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; fill: #2c3e50; }
-      .flow-line { stroke: #3498db; stroke-width: 2; fill: none; marker-end: url(#arrow); }
-      .error-line { stroke: #e74c3c; stroke-width: 2; fill: none; stroke-dasharray: 5,5; marker-end: url(#error-arrow); }
-      .success-box { fill: #d4edda; }
-      .error-box { fill: #f8d7da; }
-      .cache-box { fill: #fff3cd; }
+      :root {
+        --svg-bg: #ffffff;
+        --svg-text: #1a1a1a;
+        --svg-primary: #0066cc;
+        --svg-success: #16a34a;
+        --svg-warning: #ca8a04;
+        --svg-error: #dc2626;
+        --svg-neutral: #6b7280;
+      }
+      .title-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 16px; font-weight: 600; fill: var(--svg-text); }
+      .component-box { fill: var(--svg-bg); stroke: var(--svg-primary); stroke-width: 2; rx: 4; }
+      .service-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 400; fill: var(--svg-text); }
+      .annotation-text { font-family: Inter, 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 400; fill: var(--svg-neutral); }
+      .flow-line { stroke: var(--svg-primary); stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .error-line { stroke: var(--svg-error); stroke-width: 2; fill: none; stroke-dasharray: 5,5; marker-end: url(#error-arrow); }
+      .success-box { fill: var(--svg-success); fill-opacity: 0.1; stroke: var(--svg-success); }
+      .error-box { fill: var(--svg-error); fill-opacity: 0.1; stroke: var(--svg-error); }
+      .cache-box { fill: var(--svg-warning); fill-opacity: 0.1; stroke: var(--svg-warning); }
     </style>
     <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#3498db"/>
+      <polygon points="0 0, 10 3, 0 6" fill="var(--svg-primary)"/>
     </marker>
     <marker id="error-arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#e74c3c"/>
+      <polygon points="0 0, 10 3, 0 6" fill="var(--svg-error)"/>
     </marker>
   </defs>
 
   <!-- Title -->
-  <text x="450" y="30" class="title-text" text-anchor="middle">API リクエスト/レスポンスサイクル（エラーハンドリング含む）</text>
+  <text x="400" y="60" class="title-text" text-anchor="middle">API リクエスト/レスポンスサイクル</text>
 
   <!-- Components -->
   <!-- Client -->
-  <rect x="50" y="80" width="100" height="60" class="component-box"/>
-  <text x="100" y="105" class="service-text" text-anchor="middle">クライアント</text>
-  <text x="100" y="125" class="service-text" text-anchor="middle" font-size="10">(Web/Mobile)</text>
+  <rect x="60" y="100" width="90" height="50" class="component-box"/>
+  <text x="105" y="120" class="service-text" text-anchor="middle">クライアント</text>
+  <text x="105" y="135" class="annotation-text" text-anchor="middle">Web/Mobile</text>
 
   <!-- API Gateway -->
-  <rect x="200" y="80" width="120" height="60" class="component-box"/>
-  <text x="260" y="105" class="service-text" text-anchor="middle">API Gateway</text>
-  <text x="260" y="125" class="service-text" text-anchor="middle" font-size="10">認証・ルーティング</text>
+  <rect x="170" y="100" width="90" height="50" class="component-box"/>
+  <text x="215" y="120" class="service-text" text-anchor="middle">API Gateway</text>
+  <text x="215" y="135" class="annotation-text" text-anchor="middle">認証・ルーティング</text>
 
   <!-- Auth Service -->
-  <rect x="370" y="80" width="120" height="60" class="component-box"/>
-  <text x="430" y="105" class="service-text" text-anchor="middle">認証サービス</text>
-  <text x="430" y="125" class="service-text" text-anchor="middle" font-size="10">トークン検証</text>
+  <rect x="280" y="100" width="90" height="50" class="component-box"/>
+  <text x="325" y="120" class="service-text" text-anchor="middle">認証サービス</text>
+  <text x="325" y="135" class="annotation-text" text-anchor="middle">トークン検証</text>
 
   <!-- Cache Layer -->
-  <rect x="540" y="80" width="120" height="60" class="component-box cache-box"/>
-  <text x="600" y="105" class="service-text" text-anchor="middle">キャッシュ層</text>
-  <text x="600" y="125" class="service-text" text-anchor="middle" font-size="10">Redis/Memcached</text>
+  <rect x="390" y="100" width="90" height="50" class="component-box cache-box"/>
+  <text x="435" y="120" class="service-text" text-anchor="middle">キャッシュ層</text>
+  <text x="435" y="135" class="annotation-text" text-anchor="middle">Redis</text>
 
   <!-- Business Logic -->
-  <rect x="710" y="80" width="120" height="60" class="component-box"/>
-  <text x="770" y="105" class="service-text" text-anchor="middle">ビジネスロジック</text>
-  <text x="770" y="125" class="service-text" text-anchor="middle" font-size="10">処理実行</text>
+  <rect x="500" y="100" width="90" height="50" class="component-box"/>
+  <text x="545" y="120" class="service-text" text-anchor="middle">ビジネス</text>
+  <text x="545" y="135" class="annotation-text" text-anchor="middle">処理実行</text>
 
   <!-- Database -->
-  <rect x="710" y="200" width="120" height="60" class="component-box"/>
-  <text x="770" y="225" class="service-text" text-anchor="middle">データベース</text>
-  <text x="770" y="245" class="service-text" text-anchor="middle" font-size="10">PostgreSQL/MySQL</text>
+  <rect x="610" y="100" width="90" height="50" class="component-box"/>
+  <text x="655" y="120" class="service-text" text-anchor="middle">データベース</text>
+  <text x="655" y="135" class="annotation-text" text-anchor="middle">PostgreSQL</text>
 
   <!-- Flow Lines - Success Path -->
-  <path d="M 150 110 L 200 110" class="flow-line"/>
-  <path d="M 320 110 L 370 110" class="flow-line"/>
-  <path d="M 490 110 L 540 110" class="flow-line"/>
-  <path d="M 660 110 L 710 110" class="flow-line"/>
-  <path d="M 770 140 L 770 200" class="flow-line"/>
+  <path d="M 150 125 L 170 125" class="flow-line"/>
+  <path d="M 260 125 L 280 125" class="flow-line"/>
+  <path d="M 370 125 L 390 125" class="flow-line"/>
+  <path d="M 480 125 L 500 125" class="flow-line"/>
+  <path d="M 590 125 L 610 125" class="flow-line"/>
 
   <!-- Return Path -->
-  <path d="M 770 260 L 770 320" class="flow-line"/>
-  <path d="M 710 320 L 100 320" class="flow-line"/>
-  <path d="M 100 320 L 100 140" class="flow-line"/>
+  <path d="M 655 150 L 655 180" class="flow-line"/>
+  <path d="M 610 180 L 105 180" class="flow-line"/>
+  <path d="M 105 180 L 105 150" class="flow-line"/>
 
   <!-- Error Paths -->
-  <path d="M 430 140 L 430 400" class="error-line"/>
-  <path d="M 430 400 L 100 400" class="error-line"/>
-  <path d="M 100 400 L 100 140" class="error-line"/>
+  <path d="M 325 150 L 325 220" class="error-line"/>
+  <path d="M 280 220 L 105 220" class="error-line"/>
+  <path d="M 105 220 L 105 150" class="error-line"/>
 
   <!-- Decision Points -->
   <g>
-    <polygon points="430,180 460,210 430,240 400,210" fill="#ffeaa7" stroke="#fdcb6e" stroke-width="2"/>
-    <text x="430" y="215" class="service-text" text-anchor="middle" font-size="10">認証OK?</text>
+    <polygon points="325,260 345,280 325,300 305,280" fill="var(--svg-warning)" fill-opacity="0.2" stroke="var(--svg-warning)" stroke-width="2" rx="4"/>
+    <text x="325" y="285" class="annotation-text" text-anchor="middle">認証OK?</text>
   </g>
 
   <g>
-    <polygon points="600,180 630,210 600,240 570,210" fill="#ffeaa7" stroke="#fdcb6e" stroke-width="2"/>
-    <text x="600" y="215" class="service-text" text-anchor="middle" font-size="10">キャッシュ</text>
-    <text x="600" y="225" class="service-text" text-anchor="middle" font-size="10">ヒット?</text>
+    <polygon points="435,260 455,280 435,300 415,280" fill="var(--svg-warning)" fill-opacity="0.2" stroke="var(--svg-warning)" stroke-width="2" rx="4"/>
+    <text x="435" y="280" class="annotation-text" text-anchor="middle">キャッシュ</text>
+    <text x="435" y="295" class="annotation-text" text-anchor="middle">ヒット?</text>
   </g>
 
   <!-- Response Boxes -->
-  <rect x="50" y="450" width="150" height="80" class="component-box success-box"/>
-  <text x="125" y="475" class="service-text" text-anchor="middle" font-weight="bold">成功レスポンス</text>
-  <text x="125" y="495" class="service-text" text-anchor="middle" font-size="10">• ステータス: 200</text>
-  <text x="125" y="510" class="service-text" text-anchor="middle" font-size="10">• データ: JSON</text>
+  <rect x="80" y="350" width="160" height="70" class="component-box success-box" rx="4"/>
+  <text x="160" y="370" class="service-text" text-anchor="middle" font-weight="500">成功レスポンス</text>
+  <text x="160" y="385" class="annotation-text" text-anchor="middle">ステータス: 200</text>
+  <text x="160" y="400" class="annotation-text" text-anchor="middle">データ: JSON</text>
 
-  <rect x="250" y="450" width="150" height="80" class="component-box error-box"/>
-  <text x="325" y="475" class="service-text" text-anchor="middle" font-weight="bold">認証エラー</text>
-  <text x="325" y="495" class="service-text" text-anchor="middle" font-size="10">• ステータス: 401</text>
-  <text x="325" y="510" class="service-text" text-anchor="middle" font-size="10">• エラー: Unauthorized</text>
+  <rect x="260" y="350" width="160" height="70" class="component-box error-box" rx="4"/>
+  <text x="340" y="370" class="service-text" text-anchor="middle" font-weight="500">認証エラー</text>
+  <text x="340" y="385" class="annotation-text" text-anchor="middle">ステータス: 401</text>
+  <text x="340" y="400" class="annotation-text" text-anchor="middle">エラー: Unauthorized</text>
 
-  <rect x="450" y="450" width="150" height="80" class="component-box error-box"/>
-  <text x="525" y="475" class="service-text" text-anchor="middle" font-weight="bold">サーバーエラー</text>
-  <text x="525" y="495" class="service-text" text-anchor="middle" font-size="10">• ステータス: 500</text>
-  <text x="525" y="510" class="service-text" text-anchor="middle" font-size="10">• エラー: Internal Error</text>
+  <rect x="440" y="350" width="160" height="70" class="component-box error-box" rx="4"/>
+  <text x="520" y="370" class="service-text" text-anchor="middle" font-weight="500">サーバーエラー</text>
+  <text x="520" y="385" class="annotation-text" text-anchor="middle">ステータス: 500</text>
+  <text x="520" y="400" class="annotation-text" text-anchor="middle">エラー: Internal Error</text>
 
-  <!-- Labels -->
-  <text x="180" y="100" class="service-text" font-size="10">①リクエスト</text>
-  <text x="350" y="100" class="service-text" font-size="10">②認証</text>
-  <text x="520" y="100" class="service-text" font-size="10">③キャッシュ確認</text>
-  <text x="690" y="100" class="service-text" font-size="10">④処理</text>
-  <text x="780" y="180" class="service-text" font-size="10">⑤DB照会</text>
+  <!-- Flow Labels -->
+  <text x="160" y="115" class="annotation-text">①リクエスト</text>
+  <text x="270" y="115" class="annotation-text">②認証</text>
+  <text x="380" y="115" class="annotation-text">③キャッシュ</text>
+  <text x="490" y="115" class="annotation-text">④処理</text>
+  <text x="600" y="115" class="annotation-text">⑤DB照会</text>
+  <text x="400" y="190" class="annotation-text">⑥レスポンス返却</text>
 </svg>
