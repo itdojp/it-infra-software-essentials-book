@@ -68,4 +68,4 @@ Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
 
 ---
 
-© 2025 株式会社アイティードゥ (ITDO Inc.)
+© 2025 株式会社アイティードゥ (ITDO Inc.)<!-- Force GitHub Pages update Mon Aug 18 07:38:07 AM JST 2025 -->
