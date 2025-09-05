@@ -38,3 +38,12 @@ kramdown:
 url: "https://itdojp.github.io"
 baseurl: "/it-infra-software-essentials-book"
 repository: "itdojp/it-infra-software-essentials-book"
+# Defaults: use custom book layout as default
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "book"
+
+permalink: pretty
