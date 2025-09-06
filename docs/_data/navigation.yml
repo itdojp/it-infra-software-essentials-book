@@ -1,0 +1,11 @@
+chapters:
+- title: 第1章：インフラエンジニアとソフトウェアの接点
+  path: /chapters/chapter01/
+- title: 第2章：データ記述言語の基本と実践
+  path: /chapters/chapter02/
+- title: 第3章：スクリプト言語による自動化の初歩
+  path: /chapters/chapter03/
+- title: 第4章：APIによるインフラ連携
+  path: /chapters/chapter04/
+- title: 第5章：インフラ運用を支えるその他のソフトウェア知識
+  path: /chapters/chapter05/
