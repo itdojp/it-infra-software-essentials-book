@@ -87,3 +87,4 @@ Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
     color: #34495e;
 }
 </style>
+{% include page-navigation.html %}
