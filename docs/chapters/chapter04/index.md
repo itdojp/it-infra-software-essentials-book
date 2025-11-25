@@ -163,10 +163,12 @@ APIにアクセスする際には、通常、認証（Authentication: 誰であ�
   * サードパーティアプリケーションがユーザーの代わりにリソースにアクセスするための標準的なフレームワークです。  
   * ユーザー名とパスワードを直接サードパーティアプリに渡すことなく、安全にアクセス権限を付与できます。  
   * **OAuth 2.0の主要な認証フロー**:
-    * **Authorization Code Flow**: Webアプリケーション向けの最も一般的なフロー
+    * **Authorization Code Flow**: Webアプリケーション向けの最も一般的なフロー（ユーザーがブラウザでログインするタイプ）
     * **Client Credentials Flow**: マシン間通信（API to API）で使用
     * **Device Code Flow**: TVやIoTデバイスなどの入力制限のあるデバイス向け
     * **Resource Owner Password Credentials Flow**: 信頼できるアプリケーションでのみ使用
+
+  本書では、インフラ自動化の文脈で利用頻度の高い **Client Credentials Flow** にフォーカスします。その他のフローは名前だけ押さえておき、必要になったときに公式ドキュメント等で詳細を確認する、という読み方で問題ありません。
 
   * **Client Credentials Flowの実装例**（インフラ自動化で最も使用頻度が高い）:
     ```python

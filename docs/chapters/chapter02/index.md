@@ -57,7 +57,17 @@ JSONは、主に以下の2つの構造と、いくつかの基本的なデータ
 
 ### **PythonでのJSONデータの読み書き、簡単な操作**
 
-Pythonは標準ライブラリでJSONをサポートしており、非常に簡単にJSONデータを扱うことができます。jsonモジュールを使用します。
+Pythonは標準ライブラリでJSONをサポートしており、非常に簡単にJSONデータを扱うことができます。まずは、ごく基本的な変換の例から見てみましょう。
+
+```python
+import json
+
+json_string = '{"name": "Alice", "age": 30}'
+data = json.loads(json_string)
+print(data["name"])
+```
+
+このようなシンプルなパターンに慣れてから、次のステップとして型チェックや必須キーの検証、例外処理などを少しずつ追加していくと、無理なく実務レベルのコードに近づけていけます。
 
 * **jsonモジュール（json.load(), json.loads(), json.dump(), json.dumps()）**:  
   * json.loads(): JSON形式の文字列をPythonのオブジェクト（辞書やリスト）に変換します（"load string"）。  
