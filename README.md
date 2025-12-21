@@ -103,7 +103,7 @@ docker-compose up
 
 ## 📝 ライセンス
 
-Copyright (c) 2025 ITDO Inc. All rights reserved.
+本書は **Creative Commons BY-NC-SA 4.0** ライセンスで提供されます。詳細は `LICENSE.md` を参照してください。
 
 ## 👥 著者
 
