@@ -3,7 +3,7 @@
 > **YAML, JSON, スクリプト, APIで学ぶ自動化の基本**
 
 [![Book Format](https://img.shields.io/badge/Format-ITDO%20book--formatter%20v3.0-blue.svg)](https://github.com/itdojp/book-formatter)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://github.com/itdojp/it-engineer-knowledge-architecture/blob/main/LICENSE.md)
 [![Version](https://img.shields.io/badge/Version-1.0.0-orange.svg)](book-config.yaml)
 
 ## 📚 概要
@@ -103,7 +103,7 @@ docker-compose up
 
 ## 📝 ライセンス
 
-Copyright (c) 2025 ITDO Inc. All rights reserved.
+本書は **Creative Commons BY-NC-SA 4.0** ライセンスで提供されます。詳細は `LICENSE.md` を参照してください。
 
 ## 👥 著者
 
