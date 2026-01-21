@@ -76,11 +76,11 @@ print(data["name"])
 
 このようなシンプルなパターンに慣れてから、次のステップとして型チェックや必須キーの検証、例外処理などを少しずつ追加していくと、無理なく実務レベルのコードに近づけていけます。
 
-* **jsonモジュール（json.load(), json.loads(), json.dump(), json.dumps()）**
-  * json.loads(): JSON形式の文字列をPythonのオブジェクト（辞書やリスト）に変換します（"load string"）。  
-  * json.dumps(): PythonのオブジェクトをJSON形式の文字列に変換します（"dump string"）。  
-  * json.load(): ファイルオブジェクトからJSONデータを読み込み、Pythonのオブジェクトに変換します。  
-  * json.dump(): PythonのオブジェクトをJSON形式でファイルに書き込みます。
+* **`json`モジュール（`json.load()`、`json.loads()`、`json.dump()`、`json.dumps()`）**
+  * `json.load()`: ファイルオブジェクトからJSONデータを読み込み、Pythonのオブジェクトに変換します。  
+  * `json.loads()`: JSON形式の文字列をPythonのオブジェクト（辞書やリスト）に変換します（"load string"）。  
+  * `json.dump()`: PythonのオブジェクトをJSON形式でファイルに書き込みます。  
+  * `json.dumps()`: PythonのオブジェクトをJSON形式の文字列に変換します（"dump string"）。  
 
 ```python
 import json
@@ -165,6 +165,34 @@ except ValueError as e:
 #     os.remove(file_path_config)
 # if os.path.exists(file_path_users):
 #     os.remove(file_path_users)
+```
+
+#### 実行手順（例）
+
+上記のコードをファイルに保存して実行すると、標準出力に結果が表示され、カレントディレクトリに `config.json` と `users.json` が作成されます。
+
+```bash
+# 例: json_example.py として保存した場合
+python3 json_example.py
+```
+
+出力例（抜粋）:
+
+※ 以下の出力例では、`...` は出力の一部を省略していることを示します。
+
+```text
+Pythonオブジェクト: {'name': 'Alice', 'age': 30, 'city': 'New York'}
+名前: Alice, 年齢: 30
+
+JSON文字列:
+{
+  "server": "web01",
+  ...（一部省略）
+}
+
+'config.json' を作成しました。
+'config.json' から読み込んだデータ: {'database': 'mydb', 'port': 5432, 'environment': 'production'}
+'users.json' にデータを書き込みました。
 ```
 
 `indent`引数を使用すると、出力されるJSON文字列を整形して読みやすくすることができます。`ensure_ascii=False`は、日本語などの非ASCII文字をエスケープせずにそのまま出力するために重要です。また、ファイル操作時には`encoding="utf-8"`を指定することで文字化けを防ぎます。
