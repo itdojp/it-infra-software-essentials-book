@@ -1,7 +1,7 @@
 {
   "name": "it-infra-software-essentials-book",
   "version": "1.0.0",
-  "description": "ITインフラエンジニアのためのソフトウェア基礎知識",
+  "description": "IT\u30a4\u30f3\u30d5\u30e9\u30a8\u30f3\u30b8\u30cb\u30a2\u306e\u305f\u3081\u306e\u30bd\u30d5\u30c8\u30a6\u30a7\u30a2\u57fa\u790e\u77e5\u8b58",
   "scripts": {
     "dev": "cd docs && bundle exec jekyll serve --livereload --baseurl ''",
     "build": "cd docs && bundle exec jekyll build",
@@ -27,7 +27,7 @@
     "devops"
   ],
   "author": "ITDO Inc.",
-  "license": "UNLICENSED",
+  "license": "CC-BY-NC-SA-4.0",
   "bugs": {
     "url": "https://github.com/itdojp/it-infra-software-essentials-book/issues"
   },
