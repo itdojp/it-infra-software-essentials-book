@@ -79,7 +79,7 @@ bundle exec jekyll serve --baseurl ""
 
 ```bash
 # Dockerコンテナの起動
-docker-compose up
+docker compose up
 
 # ブラウザで http://localhost:4000 にアクセス
 ```
