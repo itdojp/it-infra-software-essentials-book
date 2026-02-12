@@ -86,7 +86,7 @@ docker compose up
 
 ### 書籍の構造
 
-```
+```text
 ├── book-config.yaml          # 書籍設定（ITDO book-formatter準拠）
 ├── _config.yml              # Jekyll設定
 ├── index.md                 # 書籍のホームページ
