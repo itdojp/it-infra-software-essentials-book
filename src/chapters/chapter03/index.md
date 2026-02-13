@@ -242,7 +242,7 @@ log_message() {
 log_message "スクリプトを開始します。"
 log_message "設定ファイルを読み込み中..."
 
-# 実際の処理をここに記述
+# 例: Apache2 の稼働確認（必要なら再起動）
 # systemctl status apache2 > /dev/null 2>&1
 # if [ $? -eq 0 ]; then
 #   log_message "Apache2 サービスは稼働中です。"
