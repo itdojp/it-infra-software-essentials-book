@@ -1,6 +1,6 @@
 {
   "name": "it-infra-software-essentials-book",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ITインフラエンジニアのためのソフトウェア基礎知識",
   "scripts": {
     "dev": "cd docs && bundle exec jekyll serve --livereload --baseurl ''",
