@@ -152,7 +152,7 @@ APIにアクセスする際には、通常、認証（Authentication: 誰であ�
 
 * **APIキー**
   * 最もシンプルな認証方法の一つで、APIリクエストに一意のキー（文字列）を含めることで、リクエスト元を識別します。  
-  * 通常、HTTPヘッダー（例: X-API-Key, Authorization: Bearer API_KEY）やクエリパラメータ（例: ?api_key=YOUR_API_KEY）として渡されます。  
+  * 通常、HTTPヘッダー（例: `X-API-Key: YOUR_API_KEY`）やクエリパラメータ（例: `?api_key=YOUR_API_KEY`）として渡されます。Authorization ヘッダーのスキームは API 仕様依存であり、`Bearer` は主に OAuth 等のアクセストークンで利用されます。  
   * 手軽ですが、キーが漏洩すると悪用されるリスクがあるため、取り扱いには注意が必要です。  
   * **セキュリティベストプラクティス**:
     * 環境変数やシークレット管理サービスを使用してAPIキーを保存
@@ -247,6 +247,7 @@ APIにアクセスする際には、通常、認証（Authentication: 誰であ�
         'staging': 'staging_api_key_here'
     }
     ```
+    ※学習用の例です。実運用ではソースコード/リポジトリに機密情報を置かず、環境変数やシークレット管理サービスを利用します。
   * **クラウドシークレット管理サービスの活用**:
     * AWS Secrets Manager、Azure Key Vault、Google Secret Manager
     * HashiCorp Vault
@@ -276,7 +277,7 @@ import time
 import logging
 from typing import Optional, Dict, Any
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from urllib3.util.retry import Retry
 
 # ログ設定
 logging.basicConfig(level=logging.INFO)
@@ -294,8 +295,9 @@ def create_session_with_retry() -> requests.Session:
         total=3,  # 最大リトライ回数
         backoff_factor=1,  # リトライ間の待機時間（指数バックオフ）
         status_forcelist=[429, 500, 502, 503, 504],  # リトライ対象のステータスコード
-        method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
-        raise_on_status=False
+        # 注意: POST は非冪等の場合が多く、安易な再試行は二重実行のリスクがあるため除外する
+        allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
+        raise_on_status=False,
     )
     
     adapter = HTTPAdapter(max_retries=retry_strategy)
@@ -440,7 +442,7 @@ if __name__ == "__main__":
     import os
     import requests
     from requests.adapters import HTTPAdapter
-    from requests.packages.urllib3.util.retry import Retry
+    from urllib3.util.retry import Retry
     
     # セキュアなヘッダー設定
     def create_secure_headers():
@@ -569,7 +571,7 @@ import time
 import logging
 from typing import Optional
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from urllib3.util.retry import Retry
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -589,6 +591,12 @@ def robust_api_request(
     - 包括的なエラーハンドリング
     - タイムアウト設定
     """
+
+    method_upper = method.upper()
+    if method_upper == 'POST':
+        # 注意: POST など非冪等メソッドは安易に再試行すると二重実行のリスクがある。
+        # 必要な場合は冪等性キー（Idempotency-Key）等をAPI仕様に合わせて利用する。
+        max_retries = 1
     
     # セッション設定
     session = requests.Session()
@@ -598,7 +606,7 @@ def robust_api_request(
         total=max_retries,
         backoff_factor=backoff_factor,
         status_forcelist=[429, 500, 502, 503, 504, 522, 524],
-        method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
+        allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
         raise_on_status=False
     )
     
@@ -618,13 +626,13 @@ def robust_api_request(
             logger.info(f"APIリクエスト開始 (試行 {attempt + 1}/{max_retries}): {method} {url}")
             
             # リクエスト実行
-            if method.upper() == 'GET':
+            if method_upper == 'GET':
                 response = session.get(url, headers=headers, timeout=timeout)
-            elif method.upper() == 'POST':
+            elif method_upper == 'POST':
                 response = session.post(url, json=data, headers=headers, timeout=timeout)
-            elif method.upper() == 'PUT':
+            elif method_upper == 'PUT':
                 response = session.put(url, json=data, headers=headers, timeout=timeout)
-            elif method.upper() == 'DELETE':
+            elif method_upper == 'DELETE':
                 response = session.delete(url, headers=headers, timeout=timeout)
             else:
                 raise ValueError(f"サポートされていないHTTPメソッド: {method}")
@@ -737,7 +745,7 @@ import requests
 import time
 from typing import Optional, Tuple
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from urllib3.util.retry import Retry
 
 class APIClient:
     """
@@ -766,7 +774,7 @@ class APIClient:
             total=3,
             backoff_factor=1,
             status_forcelist=[408, 429, 500, 502, 503, 504],
-            method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"]
+            allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"]
         )
         
         adapter = HTTPAdapter(max_retries=retry_strategy)
