@@ -31,5 +31,9 @@ docs/_site/
 vendor/
 Gemfile.lock
 
+# Python
+__pycache__/
+*.pyc
+
 # 企画書（非公開）
 /planning/

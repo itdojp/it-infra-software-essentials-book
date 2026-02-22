@@ -47,12 +47,12 @@ def _check_yaml(paths: list[Path]) -> bool:
 
 
 def _check_python(paths: list[Path]) -> bool:
-    import py_compile
-
     ok = True
     for p in paths:
         try:
-            py_compile.compile(str(p), doraise=True)
+            # Parse-only compile; avoid generating __pycache__/ files during validation.
+            src = p.read_text(encoding="utf-8")
+            compile(src, str(p), "exec")
         except Exception as e:
             _error(f"Python syntax error: {p}: {e}")
             ok = False
@@ -77,12 +77,39 @@ def main() -> int:
         print("examples/: not found; skipping")
         return 0
 
-    json_paths = sorted((examples / "json").glob("*.json"))
-    yaml_paths = sorted((examples / "yaml").glob("*.yml")) + sorted((examples / "yaml").glob("*.yaml"))
-    py_paths = sorted((examples / "python").glob("*.py"))
-    sh_paths = sorted((examples / "shell").glob("*.sh"))
+    json_dir = examples / "json"
+    yaml_dir = examples / "yaml"
+    py_dir = examples / "python"
+    sh_dir = examples / "shell"
 
     ok = True
+
+    for d in [json_dir, yaml_dir, py_dir, sh_dir]:
+        if not d.is_dir():
+            _error(f"Missing examples directory: {d}")
+            ok = False
+
+    json_paths = sorted(json_dir.glob("*.json")) if json_dir.is_dir() else []
+    yaml_paths = (sorted(yaml_dir.glob("*.yml")) + sorted(yaml_dir.glob("*.yaml"))) if yaml_dir.is_dir() else []
+    py_paths = sorted(py_dir.glob("*.py")) if py_dir.is_dir() else []
+    sh_paths = sorted(sh_dir.glob("*.sh")) if sh_dir.is_dir() else []
+
+    if not json_paths:
+        _error(f"No JSON examples found under: {json_dir}")
+        ok = False
+    if not yaml_paths:
+        _error(f"No YAML examples found under: {yaml_dir}")
+        ok = False
+    if not py_paths:
+        _error(f"No Python examples found under: {py_dir}")
+        ok = False
+    if not sh_paths:
+        _error(f"No Shell examples found under: {sh_dir}")
+        ok = False
+
+    if not ok:
+        return 1
+
     ok &= _check_json(json_paths)
     ok &= _check_yaml(yaml_paths)
     ok &= _check_python(py_paths)

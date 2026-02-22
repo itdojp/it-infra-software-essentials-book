@@ -356,7 +356,7 @@ def make_api_request(
                 raise
         except requests.exceptions.ConnectionError as e:
             logger.error(f"接続エラー (試行 {attempt + 1}): {e}")
-            if attempt < max_retries - 1:
+            if attempt < attempts - 1:
                 time.sleep(2 ** attempt)
             else:
                 raise
