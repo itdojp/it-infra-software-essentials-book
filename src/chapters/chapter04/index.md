@@ -145,7 +145,7 @@ APIにアクセスする際には、通常、認証（Authentication: 誰であ�
 
 * **APIキー**:  
   * 最もシンプルな認証方法の一つで、APIリクエストに一意のキー（文字列）を含めることで、リクエスト元を識別します。  
-  * 通常、HTTPヘッダー（例: X-API-Key, Authorization: Bearer API_KEY）やクエリパラメータ（例: ?api_key=YOUR_API_KEY）として渡されます。  
+  * 通常、HTTPヘッダー（例: `X-API-Key: YOUR_API_KEY`）やクエリパラメータ（例: `?api_key=YOUR_API_KEY`）として渡されます。Authorization ヘッダーのスキームは API 仕様依存であり、`Bearer` は主に OAuth 等のアクセストークンで利用されます。  
   * 手軽ですが、キーが漏洩すると悪用されるリスクがあるため、取り扱いには注意が必要です。  
   * **セキュリティベストプラクティス**:
     * 環境変数やシークレット管理サービスを使用してAPIキーを保存
@@ -238,6 +238,7 @@ APIにアクセスする際には、通常、認証（Authentication: 誰であ�
         'staging': 'staging_api_key_here'
     }
     ```
+    ※学習用の例です。実運用ではソースコード/リポジトリに機密情報を置かず、環境変数やシークレット管理サービスを利用します。
   * **クラウドシークレット管理サービスの活用**:
     * AWS Secrets Manager、Azure Key Vault、Google Secret Manager
     * HashiCorp Vault
@@ -267,7 +268,7 @@ import time
 import logging
 from typing import Optional, Dict, Any
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from urllib3.util.retry import Retry
 
 # ログ設定
 logging.basicConfig(level=logging.INFO)
@@ -285,8 +286,9 @@ def create_session_with_retry() -> requests.Session:
         total=3,  # 最大リトライ回数
         backoff_factor=1,  # リトライ間の待機時間（指数バックオフ）
         status_forcelist=[429, 500, 502, 503, 504],  # リトライ対象のステータスコード
-        method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
-        raise_on_status=False
+        # 注意: POST は非冪等の場合が多く、安易な再試行は二重実行のリスクがあるため除外する
+        allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
+        raise_on_status=False,
     )
     
     adapter = HTTPAdapter(max_retries=retry_strategy)
@@ -316,19 +318,22 @@ def make_api_request(
     }
     if headers:
         default_headers.update(headers)
-    
-    for attempt in range(max_retries):
+
+    method_upper = method.upper()
+    attempts = max_retries if method_upper != 'POST' else 1
+
+    for attempt in range(attempts):
         try:
-            logger.info(f"APIリクエスト実行 (試行 {attempt + 1}/{max_retries}): {method} {url}")
+            logger.info(f"APIリクエスト実行 (試行 {attempt + 1}/{attempts}): {method_upper} {url}")
             
             # リクエストの実行
-            if method.upper() == 'GET':
+            if method_upper == 'GET':
                 response = session.get(url, headers=default_headers, timeout=timeout)
-            elif method.upper() == 'POST':
+            elif method_upper == 'POST':
                 response = session.post(url, json=data, headers=default_headers, timeout=timeout)
-            elif method.upper() == 'PUT':
+            elif method_upper == 'PUT':
                 response = session.put(url, json=data, headers=default_headers, timeout=timeout)
-            elif method.upper() == 'DELETE':
+            elif method_upper == 'DELETE':
                 response = session.delete(url, headers=default_headers, timeout=timeout)
             else:
                 raise ValueError(f"サポートされていないHTTPメソッド: {method}")
@@ -338,14 +343,14 @@ def make_api_request(
                 return response
             else:
                 logger.warning(f"サーバーエラー (試行 {attempt + 1}): {response.status_code}")
-                if attempt < max_retries - 1:
+                if attempt < attempts - 1:
                     wait_time = 2 ** attempt  # 指数バックオフ
                     logger.info(f"{wait_time}秒後にリトライします...")
                     time.sleep(wait_time)
                 
         except requests.exceptions.Timeout:
             logger.error(f"タイムアウトエラー (試行 {attempt + 1}): {url}")
-            if attempt < max_retries - 1:
+            if attempt < attempts - 1:
                 time.sleep(2 ** attempt)
             else:
                 raise
@@ -431,7 +436,7 @@ if __name__ == "__main__":
     import os
     import requests
     from requests.adapters import HTTPAdapter
-    from requests.packages.urllib3.util.retry import Retry
+    from urllib3.util.retry import Retry
     
     # セキュアなヘッダー設定
     def create_secure_headers():
@@ -556,11 +561,10 @@ if __name__ == "__main__":
 
 ```python
 import requests
-import time
 import logging
 from typing import Optional
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from urllib3.util.retry import Retry
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -580,107 +584,58 @@ def robust_api_request(
     - 包括的なエラーハンドリング
     - タイムアウト設定
     """
-    
-    # セッション設定
+
+    method_upper = method.upper()
+
+    # POST など非冪等メソッドは、安易な再試行で二重実行のリスクがある。
+    # 必要な場合は冪等性キー（Idempotency-Key）等をAPI仕様に合わせて利用する。
+    retry_total = max_retries if method_upper != 'POST' else 0
+
+    # セッション設定（接続の再利用）
     session = requests.Session()
-    
-    # リトライ戦略の設定
+
+    # リトライ戦略の設定（requests は内部で urllib3 を利用する）
     retry_strategy = Retry(
-        total=max_retries,
+        total=retry_total,
         backoff_factor=backoff_factor,
         status_forcelist=[429, 500, 502, 503, 504, 522, 524],
-        method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
-        raise_on_status=False
+        allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
+        raise_on_status=False,
+        respect_retry_after_header=True,
     )
-    
+
     adapter = HTTPAdapter(max_retries=retry_strategy)
     session.mount("http://", adapter)
     session.mount("https://", adapter)
-    
+
     # ヘッダー設定
     headers = {
         "User-Agent": "InfraAutomation/1.0",
         "Accept": "application/json",
         "Content-Type": "application/json"
     }
-    
-    for attempt in range(max_retries):
-        try:
-            logger.info(f"APIリクエスト開始 (試行 {attempt + 1}/{max_retries}): {method} {url}")
-            
-            # リクエスト実行
-            if method.upper() == 'GET':
-                response = session.get(url, headers=headers, timeout=timeout)
-            elif method.upper() == 'POST':
-                response = session.post(url, json=data, headers=headers, timeout=timeout)
-            elif method.upper() == 'PUT':
-                response = session.put(url, json=data, headers=headers, timeout=timeout)
-            elif method.upper() == 'DELETE':
-                response = session.delete(url, headers=headers, timeout=timeout)
-            else:
-                raise ValueError(f"サポートされていないHTTPメソッド: {method}")
-            
-            # レスポンス処理
-            if response.status_code == 200:
-                logger.info(f"リクエスト成功: {response.status_code}")
-                return response
-            elif response.status_code == 404:
-                logger.warning(f"リソースが見つかりません: {url}")
-                return response  # 404は通常リトライしない
-            elif response.status_code == 429:
-                # レート制限の場合、Retry-Afterヘッダーを確認
-                retry_after = response.headers.get('Retry-After')
-                if retry_after:
-                    wait_time = int(retry_after)
-                    logger.warning(f"レート制限に達しました。{wait_time}秒後にリトライします")
-                    time.sleep(wait_time)
-                else:
-                    # 指数バックオフ
-                    wait_time = backoff_factor * (2 ** attempt)
-                    logger.warning(f"レート制限に達しました。{wait_time}秒後にリトライします")
-                    time.sleep(wait_time)
-            elif 500 <= response.status_code < 600:
-                logger.error(f"サーバーエラー: {response.status_code}")
-                if attempt < max_retries - 1:
-                    wait_time = backoff_factor * (2 ** attempt)
-                    logger.info(f"{wait_time}秒後にリトライします")
-                    time.sleep(wait_time)
-                else:
-                    return response
-            else:
-                logger.error(f"予期しないステータスコード: {response.status_code}")
-                return response
-                
-        except requests.exceptions.Timeout:
-            logger.error(f"タイムアウトエラー (試行 {attempt + 1}): {url}")
-            if attempt < max_retries - 1:
-                wait_time = backoff_factor * (2 ** attempt)
-                logger.info(f"タイムアウト後のリトライ: {wait_time}秒後")
-                time.sleep(wait_time)
-            else:
-                logger.error("最大リトライ回数に達しました（タイムアウト）")
-                raise
-                
-        except requests.exceptions.ConnectionError as e:
-            logger.error(f"接続エラー (試行 {attempt + 1}): {e}")
-            if attempt < max_retries - 1:
-                wait_time = backoff_factor * (2 ** attempt)
-                logger.info(f"接続エラー後のリトライ: {wait_time}秒後")
-                time.sleep(wait_time)
-            else:
-                logger.error("最大リトライ回数に達しました（接続エラー）")
-                raise
-                
-        except requests.exceptions.RequestException as e:
-            logger.error(f"リクエスト例外: {e}")
-            raise
-            
-        except Exception as e:
-            logger.error(f"予期せぬエラー: {e}")
-            raise
-    
-    logger.error("すべてのリトライが失敗しました")
-    return None
+
+    request_kwargs = {"headers": headers, "timeout": timeout}
+    if method_upper in ('POST', 'PUT') and data is not None:
+        request_kwargs["json"] = data
+
+    try:
+        logger.info(f"APIリクエスト開始: {method_upper} {url} (retries={retry_total})")
+        response = session.request(method_upper, url, **request_kwargs)
+    except requests.exceptions.RequestException as e:
+        logger.error(f"リクエスト例外: {e}")
+        return None
+
+    if response.status_code == 404:
+        logger.warning(f"リソースが見つかりません: {url}")
+        return response  # 404 は通常リトライしない
+
+    if 200 <= response.status_code < 300:
+        logger.info(f"リクエスト成功: {response.status_code}")
+    else:
+        logger.error(f"エラーレスポンス: {response.status_code}")
+
+    return response
 
 # 使用例
 if __name__ == "__main__":
@@ -728,7 +683,7 @@ import requests
 import time
 from typing import Optional, Tuple
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+from urllib3.util.retry import Retry
 
 class APIClient:
     """
@@ -757,7 +712,7 @@ class APIClient:
             total=3,
             backoff_factor=1,
             status_forcelist=[408, 429, 500, 502, 503, 504],
-            method_whitelist=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"]
+            allowed_methods=["HEAD", "GET", "PUT", "DELETE", "OPTIONS", "TRACE"],
         )
         
         adapter = HTTPAdapter(max_retries=retry_strategy)

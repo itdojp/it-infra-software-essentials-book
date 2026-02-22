@@ -308,8 +308,26 @@ except IndexError:
 except KeyError:
     print("エラー: VPCに'tags'キーが存在しません。")
 
-# よりPythonicな方法 (例えば、`None`を返すチェーン)
-tags = config_data.get('network', {}).get('vpcs', [None, None, {'tags': []}])[2].get('tags') if len(config_data.get('network', {}).get('vpcs', [])) > 2 else None
+# 読みやすい安全なアクセス（ヘルパ関数）
+def get_nested(obj, path, default=None):
+    missing = object()
+    cur = obj
+    for key in path:
+        if isinstance(key, int):
+            if not isinstance(cur, list) or key >= len(cur):
+                return default
+            cur = cur[key]
+            continue
+
+        if not isinstance(cur, dict):
+            return default
+        cur = cur.get(key, missing)
+        if cur is missing:
+            return default
+
+    return cur
+
+tags = get_nested(config_data, ("network", "vpcs", 2, "tags"), default=None)
 print(f"存在しないVPCのタグ (安全なアクセス): {tags}")
 ```
 

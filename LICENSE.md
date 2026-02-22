@@ -1,18 +1,11 @@
-# ライセンス
+# ライセンス（概要）
 
-本書籍のライセンス条件は、株式会社アイティードゥの統一ライセンスに準拠します。
+本書は **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International**（**CC BY-NC-SA 4.0**）で提供します。
 
-📋 **詳細なライセンス条件：**  
-https://github.com/itdojp/it-engineer-knowledge-architecture/blob/main/LICENSE.md
+- 教育・研究・個人学習などの非営利利用は、CC BY-NC-SA 4.0 の条件に従う限り利用できます。
+- 商用利用は、別途商用ライセンス契約が必要です。
 
-## 簡易説明
+ライセンス条文（Legal Code）は `LICENSE` を参照してください。
 
-本作品は **Creative Commons BY-NC-SA 4.0** ライセンスで提供されています。
+お問い合わせ: knowledge@itdo.jp
 
-- **🔓 非営利利用：** 教育・研究・個人学習で自由に利用可能
-- **💼 商用利用：** 事前の商用ライセンス契約が必要
-
-**お問い合わせ：** knowledge@itdo.jp
-
----
-© 2025 株式会社アイティードゥ (ITDO Inc.)
