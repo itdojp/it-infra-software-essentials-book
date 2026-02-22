@@ -327,19 +327,22 @@ def make_api_request(
     }
     if headers:
         default_headers.update(headers)
-    
-    for attempt in range(max_retries):
+
+    method_upper = method.upper()
+    attempts = max_retries if method_upper != 'POST' else 1
+
+    for attempt in range(attempts):
         try:
-            logger.info(f"APIリクエスト実行 (試行 {attempt + 1}/{max_retries}): {method} {url}")
+            logger.info(f"APIリクエスト実行 (試行 {attempt + 1}/{attempts}): {method_upper} {url}")
             
             # リクエストの実行
-            if method.upper() == 'GET':
+            if method_upper == 'GET':
                 response = session.get(url, headers=default_headers, timeout=timeout)
-            elif method.upper() == 'POST':
+            elif method_upper == 'POST':
                 response = session.post(url, json=data, headers=default_headers, timeout=timeout)
-            elif method.upper() == 'PUT':
+            elif method_upper == 'PUT':
                 response = session.put(url, json=data, headers=default_headers, timeout=timeout)
-            elif method.upper() == 'DELETE':
+            elif method_upper == 'DELETE':
                 response = session.delete(url, headers=default_headers, timeout=timeout)
             else:
                 raise ValueError(f"サポートされていないHTTPメソッド: {method}")
@@ -349,20 +352,20 @@ def make_api_request(
                 return response
             else:
                 logger.warning(f"サーバーエラー (試行 {attempt + 1}): {response.status_code}")
-                if attempt < max_retries - 1:
+                if attempt < attempts - 1:
                     wait_time = 2 ** attempt  # 指数バックオフ
                     logger.info(f"{wait_time}秒後にリトライします...")
                     time.sleep(wait_time)
                 
         except requests.exceptions.Timeout:
             logger.error(f"タイムアウトエラー (試行 {attempt + 1}): {url}")
-            if attempt < max_retries - 1:
+            if attempt < attempts - 1:
                 time.sleep(2 ** attempt)
             else:
                 raise
         except requests.exceptions.ConnectionError as e:
             logger.error(f"接続エラー (試行 {attempt + 1}): {e}")
-            if attempt < max_retries - 1:
+            if attempt < attempts - 1:
                 time.sleep(2 ** attempt)
             else:
                 raise

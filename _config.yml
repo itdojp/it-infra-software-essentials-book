@@ -31,7 +31,7 @@ plugins:
 book:
   version: "1.0.1"
   language: "ja"
-  license: "MIT"
+  license: "CC-BY-NC-SA-4.0"
   format: "web"
   theme: "technical"
 

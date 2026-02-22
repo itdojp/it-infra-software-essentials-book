@@ -47,6 +47,16 @@ jobs:
       - name: Docs sanity check (smart quotes / deprecated snippets)
         run: bash scripts/check-docs-sanity.sh "${{ steps.scan.outputs.dir }}"
 
+      - name: Source sanity check (src)
+        if: ${{ hashFiles('src/**') != '' }}
+        run: bash scripts/check-docs-sanity.sh "src"
+
+      - name: Validate examples (python/json/yaml/shell)
+        shell: bash
+        run: |
+          python3 -m pip install --user pyyaml
+          python3 scripts/validate-examples.py
+
       - name: Unicode check (fail on warnings)
         run: node book-formatter/scripts/check-unicode.js "${{ steps.scan.outputs.dir }}" --allowlist .book-formatter/unicode-allowlist.json --fail-on warn
 
