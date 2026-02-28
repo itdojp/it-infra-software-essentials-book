@@ -37,7 +37,7 @@ ITインフラエンジニアが現代の運用で必須となるソフトウェ
 <div class="chapter-list">
 {% for chapter in site.data.navigation.chapters %}
 <div class="chapter-item">
-    <h3><a href="{{ chapter.url | relative_url }}">{{ chapter.title }}</a></h3>
+    <h3><a href="{{ chapter.path | relative_url }}">{{ chapter.title }}</a></h3>
 </div>
 {% endfor %}
 </div>
