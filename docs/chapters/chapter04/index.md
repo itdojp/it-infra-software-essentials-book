@@ -1013,7 +1013,7 @@ if __name__ == "__main__":
 
 * **クラウドAPI操作（SDKの利用）**
   * AWS boto3、Azure SDK for Python、Google Cloud Client Libraries for Python など、各クラウドプロバイダーが提供するPython SDKは、内部的にAPIを呼び出しています。これらのSDKを使うことで、より抽象化された形でクラウド操作をPythonから行えます。例えば、EC2インスタンスの起動・停止、S3バケットの作成・管理、Azure VMのプロビジョニング、GCPのCloud Storageへのファイルアップロードなどが可能です。  
-  * SDKが提供されていない、またはより低レベルなAPI操作が必要な場合にrequestsを直接使うこともあります。  
+  * SDKが提供されていない、またはより低レベルなAPI操作が必要な場合に`requests`を直接使うこともあります。  
 * **SaaS連携（例: Slack通知、監視ツールのデータ取得）**
   * SlackのIncoming Webhook APIを使って、自動化スクリプトの実行結果や監視アラートをSlackチャンネルに通知する。  
   * ZabbixやPrometheusなどの監視ツールのAPIからメトリクスやイベントデータを取得し、カスタムレポートを作成したり、外部システムと連携させたりする。  
