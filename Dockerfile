@@ -1,4 +1,4 @@
-FROM ruby:3.2-alpine
+FROM docker.io/library/ruby:3.2-alpine
 
 # Install dependencies
 RUN apk add --no-cache \
