@@ -220,11 +220,13 @@ def make_authenticated_request(endpoint: str, method: str = "GET", data=None) ->
         "Content-Type": "application/json",
     }
 
-    if method == "GET":
+    normalized_method = method.upper()
+
+    if normalized_method == "GET":
         return requests.get(endpoint, headers=headers, timeout=10)
-    if method == "POST":
+    if normalized_method == "POST":
         return requests.post(endpoint, json=data, headers=headers, timeout=10)
-    raise ValueError(f"Unsupported method: {method}")
+    raise ValueError(f"Unsupported method: {normalized_method}")
 ```
 
 - **JWT（JSON Web Token）**
