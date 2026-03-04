@@ -9,7 +9,7 @@
     "docker:up": "docker compose up",
     "docker:down": "docker compose down",
     "docker:build": "docker compose build",
-    "lint:markdown": "markdownlint docs/**/*.md --ignore docs/_site",
+    "lint:markdown": "markdownlint -c .markdownlint.json \"docs/**/*.md\" --ignore docs/_site",
     "format:check": "prettier --check 'docs/**/*.{md,yml,yaml,json}'",
     "format": "prettier --write 'docs/**/*.{md,yml,yaml,json}'"
   },
