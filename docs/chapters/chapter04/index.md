@@ -229,6 +229,8 @@ def make_authenticated_request(endpoint: str, method: str = "GET", data=None) ->
     raise ValueError(f"Unsupported method: {normalized_method}")
 ```
 
+この例は学習用の最小構成です。実際の OAuth サーバーでは、`client_id` / `client_secret` をリクエストボディではなく HTTP Basic 認証で渡す場合や、`scope` の指定方法が異なる場合があります。実装前に対象 API の公式ドキュメントで要件を確認してください。
+
 - **JWT（JSON Web Token）**
   - 認証とデータ交換のためのコンパクトで自己完結型のトークン形式
   - ヘッダー、ペイロード、署名の3つの部分から構成
