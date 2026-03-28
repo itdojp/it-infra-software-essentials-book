@@ -63,9 +63,9 @@ ITインフラの設計・構築・運用を専門とする技術者集団。ク
 ## ライセンス
 
 本書は **Creative Commons BY-NC-SA 4.0** ライセンスで公開されています。  
-利用条件の詳細は以下を参照してください。
+表示（BY）、非営利（NC）、継承（SA）の条件を満たす範囲で利用できます。商用利用は CC ライセンスの範囲外であり、別途ライセンスが必要です。
 
-[詳細なライセンス条件](https://github.com/itdojp/it-engineer-knowledge-architecture/blob/main/LICENSE.md)
+[詳細なライセンス条件](https://github.com/itdojp/it-infra-software-essentials-book/blob/main/LICENSE.md)
 
 **お問い合わせ**  
 株式会社アイティードゥ（ITDO Inc.）  
