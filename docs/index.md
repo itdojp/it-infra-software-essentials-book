@@ -67,14 +67,14 @@ ITインフラの設計・構築・運用を専門とする技術者集団。ク
 
 [詳細なライセンス条件](https://github.com/itdojp/it-infra-software-essentials-book/blob/main/LICENSE.md)
 
-**お問い合わせ**
-株式会社アイティードゥ（ITDO Inc.）
+**お問い合わせ**<br>
+株式会社アイティードゥ（ITDO Inc.）<br>
 Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
 
 ---
 
-**著者:** 株式会社アイティードゥ
-**バージョン:** {{ site.version }}
+**著者:** 株式会社アイティードゥ<br>
+**バージョン:** {{ site.version }}<br>
 **最終更新:** {{ site.last_updated }}
 
 <style>
