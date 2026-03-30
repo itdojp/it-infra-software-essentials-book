@@ -62,19 +62,19 @@ ITインフラの設計・構築・運用を専門とする技術者集団。ク
 
 ## ライセンス
 
-本書は **Creative Commons BY-NC-SA 4.0** ライセンスで公開されています。  
-表示（BY）、非営利（NC）、継承（SA）の条件を満たす範囲で利用できます。商用利用は CC ライセンスの範囲外であり、別途ライセンスが必要です。
+本書は [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja) ライセンスで公開しています。
+利用時は BY（表示）/ NC（非営利）/ SA（継承）の条件を満たしてください。商用利用はこの CC ライセンスの範囲外であり、別途許諾が必要です。
 
 [詳細なライセンス条件](https://github.com/itdojp/it-infra-software-essentials-book/blob/main/LICENSE.md)
 
-**お問い合わせ**  
-株式会社アイティードゥ（ITDO Inc.）  
+**お問い合わせ**<br>
+株式会社アイティードゥ（ITDO Inc.）<br>
 Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
 
 ---
 
-**著者:** 株式会社アイティードゥ  
-**バージョン:** {{ site.version }}  
+**著者:** 株式会社アイティードゥ<br>
+**バージョン:** {{ site.version }}<br>
 **最終更新:** {{ site.last_updated }}
 
 <style>
