@@ -43,7 +43,7 @@ ITインフラエンジニアが現代の運用で必須となるソフトウェ
 - Git / PR: 設定ファイル、スクリプト、IaC はブランチと PR でレビューし、secret scan、CI、影響範囲、戻し方を記録する。
 
 演習結果や Issue / PR の証跡を共有する場合は、API キー、トークン、Cookie、hostname、public IP、内部 CIDR、アカウント ID、メールアドレスなどをマスクします。
-改善 PR では GitHub Copilot review の本文・inline comment・suggestion を全件確認し、未解決 review thread 0 件、CI green、merge 後 main checks、公開サイト反映確認までを完了条件とします。
+改善 PR では GitHub Copilot review の本文・inline comment・suggestion を全件確認し、未解決 review thread 0件、CI green、merge 後 main checks、公開サイト反映確認までを完了条件とします。
 このゲートは、後続のクラウド、コンテナ、Kubernetes 関連書籍へ進む前に、本書で扱う基礎操作を安全な運用単位へ接続するためのものです。
 
 ## 目次
