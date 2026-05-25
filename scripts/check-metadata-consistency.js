@@ -167,16 +167,30 @@ function resolveDocsPath(navPath) {
     ? [path.join(DOCS, 'index.md')]
     : [path.join(DOCS, relative, 'index.md'), path.join(DOCS, `${relative.replace(/\/$/, '')}.md`)];
   const docsRoot = `${DOCS}${path.sep}`;
+  const realDocsRoot = fs.realpathSync(DOCS);
+  const realDocsPrefix = `${realDocsRoot}${path.sep}`;
   for (const candidate of candidates) {
     const resolved = path.resolve(candidate);
     if (resolved !== DOCS && !resolved.startsWith(docsRoot)) {
       fail(`navigation path ${JSON.stringify(navPath)}: resolved outside docs`);
       return null;
     }
-    if (fs.existsSync(resolved)) return resolved;
+    if (fs.existsSync(resolved)) {
+      const stat = fs.lstatSync(resolved);
+      if (stat.isSymbolicLink()) {
+        fail(`navigation path ${JSON.stringify(navPath)}: symlink targets are not allowed`);
+        return null;
+      }
+      const real = fs.realpathSync(resolved);
+      if (real !== realDocsRoot && !real.startsWith(realDocsPrefix)) {
+        fail(`navigation path ${JSON.stringify(navPath)}: real path resolves outside docs`);
+        return null;
+      }
+      return real;
+    }
   }
   fail(`navigation path ${JSON.stringify(navPath)}: target page not found under docs`);
-  return candidates[0];
+  return null;
 }
 
 const book = readJson(path.join(ROOT, 'book-config.json'));
@@ -227,7 +241,7 @@ for (const [i, chapter] of chapters.entries()) {
   const navItem = navChapters[i] || {};
   assertEqual(`navigation chapter ${i + 1} title`, navItem.title, chapter.title);
   assertEqual(`navigation chapter ${i + 1} path`, navItem.path, expectedPath);
-  const page = resolveDocsPath(expectedPath);
+  const page = resolveDocsPath(navItem.path);
   if (page) {
     const frontMatter = parseFrontMatter(page).data;
     assertEqual(`${rel(page)} title`, frontMatter.title, chapter.title);
