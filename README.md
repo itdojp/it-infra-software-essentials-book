@@ -6,6 +6,11 @@
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://github.com/itdojp/it-engineer-knowledge-architecture/blob/main/LICENSE.md)
 [![Version](https://img.shields.io/badge/Version-1.0.1-orange.svg)](book-config.yaml)
 
+## オンライン版
+
+- GitHub Pages: https://itdojp.github.io/it-infra-software-essentials-book/
+- リポジトリ入口: `docs/index.md`
+
 ## 📚 概要
 
 本書は、ITインフラエンジニアが現代の運用で必須となるソフトウェアの基礎知識を、実践的な視点からコンパクトに解説する技術書です。ITDO book-formatter v3.0の標準構造に準拠して作成されており、効率的な学習体験を提供します。
@@ -73,6 +78,17 @@ bundle install
 bundle exec jekyll serve --baseurl ""
 
 # ブラウザで http://localhost:4000 にアクセス
+```
+
+
+### 品質チェック
+
+```bash
+# メタデータ・ナビゲーション整合性チェック
+npm run check:metadata
+
+# ローカル品質チェック（メタデータ、Markdown lint、Prettier、docs sanity）
+npm test
 ```
 
 ### Dockerを使用した開発

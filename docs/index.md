@@ -1,6 +1,10 @@
 ---
 layout: book
 title: "ITインフラエンジニアのためのソフトウェア基礎知識"
+description: "YAML, JSON, スクリプト, APIで学ぶ自動化の基本。現代のインフラエンジニアが身につけるべきソフトウェアの基礎知識を実践的に解説。"
+author: "ITDO Inc.（株式会社アイティードゥ）"
+version: "1.0.1"
+permalink: /
 order: 1
 ---
 
