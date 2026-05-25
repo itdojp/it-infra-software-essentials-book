@@ -1,6 +1,6 @@
 {
   "title": "ITインフラエンジニアのためのソフトウェア基礎知識",
-  "description": "ITインフラエンジニアのためのソフトウェア基礎知識",
+  "description": "YAML, JSON, スクリプト, APIで学ぶ自動化の基本。現代のインフラエンジニアが身につけるべきソフトウェアの基礎知識を実践的に解説。",
   "author": "ITDO Inc.（株式会社アイティードゥ）",
   "version": "1.0.1",
   "language": "ja",
@@ -13,8 +13,28 @@
     "chapters": [
       {
         "id": "chapter01",
-        "title": "第1章：基礎概念",
-        "description": "基本的な概念と原理"
+        "title": "第1章：インフラエンジニアとソフトウェアの接点",
+        "description": "現代インフラにおけるソフトウェア知識の重要性"
+      },
+      {
+        "id": "chapter02",
+        "title": "第2章：データ記述言語の基本と実践",
+        "description": "JSON、YAMLを中心としたデータ形式の理解"
+      },
+      {
+        "id": "chapter03",
+        "title": "第3章：スクリプト言語による自動化の初歩",
+        "description": "シェルスクリプトとPythonによる自動化"
+      },
+      {
+        "id": "chapter04",
+        "title": "第4章：APIによるインフラ連携",
+        "description": "RESTful APIとクラウドサービス連携"
+      },
+      {
+        "id": "chapter05",
+        "title": "第5章：インフラ運用を支えるその他のソフトウェア知識",
+        "description": "Git、正規表現、データ構造の基礎"
       }
     ]
   },
