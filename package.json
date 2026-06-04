@@ -13,7 +13,7 @@
     "format:check": "prettier --check 'docs/**/*.{md,yml,yaml,json}'",
     "format": "prettier --write 'docs/**/*.{md,yml,yaml,json}'",
     "check:metadata": "node scripts/check-metadata-consistency.js",
-    "test": "npm run check:security && npm run check:metadata && npm run lint:markdown && npm run format:check && bash scripts/check-docs-sanity.sh docs",
+    "test": "npm run check:metadata && npm run lint:markdown && npm run format:check && bash scripts/check-docs-sanity.sh docs",
     "check:security": "npm audit"
   },
   "repository": {

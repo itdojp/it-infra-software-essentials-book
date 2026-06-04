@@ -38,6 +38,9 @@ jobs:
       - name: Install local npm dependencies
         run: npm ci
 
+      - name: Local npm security audit
+        run: npm run check:security
+
       - name: Local npm QA
         run: npm test
 
@@ -54,9 +57,6 @@ jobs:
           else
             echo "dir=." >> "$GITHUB_OUTPUT"
           fi
-
-      - name: Docs sanity check (smart quotes / deprecated snippets)
-        run: bash scripts/check-docs-sanity.sh "${{ steps.scan.outputs.dir }}"
 
       - name: Source sanity check (src)
         if: ${{ hashFiles('src/**') != '' }}
