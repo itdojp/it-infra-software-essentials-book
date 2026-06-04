@@ -62,7 +62,7 @@
 
 - Ruby 3.2+
 - Bundler
-- Node.js 20+ (オプション)
+- Node.js 20.18.1+（npm によるローカル品質チェックで使用）
 
 ### ローカル環境での開発
 
@@ -71,11 +71,14 @@
 git clone https://github.com/itdojp/it-infra-software-essentials-book.git
 cd it-infra-software-essentials-book
 
-# 依存関係のインストール
-bundle install
+# Node.js 依存関係のインストール
+npm ci
+
+# Ruby/Bundler 依存関係のインストール（docs/Gemfile を使用）
+npm run install:deps
 
 # ローカルサーバーの起動
-bundle exec jekyll serve --baseurl ""
+npm run dev
 
 # ブラウザで http://localhost:4000 にアクセス
 ```
@@ -84,6 +87,9 @@ bundle exec jekyll serve --baseurl ""
 ### 品質チェック
 
 ```bash
+# セキュリティ監査
+npm run check:security
+
 # メタデータ・ナビゲーション整合性チェック
 npm run check:metadata
 
@@ -104,17 +110,20 @@ docker compose up
 
 ```text
 ├── book-config.yaml          # 書籍設定（ITDO book-formatter準拠）
-├── _config.yml              # Jekyll設定
-├── index.md                 # 書籍のホームページ
-├── src/                     # 書籍のソースファイル
-│   ├── chapters/           # 章ごとのディレクトリ
-│   │   ├── chapter01/      
-│   │   │   └── index.md    # 第1章の内容
+├── _config.yml              # ルート配置の互換用 Jekyll 設定
+├── docs/                    # 公開サイトのソース
+│   ├── _config.yml          # GitHub Pages/Jekyll ビルド設定
+│   ├── _data/               # 公開サイトのナビゲーション定義
+│   ├── index.md             # 書籍のホームページ
+│   ├── chapters/            # 章ごとのディレクトリ
+│   │   ├── chapter01/
+│   │   │   └── index.md     # 第1章の内容
 │   │   └── ...
-│   └── appendices/         # 付録
-├── assets/                  # 画像、CSS、JavaScript
-├── templates/               # レイアウトテンプレート
-└── _layouts/               # Jekyll レイアウト
+│   ├── assets/              # 画像、CSS、JavaScript
+│   └── _layouts/            # Jekyll レイアウト
+├── src/                     # book-config.yaml が参照する原稿ソース
+│   └── chapters/            # 章ごとの原稿ディレクトリ
+└── scripts/                 # ローカル品質チェック/ビルド補助
 ```
 
 ## 📝 ライセンス
