@@ -1,7 +1,7 @@
 {
   "name": "it-infra-software-essentials-book",
   "version": "1.0.1",
-  "description": "YAML, JSON, スクリプト, APIで学ぶ自動化の基本。現代のインフラエンジニアが身につけるべきソフトウェアの基礎知識を実践的に解説。",
+  "description": "YAML, JSON, スクリプト, API で学ぶ自動化の基本。現代のインフラエンジニアが身につけるべきソフトウェアの基礎知識を実践的に解説。",
   "scripts": {
     "dev": "cd docs && (bundle check || bundle install) && bundle exec jekyll serve --livereload --baseurl \"\"",
     "build": "cd docs && (bundle check || bundle install) && bundle exec jekyll build",
@@ -41,5 +41,11 @@
   },
   "engines": {
     "node": ">=20.18.1"
+  },
+  "overrides": {
+    "js-yaml": "4.3.0",
+    "markdown-it": "14.2.0",
+    "linkify-it": "5.0.1",
+    "undici": "7.28.0"
   }
 }

@@ -32,6 +32,6 @@ npm run clean               # Clean build artifacts
 
 ## Contact Information
 
-**Author**: ITDO Inc.（株式会社アイティードゥ）  
-**Email**: knowledge@itdo.jp  
+**Author**: ITDO Inc.（株式会社アイティードゥ）
+**Email**: knowledge@itdo.jp
 **GitHub**: [@itdojp](https://github.com/itdojp)

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
   <title>API リクエスト/レスポンスサイクル（エラーハンドリング含む）</title>
-  <desc>クライアントからデータベースまでのAPI処理フローとエラーハンドリングを示すワークフロー図</desc>
+  <desc>クライアントからデータベースまでの API 処理フローとエラーハンドリングを示すワークフロー図</desc>
   <defs>
     <style>
       :root {
@@ -115,6 +115,6 @@
   <text x="270" y="115" class="annotation-text">②認証</text>
   <text x="380" y="115" class="annotation-text">③キャッシュ</text>
   <text x="490" y="115" class="annotation-text">④処理</text>
-  <text x="600" y="115" class="annotation-text">⑤DB照会</text>
+  <text x="600" y="115" class="annotation-text">⑤DB 照会</text>
   <text x="400" y="190" class="annotation-text">⑥レスポンス返却</text>
 </svg>

@@ -1,7 +1,7 @@
 # Jekyll Configuration for ITDO book-formatter v3.0
 title: ITインフラエンジニアのためのソフトウェア基礎知識
-description: YAML, JSON, スクリプト, APIで学ぶ自動化の基本。現代のインフラエンジニアが身につけるべきソフトウェアの基礎知識を実践的に解説。
-author: 
+description: YAML, JSON, スクリプト, API で学ぶ自動化の基本。現代のインフラエンジニアが身につけるべきソフトウェアの基礎知識を実践的に解説。
+author:
   name: ITDO Inc.（株式会社アイティードゥ）
   email: knowledge@itdo.jp
 url: "https://itdojp.github.io"
@@ -69,13 +69,13 @@ navigation:
       description: "現代インフラにおけるソフトウェア知識の重要性"
     - title: "第2章：データ記述言語の基本と実践"
       url: /chapters/chapter02/
-      description: "JSON、YAMLを中心としたデータ形式の理解"
+      description: "JSON、YAML を中心としたデータ形式の理解"
     - title: "第3章：スクリプト言語による自動化の初歩"
       url: /chapters/chapter03/
-      description: "シェルスクリプトとPythonによる自動化"
-    - title: "第4章：APIによるインフラ連携"
+      description: "シェルスクリプトと Python による自動化"
+    - title: "第4章：API によるインフラ連携"
       url: /chapters/chapter04/
-      description: "RESTful APIとクラウドサービス連携"
+      description: "RESTful API とクラウドサービス連携"
     - title: "第5章：インフラ運用を支えるその他のソフトウェア知識"
       url: /chapters/chapter05/
       description: "Git、正規表現、データ構造の基礎"
