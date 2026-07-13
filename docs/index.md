@@ -60,6 +60,13 @@ IT インフラエンジニアが現代の運用で必須となるソフトウ�
 {% endfor %}
 </div>
 
+## 実務で迷ったとき
+
+本文のサンプルで問題が起きたときは、変更を急がず、まず安全な確認から始めます。次の付録は、本文の基礎知識へ戻りながら判断するための専用導線です。
+
+- [付録A：トラブルシューティングフロー]({{ '/appendices/troubleshooting/' | relative_url }}) — 症状別に観測、read-only 確認、対処または escalation を選ぶ。
+- [付録B：図表索引]({{ '/appendices/figure-index/' | relative_url }}) — 本文で参照する図表を目的と確認観点から開く。
+
 ### 著者について
 
 **ITDO Inc.（株式会社アイティードゥ）**
@@ -128,5 +135,3 @@ Email: [knowledge@itdo.jp](mailto:knowledge@itdo.jp)
     color: #34495e;
 }
 </style>
-
-{% include page-navigation.html %}

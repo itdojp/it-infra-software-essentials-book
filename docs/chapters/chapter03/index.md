@@ -16,6 +16,7 @@ order: 4
 - Python で「ファイル操作/外部コマンド実行/データ加工」などの自動化スクリプトを作るための基礎を説明できる。
 - 実務のタスクに対して、シェルスクリプトと Python の使い分けの観点を持てる。
 
+<span id="figure-script-automation-architecture"></span>
 ![スクリプト自動化アーキテクチャ]({{ '/assets/images/diagrams/chapter03/script-automation-architecture.svg' | relative_url }})
 
 ## **3.1 シェルスクリプトの基本**

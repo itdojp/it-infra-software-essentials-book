@@ -10,6 +10,7 @@ chapter: 3
 
 この章では、インフラエンジニアが頻繁に利用する**シェルスクリプト**と、汎用性が高い**Python**に焦点を当て、それぞれの基本的な使い方と自動化への応用方法を学びます。これらの言語を習得することで、日々の運用業務を効率化し、より重要度の高いタスクに時間を配分しやすくなります。
 
+<span id="figure-script-automation-architecture"></span>
 ![スクリプト自動化アーキテクチャ]({{ '/assets/images/diagrams/chapter03/script-automation-architecture.svg' | relative_url }})
 
 ## **3.1 シェルスクリプトの基本**
