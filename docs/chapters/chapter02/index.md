@@ -17,6 +17,7 @@ order: 3
 - Python で JSON / YAML を読み書きし、簡単な加工ができる。
 - JSON / YAML の利用シーンと、その他の形式（XML、TOML、CSV など）の位置づけを整理できる。
 
+<span id="figure-data-description-languages-overview"></span>
 ![データ記述言語の全体像]({{ '/assets/images/diagrams/chapter02/data-description-languages-overview.svg' | relative_url }})
 
 ## **2.1 JSON（JavaScript Object Notation）**

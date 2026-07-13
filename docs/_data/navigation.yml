@@ -9,3 +9,8 @@ chapters:
     path: /chapters/chapter04/
   - title: 第5章：インフラ運用を支えるその他のソフトウェア知識
     path: /chapters/chapter05/
+appendices:
+  - title: 付録A：トラブルシューティングフロー
+    path: /appendices/troubleshooting/
+  - title: 付録B：図表索引
+    path: /appendices/figure-index/

@@ -32,10 +32,10 @@ structure:
       description: "Git、正規表現、データ構造の基礎"
 
   appendices:
-    - path: src/appendices/environment-setup
-      title: "付録A：開発環境の構築"
     - path: src/appendices/troubleshooting
-      title: "付録B：よくある問題と解決法"
+      title: "付録A：トラブルシューティングフロー"
+    - path: src/appendices/figure-index
+      title: "付録B：図表索引"
 
 # Build settings
 build:

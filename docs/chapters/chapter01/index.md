@@ -18,6 +18,7 @@ order: 2
 
 ## **1.1 なぜインフラエンジニアにソフトウェア知識が必要か**
 
+<span id="figure-traditional-vs-modern-infrastructure"></span>
 ![従来インフラ vs 現代インフラ]({{ '/assets/images/diagrams/chapter01/traditional-vs-modern-infrastructure.svg' | relative_url }})
 
 かつてのインフラ運用は、ハードウェアの物理的な接続、OS のインストール、ミドルウェアの手動設定が中心でした。しかし、仮想化技術の進化、クラウドサービスの登場、そして DevOps のプラクティスが普及するにつれて、インフラは「コード」として扱われるようになり、その管理はソフトウェアエンジニアリングの手法を取り入れるようになりました。
@@ -55,6 +56,7 @@ order: 2
 
 ### **DevOps の推進**
 
+<span id="figure-devops-transformation"></span>
 ![DevOps 変革フロー]({{ '/assets/images/diagrams/chapter01/devops-transformation.svg' | relative_url }})
 
 - **開発と運用の連携強化**
@@ -66,6 +68,7 @@ order: 2
 
 ### **SRE (Site Reliability Engineering) の実践**
 
+<span id="figure-sre-concepts"></span>
 ![SRE 概念図]({{ '/assets/images/diagrams/chapter01/sre-concepts.svg' | relative_url }})
 
 - **信頼性向上のための自動化と計測**
@@ -94,6 +97,7 @@ order: 2
 
 ### **各章の概要と、実践的な演習の重要性**
 
+<span id="figure-learning-roadmap"></span>
 ![学習ロードマップ]({{ '/assets/images/diagrams/chapter01/learning-roadmap.svg' | relative_url }})
 
 本書は以下の5つの章で構成され、段階的に知識を深めていきます。各章では、概念の説明だけでなく、実際に手を動かすための具体的なサンプルコードや演習問題を豊富に用意します。理論と実践を組み合わせることで、知識の定着と応用力の向上を目指します。

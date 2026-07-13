@@ -36,6 +36,20 @@
         "title": "第5章：インフラ運用を支えるその他のソフトウェア知識",
         "description": "Git、正規表現、データ構造の基礎"
       }
+    ],
+    "appendices": [
+      {
+        "id": "troubleshooting",
+        "path": "src/appendices/troubleshooting",
+        "title": "付録A：トラブルシューティングフロー",
+        "description": "安全な停止・観測・判断・最小対処・記録のための実務フロー"
+      },
+      {
+        "id": "figure-index",
+        "path": "src/appendices/figure-index",
+        "title": "付録B：図表索引",
+        "description": "本文で参照する図表を目的別にたどる索引"
+      }
     ]
   },
   "build": {
@@ -51,9 +65,9 @@
       "quickStart": false,
       "readingGuide": true,
       "checklistPack": true,
-      "troubleshootingFlow": false,
+      "troubleshootingFlow": true,
       "conceptMap": false,
-      "figureIndex": false,
+      "figureIndex": true,
       "legalNotice": false,
       "glossary": false
     }

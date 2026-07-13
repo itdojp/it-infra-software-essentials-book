@@ -10,6 +10,7 @@ chapter: 2
 
 この章では、JSON と YAML の基本的な構造、記述ルール、そして Python を使ったデータの読み書き方法を学びます。さらに、それぞれの言語がどのような場面で使われるのか、その利用シーンについても掘り下げていきます。
 
+<span id="figure-data-description-languages-overview"></span>
 ![データ記述言語の全体像]({{ '/assets/images/diagrams/chapter02/data-description-languages-overview.svg' | relative_url }})
 
 ## **2.1 JSON（JavaScript Object Notation）**
