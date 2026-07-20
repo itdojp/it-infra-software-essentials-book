@@ -241,6 +241,22 @@ function assertContains(source, haystack, needle) {
   }
 }
 
+function readmeChapterBlock(readme, position, title, nextTitle) {
+  const readmeTitle = title.replace(/^第\d+章：/, '');
+  const marker = `${position}. **${readmeTitle}**`;
+  const start = readme.indexOf(marker);
+  if (start === -1) {
+    fail(`README chapter ${position}: expected heading ${JSON.stringify(readmeTitle)}`);
+    return '';
+  }
+  const rest = readme.slice(start + marker.length);
+  const nextMarker = nextTitle
+    ? `\n${position + 1}. **${nextTitle.replace(/^第\d+章：/, '')}**`
+    : '\n## ';
+  const next = rest.indexOf(nextMarker);
+  return rest.slice(0, next === -1 ? undefined : next);
+}
+
 function normalizeRepoUrl(value, source) {
   return requireString(source, value).replace(/^git\+/, '').replace(/\.git$/, '').replace(/\/$/, '');
 }
@@ -340,6 +356,7 @@ function validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav) {
 
   const chapters = (book.structure && book.structure.chapters) || [];
   const navChapters = nav.chapters || [];
+  const publishedChapterBodies = new Map();
   assertEqual('book-config.json chapter count', chapters.length, 5);
   assertEqual('docs/_data/navigation.yml chapter count', navChapters.length, chapters.length);
   for (const [i, chapter] of chapters.entries()) {
@@ -348,12 +365,40 @@ function validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav) {
     assertEqual(`navigation chapter ${i + 1} title`, navItem.title, chapter.title);
     assertEqual(`navigation chapter ${i + 1} path`, navItem.path, expectedPath);
     const page = resolveDocsPath(navItem.path);
-    if (page) assertEqual(`${rel(page)} title`, parseFrontMatter(page).data.title, chapter.title);
+    if (page) {
+      const publishedChapter = parseFrontMatter(page);
+      assertEqual(`${rel(page)} title`, publishedChapter.data.title, chapter.title);
+      publishedChapterBodies.set(chapter.id, publishedChapter.body);
+    }
   }
   const readme = readText(path.join(ROOT, 'README.md'));
   assertContains('README.md', readme, pagesUrl);
   assertContains('README.md', readme, 'npm run check:metadata');
   assertContains('README.md', readme, 'npm test');
+  const readmeChapterBlocks = chapters.map((chapter, i) => (
+    readmeChapterBlock(readme, i + 1, chapter.title, chapters[i + 1] && chapters[i + 1].title)
+  ));
+  const readmeScopes = [
+    { position: 2, chapterId: 'chapter02', required: ['JSON', 'YAML', 'XML', 'TOML', 'CSV'], forbidden: ['INI'] },
+    { position: 5, chapterId: 'chapter05', required: ['Git', '正規表現', 'データ構造'], forbidden: ['環境変数', 'パッケージ管理'] },
+  ];
+  for (const scope of readmeScopes) {
+    const block = readmeChapterBlocks[scope.position - 1] || '';
+    const publishedBody = publishedChapterBodies.get(scope.chapterId) || '';
+    if (!block || !publishedBody) continue;
+    for (const topic of scope.required) {
+      assertContains(`README chapter ${scope.position}`, block, topic);
+      assertContains(`published chapter ${scope.position}`, publishedBody, topic);
+    }
+    for (const topic of scope.forbidden) {
+      if (block.includes(topic)) {
+        fail(`README chapter ${scope.position}: must not contain out-of-scope topic ${JSON.stringify(topic)}`);
+      }
+      if (publishedBody.includes(topic)) {
+        fail(`published chapter ${scope.position}: must not contain out-of-scope topic ${JSON.stringify(topic)}`);
+      }
+    }
+  }
 }
 
 function validateAppendixContract(book, nav, index) {
@@ -490,21 +535,31 @@ function copyFixture(destination) {
 function expectFixtureFailure(name, mutate, expectedText) {
   const fixture = fs.mkdtempSync(path.join(negativeFixtureBase(), `${name}-`));
   copyFixture(fixture);
-  mutate(fixture);
   try {
-    childProcess.execFileSync(process.execPath, [__filename, '--root', fixture, '--skip-negative'], {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    fail(`negative fixture ${name}: checker unexpectedly passed`);
-  } catch (error) {
-    const output = `${error.stdout || ''}${error.stderr || ''}`;
-    if (!output.includes(expectedText)) {
-      fail(`negative fixture ${name}: expected failure containing ${JSON.stringify(expectedText)}, got ${JSON.stringify(output)}`);
+    mutate(fixture);
+    try {
+      childProcess.execFileSync(process.execPath, [__filename, '--root', fixture, '--skip-negative'], {
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+      fail(`negative fixture ${name}: checker unexpectedly passed`);
+    } catch (error) {
+      const output = `${error.stdout || ''}${error.stderr || ''}`;
+      if (!output.includes(expectedText)) {
+        fail(`negative fixture ${name}: expected failure containing ${JSON.stringify(expectedText)}, got ${JSON.stringify(output)}`);
+      }
     }
   } finally {
     fs.rmSync(fixture, { recursive: true, force: true });
   }
+}
+
+function replaceRequired(file, needle, replacement) {
+  const original = fs.readFileSync(file, 'utf8');
+  if (!original.includes(needle)) {
+    throw new Error(`${rel(file)}: fixture mutation source is missing: ${JSON.stringify(needle)}`);
+  }
+  fs.writeFileSync(file, original.replace(needle, replacement));
 }
 
 let negativeFixtureRoot = null;
@@ -570,6 +625,18 @@ function runNegativeFixtures() {
       const file = path.join(fixture, 'src', 'appendices', 'figure-index', 'index.md');
       fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace('/chapters/chapter03/#figure-script-automation-architecture', '/chapters/chapter03/#figure-missing'));
     }, 'figure index direct link');
+    expectFixtureFailure('readme-chapter02-out-of-scope-topic', (fixture) => {
+      const file = path.join(fixture, 'README.md');
+      replaceRequired(file, 'XML、TOML、CSV', 'XML、INI/TOML、CSV');
+    }, 'README chapter 2: must not contain out-of-scope topic "INI"');
+    expectFixtureFailure('readme-chapter05-out-of-scope-topic', (fixture) => {
+      const file = path.join(fixture, 'README.md');
+      replaceRequired(file, '正規表現によるログ・文字列処理', '正規表現、環境変数、パッケージ管理');
+    }, 'README chapter 5: must not contain out-of-scope topic "環境変数"');
+    expectFixtureFailure('published-chapter02-out-of-scope-topic', (fixture) => {
+      const file = path.join(fixture, 'docs', 'chapters', 'chapter02', 'index.md');
+      replaceRequired(file, '## **2.4 実務での注意点**', '## **2.4 INI と実務での注意点**');
+    }, 'published chapter 2: must not contain out-of-scope topic "INI"');
   } finally {
     cleanNegativeFixtureBase();
   }
