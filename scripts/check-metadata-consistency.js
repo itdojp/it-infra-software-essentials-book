@@ -241,7 +241,7 @@ function assertContains(source, haystack, needle) {
   }
 }
 
-function readmeChapterBlock(readme, position, title) {
+function readmeChapterBlock(readme, position, title, nextTitle) {
   const readmeTitle = title.replace(/^第\d+章：/, '');
   const marker = `${position}. **${readmeTitle}**`;
   const start = readme.indexOf(marker);
@@ -250,7 +250,10 @@ function readmeChapterBlock(readme, position, title) {
     return '';
   }
   const rest = readme.slice(start + marker.length);
-  const next = rest.search(/\n\d+\. \*\*|\n## /);
+  const nextMarker = nextTitle
+    ? `\n${position + 1}. **${nextTitle.replace(/^第\d+章：/, '')}**`
+    : '\n## ';
+  const next = rest.indexOf(nextMarker);
   return rest.slice(0, next === -1 ? undefined : next);
 }
 
@@ -367,7 +370,9 @@ function validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav) {
   assertContains('README.md', readme, pagesUrl);
   assertContains('README.md', readme, 'npm run check:metadata');
   assertContains('README.md', readme, 'npm test');
-  const readmeChapterBlocks = chapters.map((chapter, i) => readmeChapterBlock(readme, i + 1, chapter.title));
+  const readmeChapterBlocks = chapters.map((chapter, i) => (
+    readmeChapterBlock(readme, i + 1, chapter.title, chapters[i + 1] && chapters[i + 1].title)
+  ));
   const readmeScopes = [
     { position: 2, required: ['JSON', 'YAML', 'XML', 'TOML', 'CSV'], forbidden: ['INI'] },
     { position: 5, required: ['Git', '正規表現', 'データ構造'], forbidden: ['環境変数', 'パッケージ管理'] },
