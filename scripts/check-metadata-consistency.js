@@ -356,6 +356,7 @@ function validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav) {
 
   const chapters = (book.structure && book.structure.chapters) || [];
   const navChapters = nav.chapters || [];
+  const publishedChapterBodies = new Map();
   assertEqual('book-config.json chapter count', chapters.length, 5);
   assertEqual('docs/_data/navigation.yml chapter count', navChapters.length, chapters.length);
   for (const [i, chapter] of chapters.entries()) {
@@ -364,7 +365,11 @@ function validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav) {
     assertEqual(`navigation chapter ${i + 1} title`, navItem.title, chapter.title);
     assertEqual(`navigation chapter ${i + 1} path`, navItem.path, expectedPath);
     const page = resolveDocsPath(navItem.path);
-    if (page) assertEqual(`${rel(page)} title`, parseFrontMatter(page).data.title, chapter.title);
+    if (page) {
+      const publishedChapter = parseFrontMatter(page);
+      assertEqual(`${rel(page)} title`, publishedChapter.data.title, chapter.title);
+      publishedChapterBodies.set(chapter.id, publishedChapter.body);
+    }
   }
   const readme = readText(path.join(ROOT, 'README.md'));
   assertContains('README.md', readme, pagesUrl);
@@ -374,18 +379,23 @@ function validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav) {
     readmeChapterBlock(readme, i + 1, chapter.title, chapters[i + 1] && chapters[i + 1].title)
   ));
   const readmeScopes = [
-    { position: 2, required: ['JSON', 'YAML', 'XML', 'TOML', 'CSV'], forbidden: ['INI'] },
-    { position: 5, required: ['Git', '正規表現', 'データ構造'], forbidden: ['環境変数', 'パッケージ管理'] },
+    { position: 2, chapterId: 'chapter02', required: ['JSON', 'YAML', 'XML', 'TOML', 'CSV'], forbidden: ['INI'] },
+    { position: 5, chapterId: 'chapter05', required: ['Git', '正規表現', 'データ構造'], forbidden: ['環境変数', 'パッケージ管理'] },
   ];
   for (const scope of readmeScopes) {
     const block = readmeChapterBlocks[scope.position - 1] || '';
-    if (!block) continue;
+    const publishedBody = publishedChapterBodies.get(scope.chapterId) || '';
+    if (!block || !publishedBody) continue;
     for (const topic of scope.required) {
       assertContains(`README chapter ${scope.position}`, block, topic);
+      assertContains(`published chapter ${scope.position}`, publishedBody, topic);
     }
     for (const topic of scope.forbidden) {
       if (block.includes(topic)) {
         fail(`README chapter ${scope.position}: must not contain out-of-scope topic ${JSON.stringify(topic)}`);
+      }
+      if (publishedBody.includes(topic)) {
+        fail(`published chapter ${scope.position}: must not contain out-of-scope topic ${JSON.stringify(topic)}`);
       }
     }
   }
@@ -623,6 +633,10 @@ function runNegativeFixtures() {
       const file = path.join(fixture, 'README.md');
       replaceRequired(file, '正規表現によるログ・文字列処理', '正規表現、環境変数、パッケージ管理');
     }, 'README chapter 5: must not contain out-of-scope topic "環境変数"');
+    expectFixtureFailure('published-chapter02-out-of-scope-topic', (fixture) => {
+      const file = path.join(fixture, 'docs', 'chapters', 'chapter02', 'index.md');
+      replaceRequired(file, '## **2.4 実務での注意点**', '## **2.4 INI と実務での注意点**');
+    }, 'published chapter 2: must not contain out-of-scope topic "INI"');
   } finally {
     cleanNegativeFixtureBase();
   }
