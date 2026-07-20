@@ -401,6 +401,31 @@ function validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav) {
   }
 }
 
+function validateChapter04PatchContract() {
+  const chapters = [
+    { label: 'source chapter 4', file: path.join(SRC, 'chapters', 'chapter04', 'index.md'), definition: '* **PATCH**:' },
+    { label: 'published chapter 4', file: path.join(DOCS, 'chapters', 'chapter04', 'index.md'), definition: '- **PATCH**' },
+  ];
+  const required = [
+    'リソースへの部分的な変更',
+    'patch document',
+    'リソース全体を置き換える PUT',
+    'PATCH 自体は安全（safe）でも冪等（idempotent）でもありません',
+    '個別のリクエストを冪等に設計できる場合',
+    'If-Match',
+    'https://www.rfc-editor.org/rfc/rfc5789#section-2',
+  ];
+  for (const chapter of chapters) {
+    const body = parseFrontMatter(chapter.file).body;
+    const definition = body.indexOf(chapter.definition);
+    if (definition === -1) fail(`${chapter.label}: PATCH definition is missing`);
+    const laterUse = body.indexOf('実サービスの POST / PUT / PATCH / DELETE');
+    if (laterUse === -1) fail(`${chapter.label}: expected later PATCH operation example is missing`);
+    else if (definition === -1 || definition > laterUse) fail(`${chapter.label}: PATCH must be defined before its operational use`);
+    for (const marker of required) assertContains(chapter.label, body, marker);
+  }
+}
+
 function validateAppendixContract(book, nav, index) {
   const modules = (book.ux && book.ux.modules) || {};
   const configured = (book.structure && book.structure.appendices) || [];
@@ -637,6 +662,10 @@ function runNegativeFixtures() {
       const file = path.join(fixture, 'docs', 'chapters', 'chapter02', 'index.md');
       replaceRequired(file, '## **2.4 実務での注意点**', '## **2.4 INI と実務での注意点**');
     }, 'published chapter 2: must not contain out-of-scope topic "INI"');
+    expectFixtureFailure('published-chapter04-missing-patch-definition', (fixture) => {
+      const file = path.join(fixture, 'docs', 'chapters', 'chapter04', 'index.md');
+      replaceRequired(file, '- **PATCH**', '- **部分更新**');
+    }, 'published chapter 4: PATCH definition is missing');
   } finally {
     cleanNegativeFixtureBase();
   }
@@ -650,6 +679,7 @@ const index = parseFrontMatter(path.join(DOCS, 'index.md'));
 const nav = readNavigation(path.join(DOCS, '_data', 'navigation.yml'));
 
 validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav);
+validateChapter04PatchContract();
 validateAppendixContract(book, nav, index);
 validateFigureContract();
 
