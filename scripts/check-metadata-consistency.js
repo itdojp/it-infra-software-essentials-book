@@ -379,6 +379,7 @@ function validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav) {
   ];
   for (const scope of readmeScopes) {
     const block = readmeChapterBlocks[scope.position - 1] || '';
+    if (!block) continue;
     for (const topic of scope.required) {
       assertContains(`README chapter ${scope.position}`, block, topic);
     }
@@ -524,21 +525,31 @@ function copyFixture(destination) {
 function expectFixtureFailure(name, mutate, expectedText) {
   const fixture = fs.mkdtempSync(path.join(negativeFixtureBase(), `${name}-`));
   copyFixture(fixture);
-  mutate(fixture);
   try {
-    childProcess.execFileSync(process.execPath, [__filename, '--root', fixture, '--skip-negative'], {
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    fail(`negative fixture ${name}: checker unexpectedly passed`);
-  } catch (error) {
-    const output = `${error.stdout || ''}${error.stderr || ''}`;
-    if (!output.includes(expectedText)) {
-      fail(`negative fixture ${name}: expected failure containing ${JSON.stringify(expectedText)}, got ${JSON.stringify(output)}`);
+    mutate(fixture);
+    try {
+      childProcess.execFileSync(process.execPath, [__filename, '--root', fixture, '--skip-negative'], {
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+      fail(`negative fixture ${name}: checker unexpectedly passed`);
+    } catch (error) {
+      const output = `${error.stdout || ''}${error.stderr || ''}`;
+      if (!output.includes(expectedText)) {
+        fail(`negative fixture ${name}: expected failure containing ${JSON.stringify(expectedText)}, got ${JSON.stringify(output)}`);
+      }
     }
   } finally {
     fs.rmSync(fixture, { recursive: true, force: true });
   }
+}
+
+function replaceRequired(file, needle, replacement) {
+  const original = fs.readFileSync(file, 'utf8');
+  if (!original.includes(needle)) {
+    throw new Error(`${rel(file)}: fixture mutation source is missing: ${JSON.stringify(needle)}`);
+  }
+  fs.writeFileSync(file, original.replace(needle, replacement));
 }
 
 let negativeFixtureRoot = null;
@@ -606,11 +617,11 @@ function runNegativeFixtures() {
     }, 'figure index direct link');
     expectFixtureFailure('readme-chapter02-out-of-scope-topic', (fixture) => {
       const file = path.join(fixture, 'README.md');
-      fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace('XML、TOML、CSV', 'XML、INI/TOML、CSV'));
+      replaceRequired(file, 'XML、TOML、CSV', 'XML、INI/TOML、CSV');
     }, 'README chapter 2: must not contain out-of-scope topic "INI"');
     expectFixtureFailure('readme-chapter05-out-of-scope-topic', (fixture) => {
       const file = path.join(fixture, 'README.md');
-      fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace('正規表現によるログ・文字列処理', '正規表現、環境変数、パッケージ管理'));
+      replaceRequired(file, '正規表現によるログ・文字列処理', '正規表現、環境変数、パッケージ管理');
     }, 'README chapter 5: must not contain out-of-scope topic "環境変数"');
   } finally {
     cleanNegativeFixtureBase();
