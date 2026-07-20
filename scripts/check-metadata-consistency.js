@@ -241,6 +241,19 @@ function assertContains(source, haystack, needle) {
   }
 }
 
+function readmeChapterBlock(readme, position, title) {
+  const readmeTitle = title.replace(/^第\d+章：/, '');
+  const marker = `${position}. **${readmeTitle}**`;
+  const start = readme.indexOf(marker);
+  if (start === -1) {
+    fail(`README chapter ${position}: expected heading ${JSON.stringify(readmeTitle)}`);
+    return '';
+  }
+  const rest = readme.slice(start + marker.length);
+  const next = rest.search(/\n\d+\. \*\*|\n## /);
+  return rest.slice(0, next === -1 ? undefined : next);
+}
+
 function normalizeRepoUrl(value, source) {
   return requireString(source, value).replace(/^git\+/, '').replace(/\.git$/, '').replace(/\/$/, '');
 }
@@ -354,6 +367,22 @@ function validateMetadata(book, legacyYaml, pkg, docsConfig, index, nav) {
   assertContains('README.md', readme, pagesUrl);
   assertContains('README.md', readme, 'npm run check:metadata');
   assertContains('README.md', readme, 'npm test');
+  const readmeChapterBlocks = chapters.map((chapter, i) => readmeChapterBlock(readme, i + 1, chapter.title));
+  const readmeScopes = [
+    { position: 2, required: ['JSON', 'YAML', 'XML', 'TOML', 'CSV'], forbidden: ['INI'] },
+    { position: 5, required: ['Git', '正規表現', 'データ構造'], forbidden: ['環境変数', 'パッケージ管理'] },
+  ];
+  for (const scope of readmeScopes) {
+    const block = readmeChapterBlocks[scope.position - 1] || '';
+    for (const topic of scope.required) {
+      assertContains(`README chapter ${scope.position}`, block, topic);
+    }
+    for (const topic of scope.forbidden) {
+      if (block.includes(topic)) {
+        fail(`README chapter ${scope.position}: must not contain out-of-scope topic ${JSON.stringify(topic)}`);
+      }
+    }
+  }
 }
 
 function validateAppendixContract(book, nav, index) {
@@ -570,6 +599,14 @@ function runNegativeFixtures() {
       const file = path.join(fixture, 'src', 'appendices', 'figure-index', 'index.md');
       fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace('/chapters/chapter03/#figure-script-automation-architecture', '/chapters/chapter03/#figure-missing'));
     }, 'figure index direct link');
+    expectFixtureFailure('readme-chapter02-out-of-scope-topic', (fixture) => {
+      const file = path.join(fixture, 'README.md');
+      fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace('XML、TOML、CSV', 'XML、INI/TOML、CSV'));
+    }, 'README chapter 2: must not contain out-of-scope topic "INI"');
+    expectFixtureFailure('readme-chapter05-out-of-scope-topic', (fixture) => {
+      const file = path.join(fixture, 'README.md');
+      fs.writeFileSync(file, fs.readFileSync(file, 'utf8').replace('正規表現によるログ・文字列処理', '正規表現、環境変数、パッケージ管理'));
+    }, 'README chapter 5: must not contain out-of-scope topic "環境変数"');
   } finally {
     cleanNegativeFixtureBase();
   }
